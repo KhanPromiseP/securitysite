@@ -1,0 +1,13 @@
+{
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "spomky-labs/otphp": "^11.3",
+        "cboden/ratchet": "^0.4.4",
+        "php-ai/php-ml": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
