@@ -6,25 +6,24 @@
 include 'Database.php';
 include 'User.php';
 
-// Initialize DB connection
+
 $database = new Database();
 $db = $database->getConnection();
 
-// Create a new User object
 $user = new User($db);
 
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-$username = $_POST['username'];
-$password = $_POST['password'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-if ($user->login($username, $password)) {
-header('Location: ../../public/index.php');
-exit();
-} else {
-$message = 'Invalid username or password.';
-}
+    if ($user->login($username, $password)) {
+        header('Location: ../../public/index.php');
+        exit();
+    } else {
+        $message = 'Invalid username or password.';
+    }
 }
 ?>
 
@@ -55,6 +54,11 @@ $message = 'Invalid username or password.';
             </div>
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+            <div>
+                <p>Don't have an acount? <a class="btn btn-primary" style="decoration:none"
+                        href="register.php">Register</a> now!
+                </p>
             </div>
         </form>
     </div>

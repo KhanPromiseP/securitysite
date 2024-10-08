@@ -48,26 +48,40 @@ CREATE TABLE suspicious_files (
     file_path TEXT
 );
 
-CREATE TABLE suspicious_behavior (
+
+CREATE TABLE IF NOT EXISTS suspicious_behavior (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT,
     ip_address VARCHAR(45),
     behavior_details TEXT,
-    detection_time DATETIME,
-    is_blocked  BOOLEAN DEFAULT 1,
-    blocked_at DATETIME,
-    unblocked_at DATETIME DEFAULT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    detection_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_blocked BOOLEAN DEFAULT 1,
+    blocked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- Table to store network activity
+CREATE TABLE IF NOT EXISTS network_activity (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ip_source VARCHAR(45),
+    ip_dest VARCHAR(45),
+    protocol VARCHAR(20),
+    data_volume INT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE generated_reports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    alert_type VARCHAR(255) NOT NULL,
+    report_details TEXT NOT NULL,
+    generated_at DATETIME NOT NULL
 );
 
 
-CREATE TABLE user_behavior (
+CREATE TABLE IF NOT EXISTS user_behavior (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    ip_address VARCHAR(45),
-    login_time DATETIME,
-    failed_logins INT,
-    activity JSON,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    user_id INT NOT NULL,
+    ip_address VARCHAR(45) NOT NULL,
+    activity TEXT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE blocked_ips (

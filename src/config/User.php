@@ -8,12 +8,10 @@ class User {
     public $email;
     public $password_hash;
 
-    // Constructor to initialize the database connection
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    // Register a new user
     public function register($username, $email, $password) {
         $query = "INSERT INTO $this->table (username, email, password_hash) VALUES (:username, :email, :password_hash)";
 

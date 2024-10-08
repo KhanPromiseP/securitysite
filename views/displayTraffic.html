@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Chart</title>
+
+    <!-- Include necessary libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@^2.0.0"></script>
+
+    <!-- Include custom styling -->
+    <style>
+        /* Container to hold the chart and table */
+        .traffic-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+            background-color: #f5f5f5;  /* Light background */
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Professional shadow effect */
+        }
+
+        /* Chart should take up 60% of the container */
+        .chart-container {
+            width: 60%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table should take up 40% of the container */
+        .table-container {
+            width: 40%;
+            overflow-y: auto; /* Scroll for large data */
+            max-height: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 1000px) {
+            .traffic-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .chart-container, .table-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="traffic-container">
+      
+        <div class="chart-container">
+            <canvas id="traffic-chart"></canvas>
+        </div>
+
+        <div class="table-container">
+            <table id="traffic-table">
+                <thead>
+                    <tr>
+                        <th>Source IP</th>
+                        <th>Destination IP</th>
+                        <th>Packet Size (bytes)</th>
+                        <th>Protocol</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('traffic-chart').getContext('2d');
+            const trafficChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Packet Size (bytes)',
+                        data: [],
+                        borderColor: 'rgba(54, 162, 235, 1)',  
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',  
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverRadius: 7,
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'minute',
+                                tooltipFormat: 'MMM D, YYYY HH:mm:ss',
+                                displayFormats: {
+                                    minute: 'HH:mm'
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Timestamp',
+                                font: {
+                                    size: 16
+                                }
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Packet Size (bytes)',
+                                font: {
+                                    size: 16
+                                }
+                            },
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function (value) {
+                                    return value + ' bytes';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            enabled: true,
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    return `Packet Size: ${tooltipItem.raw} bytes`;
+                                }
+                            }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            function fetchTraffic() {
+                $.ajax({
+                    url: '../logic/analyzeTraffic.php',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (Array.isArray(response) && response.length > 0) {
+                            const labels = response.map(item => new Date(item.timestamp));
+                            const data = response.map(item => item.packet_size);
+
+                            trafficChart.data.labels = labels;
+                            trafficChart.data.datasets[0].data = data;
+                            trafficChart.update();
+
+                            const tbody = $('#traffic-table tbody');
+                            tbody.empty();
+                            response.forEach(item => {
+                                tbody.append(`<tr>
+                                    <td>${item.src_ip}</td>
+                                    <td>${item.dest_ip}</td>
+                                    <td>${item.packet_size}</td>
+                                    <td>${item.protocol}</td>
+                                    <td>${new Date(item.timestamp).toLocaleString()}</td>
+                                </tr>`);
+                            });
+                        } else {
+                            resetChartAndTable();
+                        }
+                    },
+                    error: function () {
+                        resetChartAndTable();
+                    }
+                });
+            }
+
+            function resetChartAndTable() {
+                trafficChart.data.labels = [];
+                trafficChart.data.datasets[0].data = [];
+                trafficChart.update();
+
+                const tbody = $('#traffic-table tbody');
+                tbody.empty();
+                tbody.append('<tr><td colspan="5">No data available</td></tr>');
+            }
+
+            setInterval(fetchTraffic, 10000);
+            fetchTraffic();
+        });
+    </script>
+</body>
+
+</html>
