@@ -65,9 +65,9 @@ $message = 'Invalid email or password. Password must be at least 8 characters lo
                 <button type="submit" class="btn btn-primary">Register</button>
             </div>
             <div>
-                <p>Already have an acount? <a class="btn btn-primary" style="decoration:none" href="login.php">Login</a>
-                    now!
-                </p>
+                <br>
+                <p style="text-align: center;">
+                    Already have an acount? <a style="decoration:none" href="login.php">Login</a>now ! </p>
             </div>
         </form>
     </div>

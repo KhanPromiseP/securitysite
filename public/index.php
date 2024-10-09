@@ -67,7 +67,7 @@ SimpleMiddleware::requireLogin();
                             <div class="card-body">
                                 <h5 class="card-title">Threats Report </h5>
                                 <p class="display-4">
-                                    <span id="reportCount">0</span>
+                                    <span id="report-count">0</span>
                                 </p>
                                 <p class="text-muted">In the last week</p>
                             </div>
@@ -138,7 +138,6 @@ SimpleMiddleware::requireLogin();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../views/alertsChart.js"></script>
-    <script src="../alertsChart.js"></script>
     <script src="../views/displayCountAlertsPerDay.js"></script>
     <script src="../views/reportStats.js"></script>
 
