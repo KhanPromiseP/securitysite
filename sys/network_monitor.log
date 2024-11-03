@@ -1,0 +1,8 @@
+2024-11-02 18:01:26,685 - INFO - Starting network monitoring script.
+2024-11-02 18:01:26,685 - DEBUG - Action specified: scan
+2024-11-02 18:01:26,685 - INFO - Starting subnet scan on 192.168.1.0/24
+2024-11-02 18:01:36,698 - DEBUG - Captured 2 packets.
+2024-11-02 18:01:36,698 - INFO - Starting anomaly detection.
+2024-11-02 18:01:36,698 - DEBUG - Data prepared for anomaly detection: [[1.73056689e+09 5.50000000e+01]
+ [1.73056689e+09 6.60000000e+01]]
+2024-11-02 18:01:36,698 - WARNING - Insufficient data (2 samples) for anomaly detection.

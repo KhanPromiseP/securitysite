@@ -7,17 +7,17 @@ $database = new Database();
 $db = $database->getConnection();
 
 
-function getUserIP()
-{
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } else {
-        $ip = $_SERVER['REMOTE_ADDR'];
-    }
-    return $ip;
-}
+// function getUserIP()
+// {
+//     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+//         $ip = $_SERVER['HTTP_CLIENT_IP'];
+//     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+//         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+//     } else {
+//         $ip = $_SERVER['REMOTE_ADDR'];
+//     }
+//     return $ip;
+// }
 
 class IPBlocker
 {
@@ -65,7 +65,7 @@ class IPBlocker
 
 $ipBlocker = new IPBlocker($db);
 
-$userIP = getUserIP();
+// $userIP = getUserIP();
 
 if ($ipBlocker->isBlocked($userIP)) { 
     header("Location: ../views/blocked.php"); 
@@ -85,3 +85,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "IP $ipAddress has been unblocked.";
     }
 }
+
+
+
+
+// include 'config/Database.php';
+
+// class IPBlocker {
+//     private $conn;
+
+//     public function __construct($dbConnection) {
+//         $this->conn = $dbConnection;
+//     }
+
+//     // Block or unblock IP address
+//     public function updateIPStatus($ip, $action) {
+//         $isBlocked = ($action === 'block') ? 1 : 0;
+//         $query = "UPDATE anomalies SET is_blocked = :is_blocked WHERE ip_address = :ip_address";
+//         $stmt = $this->conn->prepare($query);
+//         $stmt->bindParam(':is_blocked', $isBlocked, PDO::PARAM_INT);
+//         $stmt->bindParam(':ip_address', $ip);
+//         if ($stmt->execute()) {
+//             return $isBlocked ? 'IP blocked successfully' : 'IP unblocked successfully';
+//         }
+//         return 'Failed to update IP status';
+//     }
+// }
+
+// // Initialize the database connection
+// $database = new Database();
+// $db = $database->getConnection();
+// $blocker = new IPBlocker($db);
+
+// // Get IP and action from POST request
+// $ip = $_POST['ip'];
+// $action = $_POST['action'];
+
+// // Update IP status
+// $response = $blocker->updateIPStatus($ip, $action);
+// echo $response;

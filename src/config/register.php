@@ -16,19 +16,19 @@ $user = new User($db);
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-$username = $_POST['username'];
-$email = $_POST['email'];
-$password = $_POST['password'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-if (filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($password) >= 8) {
-if ($user->register($username, $email, $password)) {
-$message = 'Registration successful. <a href="login.php">Login here</a>';
-} else {
-$message = 'Registration failed. Username or email might already be in use.';
-}
-} else {
-$message = 'Invalid email or password. Password must be at least 8 characters long.';
-}
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($password) >= 8) {
+        if ($user->register($username, $email, $password)) {
+            $message = 'Registration successful. <a href="login.php">Login here</a>';
+        } else {
+            $message = 'Registration failed. Username or email might already be in use.';
+        }
+    } else {
+        $message = 'Invalid email or password. Password must be at least 8 characters long.';
+    }
 }
 ?>
 

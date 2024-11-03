@@ -1,39 +1,36 @@
 <?php
-include '../src/config/Database.php'; 
+header('Content-Type: application/json');
+include '../src/config/Database.php';
 
-class OnlineUsers
-{
+class ActiveUserMonitor {
     private $conn;
 
-    public function __construct($dbConnection)
-    {
+    public function __construct($dbConnection) {
         $this->conn = $dbConnection;
     }
 
-    public function getOnlineUserCount()
-    {
-       
-        $timeout = 5 * 60;
-        $currentTime = time();
-        $timeoutTime = $currentTime - $timeout;
-
-        $query = "SELECT COUNT(*) AS online_count FROM user_sessions WHERE last_activity > FROM_UNIXTIME(:timeout_time) AND status = 'online'";
+    // Function to get the count of active users
+    public function getActiveUserCount() {
+        $query = "SELECT COUNT(*) AS active_user_count FROM active_users_log WHERE is_active = 1";
         $stmt = $this->conn->prepare($query);
-
-        $stmt->bindParam(':timeout_time', $timeoutTime);
         $stmt->execute();
-
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['online_count'];
+        
+        if ($result) {
+            return ['status' => 'success', 'active_user_count' => $result['active_user_count']];
+        }
+        return ['status' => 'error', 'message' => 'Could not retrieve active user count'];
     }
 }
 
+// Initialize the Database connection
 $database = new Database();
-$conn = $database->getConnection();
+$db = $database->getConnection();
+$monitor = new ActiveUserMonitor($db);
 
-$onlineUsers = new OnlineUsers($conn);
-
-$onlineUserCount = $onlineUsers->getOnlineUserCount();
-
-header('Content-Type: application/json');
-echo json_encode(array('online_user_count' => $onlineUserCount));
+// Return active user count upon request
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    echo json_encode($monitor->getActiveUserCount());
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request']);
+}

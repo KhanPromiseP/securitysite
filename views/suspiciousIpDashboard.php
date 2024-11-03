@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
     table {
@@ -38,9 +37,6 @@
         color: white;
     }
 
-
-
-
     body {
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
@@ -72,27 +68,17 @@
     }
 
     tr:nth-child(even) {
-        background-color: #f3f3f3f;
+        background-color: #f3f3f3;
     }
 
     tr:nth-child(odd) {
         background-color: #ffffff;
     }
 
-    /* button {
-        padding: 10px 15px;
-        background-color: #009879;
-        color: white;
-        border: none;
-        cursor: pointer;
-    } */
-
     button:hover {
         background-color: #007f65;
     }
     </style>
-
-
 </head>
 
 <body>
@@ -102,7 +88,6 @@
     <table id="suspicious-table">
         <thead>
             <tr>
-                <th>User ID</th>
                 <th>IP Address</th>
                 <th>Behavior Details</th>
                 <th>Detection Time</th>
@@ -111,19 +96,19 @@
             </tr>
         </thead>
         <tbody>
-            <!--table to be populated by AJAX here -->
+            <!-- Table will be populated by AJAX -->
         </tbody>
     </table>
 
     <script>
     $(document).ready(function() {
-        /**
-         * Function to fetch and update the table in real-time
-         */
-
+        // Function to fetch and update the table in real-time
         function fetchSuspiciousBehavior() {
             $.ajax({
-                url: '../logic/fetch_suspicious_behavior.php',
+                url: 'fetch_suspicious_behavior.php',
+                {
+                    action: get_suspicious_behavior: true
+                },
                 type: 'GET',
                 success: function(response) {
                     const suspiciousUsers = JSON.parse(response);
@@ -138,15 +123,14 @@
                             `<button class="block-btn" data-ip="${user.ip_address}" data-action="block">Block</button>`;
 
                         const row = `
-                        <tr>
-                            <td>${user.user_id}</td>
-                            <td>${user.ip_address}</td>
-                            <td>${user.behavior_details}</td>
-                            <td>${user.detection_time}</td>
-                            <td>${blockedText}</td>
-                            <td>${actionButton}</td>
-                        </tr>
-                    `;
+                                <tr>
+                                    <td>${user.ip_address}</td>
+                                    <td>${user.behavior_details}</td>
+                                    <td>${user.detection_time}</td>
+                                    <td>${blockedText}</td>
+                                    <td>${actionButton}</td>
+                                </tr>
+                            `;
                         tableBody.append(row);
                     });
                 },
@@ -156,10 +140,10 @@
             });
         }
 
+        // Call fetchSuspiciousBehavior every 5 seconds to refresh data
+        setInterval(fetchSuspiciousBehavior, 5000);
 
-        setInterval(fetchSuspiciousBehavior, 5000); // 5 seconds interval
-
-
+        // Event listener for blocking/unblocking IPs
         $(document).on('click', '.block-btn, .unblock-btn', function() {
             const ipAddress = $(this).data('ip');
             const action = $(this).data('action');
@@ -167,7 +151,7 @@
 
             // AJAX request to block or unblock the IP
             $.ajax({
-                url: '../logic/block_unblock.php',
+                url: 'block_unblock.php', // Ensure correct path
                 type: 'POST',
                 data: {
                     ip: ipAddress,
@@ -175,7 +159,7 @@
                 },
                 success: function(response) {
                     alert(response);
-                    fetchSuspiciousBehavior();
+                    fetchSuspiciousBehavior(); // Refresh the table after action
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', xhr.responseText);
@@ -184,7 +168,7 @@
             });
         });
 
-
+        // Initial data fetch
         fetchSuspiciousBehavior();
     });
     </script>

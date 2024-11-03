@@ -11,11 +11,12 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE user_sessions (
-    user_id INT PRIMARY KEY,
-    last_activity TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    status ENUM('online', 'offline') DEFAULT 'online'
+CREATE TABLE active_users_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    active_user_count INT NOT NULL
 );
+
 
 
 CREATE TABLE suspicious_traffic (

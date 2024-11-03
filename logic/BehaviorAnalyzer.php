@@ -1,167 +1,121 @@
 <?php
+header('Content-Type: application/json');
 include '../src/config/Database.php';
-include '../src/config/config.php';
 
-class BehaviorAnalyzer {
+class SecurityMonitor {
     private $conn;
-    private $config;
 
     public function __construct($dbConnection) {
         $this->conn = $dbConnection;
-        $this->config = include('../src/config/config.php');
     }
 
-    public function run() {
-        // continuos real time monitoring
-        while (true) {
-            $this->monitorUserBehavior();
-            $this->analyzeUserBehavior();
-            sleep(30);
-        }
-    }
-
-    /**
-     * Monitor user behavior by fetching from the specified website's API
-     */ 
-    private function monitorUserBehavior() {
-        $websiteUrl = $this->config['websiteUrl'];
-        $ch = curl_init($websiteUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        if ($response === false) {
-            error_log("Failed to fetch data from website: " . curl_error($ch));
-            return;
-        }
-
-        $userData = json_decode($response, true);
-
-        if (!empty($userData)) {
-            foreach ($userData as $user) {
-                $this->storeUserBehavior($user);
-            }
-        }
-    }
-
-    private function storeUserBehavior($user) {
-        $query = "INSERT INTO user_behavior (user_id, ip_address, activity, timestamp)
-                  VALUES (:user_id, :ip_address, :activity, :timestamp)";
+    // Function to insert scanned host or anomaly into the database
+    public function logSuspiciousBehavior($user_id, $ip_address, $behavior_details, $is_anomaly, $threat_level) {
+        $query = "INSERT INTO suspicious_behavior (user_id, ip_address, behavior_details, detection_time, is_blocked, threat_level)
+                  VALUES (:user_id, :ip_address, :behavior_details, NOW(), :is_blocked, :threat_level)";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':user_id', $user['user_id']);
-        $stmt->bindParam(':ip_address', $user['ip_address']);
-        $stmt->bindParam(':activity', json_encode($user['activity']));
-        $stmt->bindParam(':timestamp', $user['timestamp']); 
-        $stmt->execute();
-    }
-
-    public function analyzeUserBehavior() {
-        $query = "SELECT * FROM user_behavior";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $userData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($userData as $user) {
-            if ($this->isSuspicious($user)) {
-                $this->storeSuspiciousBehavior($user);
-                $this->blockUserIP($user['ip_address']);
-            }
-        }
-    }
-
-    /**
-     * Checking if a user activity is suspicious using the OpenAI API
-     * 
-     */
-    private function isSuspicious($user) {
-        $url = 'https://api.openai.com/v1/completions';
-        $data = json_encode([
-            'model' => 'text-davinci-003',
-            'prompt' => "Analyze this user activity and determine if it is suspicious: " . json_encode($user['activity']),
-            'max_tokens' => 100,
-        ]);
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-            'Authorization: ' . 'Bearer ' . $this->config['openAiApiKey'],
-        ]);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        $result = json_decode($response, true);
-        return strpos($result['choices'][0]['text'], 'suspicious') !== false;
-    }
-
-    private function storeSuspiciousBehavior($user) {
-        $query = "INSERT INTO suspicious_behavior (user_id, ip_address, behavior_details, detection_time) 
-                  VALUES (:user_id, :ip_address, :behavior_details, :detection_time)";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':user_id', $user['user_id']);
-        $stmt->bindParam(':ip_address', $user['ip_address']);
-        $stmt->bindParam(':behavior_details', json_encode($user['activity']));
-        $stmt->bindParam(':detection_time', date('Y-m-d H:i:s'));
-        $stmt->execute();
-    }
-
-    /**
-     * Block suspicious IP address and redirect to the blocked page
-     * 
-     */
-    private function blockUserIP($ip_address) {
-        $query = "UPDATE suspicious_behavior SET is_blocked = 1, blocked_at = NOW() WHERE ip_address = :ip_address";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':ip_address', $ip_address);
-        $stmt->execute();
         
-        if ($stmt->execute()) {
-            file_put_contents('../logs/ip_block.log', "Blocked IP:" .$ip_address. " at " . date('Y-m-d H:i:s') . PHP_EOL, FILE_APPEND);
-            return true;
-        }
-        if ($this->getCurrentUserIP() === $ip_address) {
-            header("Location: ../views/blocked.php"); 
-            exit;
-        }
+        // Bind parameters
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':ip_address', $ip_address);
+        $stmt->bindParam(':behavior_details', $behavior_details);
+        $stmt->bindValue(':is_blocked', $is_anomaly ? 1 : 0);  // Block if anomaly
+        $stmt->bindParam(':threat_level', $threat_level);
+        
+        return $stmt->execute();
     }
 
-    /**
-     * Get the current user's IP address
-     */
-    private function getCurrentUserIP() {
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
+    // Function to trigger Python script for scanning and anomaly detection
+    public function triggerPythonScript() {
+        $command = escapeshellcmd('C:\Users\EMILE\AppData\Local\Programs\Python\Python312\python.exe C:\Users\EMILE\Downloads\downloads\htdocs\securitysite\scripts\main_monitor.py 2>&1'); // Capture both output and errors
+        $output = shell_exec($command);
+        
+        // Log output for debugging
+        file_put_contents('../logs/python_output.log', $output . PHP_EOL, FILE_APPEND); // Append output to a log file
+    
+        return json_decode($output, true);  // Convert Python output from JSON to PHP array
+    }
+    
+    // Function to process the output from Python and store it in the database
+    public function processMonitoringData() {
+        $scanResult = $this->triggerPythonScript();
+        
+        if (!empty($scanResult)) {
+            $user_id = 1;  // Replace with real user ID logic, possibly fetched from the session
+            
+            // Log active users
+            $active_user_count = $scanResult['active_users'];
+            $this->logActiveUsers($active_user_count);
+
+            // Log each detected host, anomalies, and their threat levels
+            foreach ($scanResult['monitoring_data'] as $entry) {
+                $ip_address = $entry['ip_address'];
+                $behavior_details = $entry['behavior_details'];
+                $is_anomaly = isset($entry['is_anomaly']) && $entry['is_anomaly'];
+                $threat_level = isset($entry['threat_level']) ? $entry['threat_level'] : 'low';  // Use threat intelligence data
+
+                // Log the activity into the suspicious_behavior table
+                $this->logSuspiciousBehavior($user_id, $ip_address, $behavior_details, $is_anomaly, $threat_level);
+            }
+
+            return ['status' => 'success', 'message' => 'Monitoring data logged', 'active_users' => $active_user_count];
         }
-        return $ip;
+
+        return ['status' => 'error', 'message' => 'No data to log'];
     }
 
-    /**
-     * Checking if the current user's IP is blocked before loading the website
-     */
-    public function checkIfIPBlocked() {
-        $userIP = $this->getCurrentUserIP();
-        $query = "SELECT is_blocked FROM suspicious_behavior WHERE ip_address = :ip_address";
+    // Function to log the number of active users into a separate table
+    public function logActiveUsers($active_user_count) {
+        $query = "INSERT INTO active_users_log (timestamp, active_user_count) VALUES (NOW(), :active_user_count)";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':ip_address', $userIP);
+        $stmt->bindParam(':active_user_count', $active_user_count);
         $stmt->execute();
-        $isBlocked = $stmt->fetchColumn();
+    }
 
-        if ($isBlocked) {
-            header("Location: /logic/blocked.php");
-            exit;
-        }
+    // Function to query and retrieve stored suspicious behavior from the database
+    public function getSuspiciousBehavior() {
+        $query = "SELECT user_id, ip_address, behavior_details, detection_time, is_blocked, threat_level FROM suspicious_behavior ORDER BY detection_time DESC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data ? $data : [];
+    }
+
+    // Function to query and retrieve active users log from the database
+    public function getActiveUsersLog() {
+        $query = "SELECT timestamp, active_user_count FROM active_users_log ORDER BY timestamp DESC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data ? $data : [];
     }
 }
 
+// Initialize the Database connection
 $database = new Database();
 $db = $database->getConnection();
-$analyzer = new BehaviorAnalyzer($db);
+$monitor = new SecurityMonitor($db);
+$monitor->processMonitoringData();
 
-$analyzer->checkIfIPBlocked();
-
-$analyzer->run();
+// Handle monitoring, logging, and querying upon request
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['action'])) {
+        switch ($_GET['action']) {
+            case 'get_suspicious_behavior':
+                echo json_encode($monitor->getSuspiciousBehavior());
+                break;
+            case 'get_active_users_log':
+                echo json_encode($monitor->getActiveUsersLog());
+                break;
+            default:
+                echo json_encode(['status' => 'error', 'message' => 'Invalid action']);
+                break;
+        }
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'No action specified']);
+    }
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request']);
+}
