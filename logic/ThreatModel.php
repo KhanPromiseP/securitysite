@@ -1,5 +1,5 @@
 <?php
-require_once 'Database.php';
+require_once '../src/config/Database.php';
 
 class ThreatModel {
     private $conn;

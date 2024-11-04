@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
@@ -16,6 +17,7 @@
             text-align: center;
             margin-bottom: 30px;
         }
+
         .os-button {
             background-color: #007bff;
             color: white;
@@ -49,143 +51,51 @@
             cursor: pointer;
         }
 
-        .block-btn { background-color: #dc3545; }
-        .unblock-btn { background-color: #28a745; }
+        .block-btn {
+            background-color: #dc3545;
+        }
+
+        .unblock-btn {
+            background-color: #28a745;
+        }
     </style>
 </head>
 
 <body>
 
-<h1>Admin Dashboard</h1>
+    <h1>Admin Dashboard</h1>
 
-<!-- OS Start System Buttons -->
-<div class="text-center mb-4">
-    <button id="startLinux" onclick="startSystem('linux')" class="os-button">Start System (Linux)</button>
-    <button id="startWindows" onclick="startSystem('windows')" class="os-button">Start System (Windows)</button>
-</div>
+    <!-- OS Start System Buttons -->
+    <div class="text-center mb-4">
+        <button id="startLinux" onclick="startSystem('linux')" class="os-button">Start System (Linux)</button>
+        <button id="startWindows" onclick="startSystem('windows')" class="os-button">Start System (Windows)</button>
+    </div>
 
-<!-- Threat Table -->
-<div class="table-container">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>IP Address</th>
-                <th>Threat Type</th>
-                <th>User Crime</th>
-                <th>Timestamp</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="threatTableBody">
-            <!-- Populated by AJAX -->
-        </tbody>
-    </table>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    let activeOS = '';
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        let activeOS = '';
 
-    setInterval(fetchThreats, 5000);
-
-    function startSystem(os) {
-        activeOS = os;
-        fetch('AdminController.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'startSystem', os: os })
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.status || 'An error occurred while starting the system.');
-        })
-        .catch(error => {
-            console.error('Start system error:', error);
-            alert('An error occurred while starting the system.');
-        });
-    }
-
-    function toggleIP(ip, button) {
-        fetch('AdminController.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'toggleBlockIP', ip: ip, os: activeOS })
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.status || 'An error occurred while toggling the IP block.');
-            const isCurrentlyBlocked = button.classList.contains('block-btn');
-            updateButtonAppearance(button, !isCurrentlyBlocked);
-        })
-        .catch(error => {
-            console.error('Toggle IP error:', error);
-            alert('An error occurred while toggling the IP block.');
-        });
-    }
-
-    function fetchThreats() {
-        fetch('AdminController.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'fetchThreats' })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data && Array.isArray(data)) {
-                updateThreatTable(data);
-            } else {
-                alert('An error occurred while fetching threats.');
-            }
-        })
-        .catch(error => {
-            console.error('Fetch threats error:', error);
-        });
-    }
-
-    function updateThreatTable(threats) {
-        const tableBody = document.getElementById('threatTableBody');
-        tableBody.innerHTML = '';
-        threats.forEach(threat => {
-            const row = document.createElement('tr');
-            const buttonClass = threat.is_blocked ? 'unblock-btn' : 'block-btn';
-            const buttonText = threat.is_blocked ? 'Unblock' : 'Block';
-
-            row.innerHTML = `
-                <td>${threat.ip_address}</td>
-                <td>${threat.threat_type}</td>
-                <td>${threat.user_crime}</td>
-                <td>${threat.detected_at}</td>
-                <td>
-                    <button class="toggle-button ${buttonClass}" onclick="toggleIP('${threat.ip_address}', this)">
-                        ${buttonText}
-                    </button>
-                </td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
-
-    function updateButtonAppearance(button, blocked) {
-        if (blocked) {
-            button.classList.remove('block-btn');
-            button.classList.add('unblock-btn');
-            button.innerText = 'Unblock';
-            button.style.backgroundColor = '#28a745'; // Green for Unblock
-        } else {
-            button.classList.remove('unblock-btn');
-            button.classList.add('block-btn');
-            button.innerText = 'Block';
-            button.style.backgroundColor = '#dc3545'; // Red for Block
+        function startSystem(os) {
+            activeOS = os;
+            fetch('NetworkController.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'startNetworkScanner', os: os })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.status || 'An error occurred while starting the system.');
+                })
+                .catch(error => {
+                    console.error('Start system error:', error);
+                    alert('An error occurred while starting the system.');
+                });
         }
-    }
-</script>
+
+    </script>
 
 </body>
-</html>
 
+</html>

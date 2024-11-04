@@ -14,9 +14,9 @@
 
 <body>
     <?php  include '../includes/navbar.php';?>
-    <div class="d-flex">
+    <div class="d-flex" style="height:90vh">
         <?php  include '../includes/sidebar.php';?>
-        <div class="row flex-fill main-content">
+        <div class=" row flex-fill main-content">
             <div class=" col-md-12">
                 <div class="card">
 

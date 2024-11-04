@@ -1,5 +1,0 @@
-Detailed Report Generated at 2024-10-09 07:04:33
-==================================================
-Alert Type: 'suspicious traffic'
---------------------------------------------
-Report Details: '{"id":18,"src_ip":"123.000.0.011","dest_ip":"567.908.0.055","packet_size":345,"protocol":"TCP","timestamp":"2024-10-08 20:47:33"}'

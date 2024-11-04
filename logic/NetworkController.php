@@ -44,7 +44,7 @@ class NetworkController
     public function startNetworkScanner()
     {
         $os = $this->detectOS();
-        $networkScannerPath = escapeshellarg("C:\\Users\\EMILE\\Downloads\\downloads\\htdocs\\sys\\NetworkScanner.py");
+        $networkScannerPath = escapeshellarg("C:\\Users\\EMILE\\Downloads\\downloads\\htdocs\\securitysite\\logic\\NetworkScanner.py");
         $pythonPath = escapeshellarg("C:\\Users\\EMILE\\AppData\\Local\\Programs\\Python\\Python312\\python.exe");
         return json_encode($this->scheduleTask($os, $networkScannerPath, $pythonPath));
     }

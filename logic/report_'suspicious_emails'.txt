@@ -1,5 +1,0 @@
-Detailed Report Generated at 2024-10-09 07:04:35
-==================================================
-Alert Type: 'suspicious emails'
---------------------------------------------
-Report Details: '{"id":5,"sender":"brother","recipient":"bossman","subject":"For my education","body":"I must strive for the best of my live.","timestamp":"2024-10-06 21:53:27"}'

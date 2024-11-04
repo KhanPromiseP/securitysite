@@ -1,5 +1,0 @@
-Detailed Report Generated at 2024-10-09 07:04:28
-==================================================
-Alert Type: 'suspicious behavior'
---------------------------------------------
-Report Details: '{"id":29,"user_id":1,"ip_address":"0.0.0.122","behavior_details":"in me the hacker","detection_time":"2024-10-05 23:40:16","is_blocked":1,"blocked_at":"2024-10-05 23:40:16","unblocked_at":null}'

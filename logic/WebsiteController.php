@@ -1,14 +1,14 @@
 <?php
+
 require_once 'ThreatModel.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-class NetworkController
+class WebsiteController
 {
     private $threatModel;
-
     public function __construct()
     {
         $this->threatModel = new ThreatModel();
@@ -19,39 +19,39 @@ class NetworkController
         return stripos(PHP_OS, 'WIN') === 0 ? 'windows' : 'linux';
     }
 
-    private function scheduleTask($os, $networkScannerPath, $pythonPath)
+    public function startWebsiteMonitor()
     {
+        $os = $this->detectOS();
+        $websiteMonitorPath = escapeshellarg("C:\\Users\\EMILE\\Downloads\\downloads\\htdocs\\securitysite\\logic\\WebsiteMonitor.py");
+        $pythonPath = escapeshellarg("C:\\Users\\EMILE\\AppData\\Local\\Programs\\Python\\Python312\\python.exe");
+
         try {
             if ($os === 'linux') {
-                $output = shell_exec("crontab -l | { cat; echo \"*/5 * * * * python3 $networkScannerPath > /dev/null 2>&1\"; } | crontab - 2>&1");
+                $output = shell_exec("crontab -l | { cat; echo \"*/5 * * * * python3 $websiteMonitorPath > /dev/null 2>&1\"; } |
+    crontab
+    - 2>&1");
                 if ($output === null)
                     throw new Exception("Failed to schedule cron jobs for Linux.");
-                return ['status' => 'Network scanning started on Linux.'];
+                return json_encode(['status' => 'Website monitoring started on Linux.']);
             } elseif ($os === 'windows') {
-                $output = shell_exec("schtasks /create /tn \"NetworkScan\" /tr \"$pythonPath $networkScannerPath\" /sc minute /mo 5 /f 2>&1");
+                $output = shell_exec("schtasks /create /tn \"WebsiteMonitor\" /tr \"$pythonPath $websiteMonitorPath\" /sc minute /mo
+    5
+    /f 2>&1");
                 if ($output === null)
                     throw new Exception("Failed to schedule tasks for Windows.");
-                return ['status' => 'Network scanning started on Windows.'];
+                return json_encode(['status' => 'Website monitoring started on Windows']);
             } else {
                 throw new Exception('Unsupported OS specified.');
             }
         } catch (Exception $e) {
             error_log("System Start Error: " . $e->getMessage());
-            return ['status' => 'Error: ' . $e->getMessage()];
+            return json_encode(['status' => 'Error: ' . $e->getMessage()]);
         }
     }
 
-    public function startNetworkScanner()
+    public function fetchWebsiteThreats()
     {
-        $os = $this->detectOS();
-        $networkScannerPath = escapeshellarg("C:\\Users\\EMILE\\Downloads\\downloads\\htdocs\\sys\\NetworkScanner.py");
-        $pythonPath = escapeshellarg("C:\\Users\\EMILE\\AppData\\Local\\Programs\\Python\\Python312\\python.exe");
-        return json_encode($this->scheduleTask($os, $networkScannerPath, $pythonPath));
-    }
-
-    public function fetchNetworkThreats()
-    {
-        return json_encode($this->threatModel->getAllNetworkThreats());
+        return json_encode($this->threatModel->getAllWebsiteThreats());
     }
 
     public function blockIPAddress($ipAddress)
@@ -68,8 +68,8 @@ class NetworkController
                 }
             } elseif ($os === 'windows') {
                 $output = shell_exec("netsh advfirewall firewall add rule name=\"Block IP $ipAddress\" dir=in interface=any
-        action=block
-        remoteip=$ipAddress 2>&1");
+    action=block
+    remoteip=$ipAddress 2>&1");
                 if ($output === null)
                     throw new Exception("Failed to block IP on Windows.");
                 if ($this->threatModel->blockIP($ipAddress)) {
@@ -116,34 +116,35 @@ class NetworkController
 // Handle AJAX request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
-    $networkController = new NetworkController();
+    $websiteController = new WebsiteController();
 
     if (isset($input['action'])) {
         switch ($input['action']) {
-            case 'startNetworkScanner':
-                echo $networkController->startNetworkScanner();
+            case 'startWebsiteMonitor':
+                echo $websiteController->startWebsiteMonitor();
                 break;
             case 'fetchThreats':
-                echo $networkController->fetchNetworkThreats();
+                echo $websiteController->fetchWebsiteThreats();
                 break;
             case 'blockIPAddress':
                 if (isset($input['ipAddress'])) {
-                    echo $networkController->blockIPAddress($input['ipAddress']);
+                    echo $websiteController->blockIPAddress($input['ipAddress']);
                 } else {
                     echo json_encode(['status' => 'Error: IP address not provided']);
                 }
                 break;
             case 'unblockIPAddress':
                 if (isset($input['ipAddress'])) {
-                    echo $networkController->unblockIPAddress($input['ipAddress']);
-                    break;
+                    echo $websiteController->unblockIPAddress($input['ipAddress']);
+                } else {
+                    echo json_encode(['status' => 'Error: IP address not provided']);
                 }
+                break;
             default:
                 echo json_encode(['status' => 'Error: Invalid action']);
-                break;
         }
     } else {
-        echo json_encode(['status' => 'Error: Invalid request']);
+        echo json_encode(['status' => 'Error: Action not specified']);
     }
 } else {
     echo json_encode(['status' => 'Error: Invalid request method']);

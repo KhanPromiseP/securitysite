@@ -1,17 +1,15 @@
 <nav class="bg-dark sidebar" id="sidebar">
     <div class="p-3 mb-3">
-        <h3 class="text-white">Security Dashboard</h3>
-        <ul class="nav flex-column">
+        <a href="../logic/Startsystem.php" class="btn btn-danger">StartSystem</a>
+        <ul class=" nav flex-column">
             <li class="nav-item">
                 <a href="../public/index.php" class="nav-link text-white active" data-active="Dashboard">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a href="../views/displayAlert.js.php" class="nav-link text-white"
-                    data-active="Security Alerts">Security
-                    Alerts</a>
+                <a href="../views/net.php" class="nav-link text-white" data-active="Security Alerts">Network</a>
             </li>
             <li class="nav-item">
-                <a href="logs.php" class="nav-link text-white" data-active="System Logs">System Logs</a>
+                <a href="../views/web.php" class="nav-link text-white" data-active="System Logs">Website</a>
             </li>
             <li class="nav-item">
                 <a href="../views/report_dashboard.php" class="nav-link text-white" data-active="Reports">Reports</a>

@@ -17,26 +17,22 @@ SimpleMiddleware::requireLogin();
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../views/onlineUsers.js"></script>
 
-
-    <style>
-
-    </style>
 </head>
 
-<body class="container-fluid " style="align-items: center  justify-content: center">
+<body>
     <?php  include '../includes/navbar.php';?>
 
-    <div class="d-flex">
-        <?php  include '../includes/sidebar.php';?>
-
+    <div class="d-flex" style="height: 90vh">
+        <div> <?php  include '../includes/sidebar.php';?></div>
         <!-- Main Content Area -->
-        <div class=" flex-fill main-content">
-            <header class=" d-flex justify-content-between align-items-center p-2 bg-light border-bottom">
-                <h2 class="h4"><?php echo 'Welcome to the security app dashboard, ' . $_SESSION['username'] . '!'; ?>
+        <div class="flex-fill main-content">
+            <!-- <header class=" d-flex justify-content-between align-items-center p-2 bg-light border-bottom">
+                <h2 class="h4">
+                    <?php echo 'Welcome to the security app dashboard, ' . $_SESSION['username'] . '!'; ?>
                 </h2>
-            </header>
+            </header> -->
 
-            <div class="container-fluid mt-2">
+            <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-md-4">
                         <div class="card bg-danger text-white">
@@ -61,6 +57,10 @@ SimpleMiddleware::requireLogin();
                             </div>
                         </div>
                     </div>
+
+
+
+
 
                     <div class="col-md-4">
                         <div class="card bg-success border">

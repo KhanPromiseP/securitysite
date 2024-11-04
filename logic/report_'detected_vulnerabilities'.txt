@@ -1,5 +1,0 @@
-Detailed Report Generated at 2024-10-09 07:04:31
-==================================================
-Alert Type: 'detected vulnerabilities'
---------------------------------------------
-Report Details: '{"id":6,"vulnerability_type":"XSS attack","details":"this is an attack in the site","detection_time":"2024-10-09 06:55:06"}'
