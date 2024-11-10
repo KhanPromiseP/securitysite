@@ -1,8 +1,146 @@
-2024-11-02 18:01:26,685 - INFO - Starting network monitoring script.
-2024-11-02 18:01:26,685 - DEBUG - Action specified: scan
-2024-11-02 18:01:26,685 - INFO - Starting subnet scan on 192.168.1.0/24
-2024-11-02 18:01:36,698 - DEBUG - Captured 2 packets.
-2024-11-02 18:01:36,698 - INFO - Starting anomaly detection.
-2024-11-02 18:01:36,698 - DEBUG - Data prepared for anomaly detection: [[1.73056689e+09 5.50000000e+01]
- [1.73056689e+09 6.60000000e+01]]
-2024-11-02 18:01:36,698 - WARNING - Insufficient data (2 samples) for anomaly detection.
+2024-11-08 15:12:53,818 - INFO - Starting network monitoring script.
+2024-11-08 15:12:53,819 - INFO - Starting subnet scan on 192.168.1.0/24 with 100 hosts
+2024-11-08 15:13:08,880 - DEBUG - Captured 0 packets.
+2024-11-08 15:13:08,881 - WARNING - No packets captured during scan.
+2024-11-08 16:14:43,035 - INFO - Starting network monitoring script.
+2024-11-08 16:14:43,036 - INFO - Starting subnet scan on 192.168.1.0/24 with 100 hosts
+2024-11-08 16:14:54,804 - DEBUG - Captured 100 packets.
+2024-11-08 16:14:54,805 - INFO - Starting anomaly detection.
+2024-11-08 17:23:10,012 - INFO - Starting network monitoring script.
+2024-11-08 17:23:10,013 - INFO - Starting subnet scan on 192.168.1.0/24 with 100 hosts
+2024-11-08 17:23:25,081 - DEBUG - Captured 87 packets.
+2024-11-08 17:23:25,081 - INFO - Starting anomaly detection.
+2024-11-08 17:23:25,090 - DEBUG - Data prepared for anomaly detection: [[1.73110459e+09 7.40000000e+01 6.40000000e+01]
+ [1.73110459e+09 7.40000000e+01 6.40000000e+01]
+ [1.73110459e+09 7.40000000e+01 3.90000000e+01]
+ [1.73110459e+09 7.40000000e+01 4.10000000e+01]
+ [1.73110459e+09 1.05000000e+02 6.40000000e+01]
+ [1.73110459e+09 7.40000000e+01 3.90000000e+01]
+ [1.73110459e+09 1.05000000e+02 5.20000000e+01]
+ [1.73110459e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110459e+09 7.40000000e+01 3.90000000e+01]
+ [1.73110459e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110459e+09 6.60000000e+01 1.15000000e+02]
+ [1.73110460e+09 7.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 7.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 1.21000000e+02 6.40000000e+01]
+ [1.73110460e+09 1.05000000e+02 6.40000000e+01]
+ [1.73110460e+09 7.40000000e+01 6.40000000e+01]
+ [1.73110460e+09 7.40000000e+01 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 5.83000000e+02 6.40000000e+01]
+ [1.73110460e+09 1.40400000e+03 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 1.40400000e+03 3.90000000e+01]
+ [1.73110460e+09 8.86000000e+02 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 1.30000000e+02 6.40000000e+01]
+ [1.73110460e+09 1.20000000e+03 6.40000000e+01]
+ [1.73110460e+09 1.45000000e+02 3.90000000e+01]
+ [1.73110460e+09 1.45000000e+02 3.90000000e+01]
+ [1.73110460e+09 6.06000000e+02 3.90000000e+01]
+ [1.73110460e+09 1.13000000e+02 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 9.40000000e+01 6.40000000e+01]
+ [1.73110460e+09 7.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 1.21000000e+02 6.40000000e+01]
+ [1.73110460e+09 7.40000000e+01 6.40000000e+01]
+ [1.73110460e+09 1.05000000e+02 6.40000000e+01]
+ [1.73110460e+09 1.05000000e+02 5.20000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 7.40000000e+01 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 3.90000000e+01]
+ [1.73110460e+09 7.80000000e+01 6.40000000e+01]
+ [1.73110460e+09 9.00000000e+01 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 7.40000000e+01 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 9.00000000e+01 6.40000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 5.83000000e+02 6.40000000e+01]
+ [1.73110460e+09 5.40000000e+01 3.90000000e+01]
+ [1.73110460e+09 5.40000000e+01 3.90000000e+01]
+ [1.73110460e+09 2.74200000e+03 3.90000000e+01]
+ [1.73110460e+09 8.87000000e+02 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 1.30000000e+02 6.40000000e+01]
+ [1.73110460e+09 1.20000000e+03 6.40000000e+01]
+ [1.73110460e+09 1.45000000e+02 3.90000000e+01]
+ [1.73110460e+09 1.45000000e+02 3.90000000e+01]
+ [1.73110460e+09 6.06000000e+02 3.90000000e+01]
+ [1.73110460e+09 1.13000000e+02 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 9.40000000e+01 6.40000000e+01]
+ [1.73110460e+09 6.60000000e+01 3.90000000e+01]
+ [1.73110460e+09 7.80000000e+01 6.40000000e+01]
+ [1.73110460e+09 9.00000000e+01 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 9.00000000e+01 6.40000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 5.40000000e+01 4.20000000e+01]
+ [1.73110460e+09 5.40000000e+01 3.90000000e+01]
+ [1.73110460e+09 7.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 1.21000000e+02 6.40000000e+01]
+ [1.73110460e+09 7.40000000e+01 6.40000000e+01]
+ [1.73110460e+09 7.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 7.40000000e+01 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 1.21000000e+02 6.40000000e+01]
+ [1.73110460e+09 5.83000000e+02 6.40000000e+01]
+ [1.73110460e+09 1.40400000e+03 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 1.40400000e+03 3.90000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110460e+09 1.05000000e+02 6.40000000e+01]
+ [1.73110460e+09 1.05000000e+02 5.20000000e+01]
+ [1.73110460e+09 6.60000000e+01 6.40000000e+01]
+ [1.73110461e+09 6.60000000e+01 6.40000000e+01]]
+2024-11-08 17:23:25,403 - INFO - Anomaly detection completed. Detected 1 anomalies out of 87 packets.
+2024-11-08 17:23:25,403 - DEBUG - Classifying threat for packet with length 66 and TTL 115
+2024-11-08 17:23:25,403 - DEBUG - Classified threat for IP 34.107.221.82 as Unusual Activity: Anomalous Packet Behavior
+2024-11-08 17:23:25,404 - INFO - Inserting threat data for IP 34.107.221.82 with threat type: Unusual Activity and crime: Anomalous Packet Behavior
+2024-11-08 17:23:25,404 - DEBUG - Attempting to connect to the database with config: {'host': 'localhost', 'user': 'root', 'password': '', 'database': 'security_app'}
+2024-11-08 17:23:25,406 - DEBUG - Database connection successful.
+2024-11-08 17:23:25,406 - DEBUG - Executing SQL insert for IP 34.107.221.82
+2024-11-08 17:23:25,412 - INFO - Threat inserted and blocked for IP 34.107.221.82
+2024-11-08 17:23:25,412 - INFO - Blocking IP 34.107.221.82
+2024-11-08 17:23:25,412 - DEBUG - Detected operating system: Linux
+2024-11-08 17:23:25,412 - DEBUG - Blocking IP 34.107.221.82 on Linux using iptables
+2024-11-08 17:23:25,421 - INFO - Blocked IP 34.107.221.82 using iptables
+2024-11-08 17:23:25,421 - DEBUG - Database connection closed after inserting threat for IP 34.107.221.82
+2024-11-09 08:54:10,623 - INFO - Starting network monitoring script.
+2024-11-09 08:57:00,520 - INFO - Starting network monitoring script.
+2024-11-09 08:57:36,815 - INFO - Starting network monitoring script.
+2024-11-09 09:01:27,906 - INFO - Starting network monitoring script.
+2024-11-09 09:06:50,851 - INFO - Starting network monitoring script.
+2024-11-09 09:13:50,796 - INFO - Starting network monitoring script.
+2024-11-09 09:13:50,797 - INFO - Detected active interface wlan0 with IP: 192.168.43.122 and netmask: 255.255.255.0
+2024-11-09 09:13:50,797 - INFO - Calculated subnet: 192.168.43.0/24
+2024-11-09 09:13:50,797 - INFO - Starting subnet scan on 192.168.43.0/24 with 100 hosts
+2024-11-09 09:14:05,847 - DEBUG - Captured 2 packets.
+2024-11-09 09:14:05,848 - INFO - Starting anomaly detection.
+2024-11-09 09:14:05,958 - INFO - Anomaly detection completed. Detected 0 anomalies out of 2 packets.
+2024-11-09 16:56:08,815 - INFO - Starting network monitoring script.
+2024-11-09 16:56:08,816 - INFO - Detected active interface wlan0 with IP: 192.168.43.122 and netmask: 255.255.255.0
+2024-11-09 16:56:08,817 - INFO - Calculated subnet: 192.168.43.0/24
+2024-11-09 16:56:08,817 - INFO - Starting subnet scan on 192.168.43.0/24 with 100 hosts
+2024-11-09 16:56:23,866 - DEBUG - Captured 26 packets.
+2024-11-09 16:56:23,866 - INFO - Starting anomaly detection.
+2024-11-09 16:56:23,985 - INFO - Anomaly detection completed. Detected 0 anomalies out of 26 packets.
+2024-11-09 16:59:29,730 - INFO - Starting network monitoring script.
+2024-11-09 16:59:29,731 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-09 16:59:29,731 - ERROR - Could not retrieve subnet details.
+2024-11-10 08:29:14,364 - INFO - Starting network monitoring script.
+2024-11-10 08:29:14,365 - INFO - Detected active interface wlan0 with IP: 192.168.43.122 and netmask: 255.255.255.0
+2024-11-10 08:29:14,365 - INFO - Calculated subnet: 192.168.43.0/24
+2024-11-10 08:29:14,365 - INFO - Starting subnet scan on 192.168.43.0/24 with 100 hosts
+2024-11-10 08:29:29,438 - DEBUG - Captured 4 packets.
+2024-11-10 08:29:29,439 - INFO - Starting anomaly detection.
+2024-11-10 08:29:29,567 - INFO - Anomaly detection completed. Detected 1 anomalies out of 4 packets.
+2024-11-10 08:29:29,567 - DEBUG - Classified threat for IP 140.82.113.26 as Unusual Activity: Anomalous Packet Behavior
+2024-11-10 08:29:29,567 - INFO - Inserting threat data for IP 140.82.113.26 with threat type: Unusual Activity and crime: Anomalous Packet Behavior
+2024-11-10 08:29:29,567 - DEBUG - Attempting to connect to the database with config: {'host': 'localhost', 'user': 'root', 'password': '', 'database': 'security_app'}
+2024-11-10 08:29:29,570 - DEBUG - Database connection successful.
+2024-11-10 08:29:29,573 - INFO - Threat inserted and blocked for IP 140.82.113.26

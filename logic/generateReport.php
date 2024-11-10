@@ -88,13 +88,10 @@ class ReportGenerator
     public function monitorDatabaseForReports()
     {
         $tables = [
-            'suspicious_behavior' => "SELECT * FROM suspicious_behavior",
-            'suspicious_files' => "SELECT * FROM suspicious_files",
-            'detected_vulnerabilities' => "SELECT * FROM detected_vulnerabilities",
-            'suspicious_traffic' => "SELECT * FROM suspicious_traffic",
-            'suspicious_emails' => "SELECT * FROM suspicious_emails"
+            'network_logs' => "SELECT * FROM network_logs",
+            'website_logs' => "SELECT * FROM website_logs",
         ];
-
+// var_dump($tables);
         foreach ($tables as $alertType => $sql) {
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();

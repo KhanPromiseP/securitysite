@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Network Threat Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #1c1c29;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+        }
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5px;
+        }
+        .chart-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+        }
+        .line-chart-box, .pie-chart-box {
+            background-color: #2d2d3f;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+        }
+        .line-chart-box {
+            flex: 2;
+        }
+        .pie-chart-container {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            flex: 1;
+        }
+        .chart-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #e8e8f0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1 class="chart-title">Network Result Overview</h1>
+        
+        <div class="chart-section">
+            <div class="line-chart-box">
+                <p class="chart-title">Real-Time Threat Detection Trends</p>
+                <canvas id="threatTrendChart"></canvas>
+            </div>
+
+            <div class="pie-chart-container">
+                <div class="pie-chart-box">
+                    <p class="chart-title">IP Status Overview</p>
+                    <canvas id="ipStatusChart"></canvas>
+                </div>
+                <div class="pie-chart-box">
+                    <p class="chart-title">Threat Types Distribution</p>
+                    <canvas id="threatPercentageChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Chart Contexts
+            const threatTrendCtx = document.getElementById('threatTrendChart').getContext('2d');
+            const ipStatusCtx = document.getElementById('ipStatusChart').getContext('2d');
+            const threatPercentageCtx = document.getElementById('threatPercentageChart').getContext('2d');
+    
+            const colors = {
+                blocked: '#d9534f',
+                active: '#5cb85c',
+                threatTypes: ['#ff6666', '#ffcc66', '#66ff66', '#66ccff'],
+                trendLine: '#1e90ff',
+                trendBg: 'rgba(30, 144, 255, 0.2)'
+            };
+    
+            // Initialize the charts
+            const threatTrendChart = new Chart(threatTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Detected threats ',
+                        data: [],
+                        borderColor: colors.trendLine,
+                        backgroundColor: colors.trendBg,
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                autoSkip: true,
+                                maxTicksLimit: 10
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 5
+                            }
+                        }
+                    }
+                },   
+
+            });
+    
+
+
+            
+            const ipStatusChart = new Chart(ipStatusCtx, {
+                type: 'pie',
+                data: { 
+                    labels: ['Blocked IPs', 'Active IPs'], 
+                    datasets: [{ data: [0, 0], backgroundColor: [colors.blocked, colors.active] }] 
+                },
+                options: { responsive: true }
+            });
+    
+            const threatPercentageChart = new Chart(threatPercentageCtx, {
+                type: 'doughnut',
+                data: { labels: [], datasets: [{ data: [], backgroundColor: colors.threatTypes }] },
+                options: { responsive: true }
+            });
+    
+            // Fetch data function
+            function fetchData() {
+                // Fetch Real-Time Threat Detection Trends
+                $.ajax({
+                    url: "../logic/ThreatModel.php",
+                    method: "POST",
+                    data: JSON.stringify({ action: "getThreatTrendData" }),
+                    contentType: "application/json",
+                    success: function(data) {
+                        const parsedData = JSON.parse(data);
+                        if (parsedData && parsedData.length) { 
+                            updateThreatTrendChart(parsedData); 
+                        } else { 
+                            console.warn("No data for trend chart");
+                        }
+                    },
+                    error: function(err) { console.error("Failed to fetch threat trend data", err); }
+                });
+    
+                // Fetch IP Status Overview
+                $.ajax({
+                    url: "../logic/ThreatModel.php",
+                    method: "POST",
+                    data: JSON.stringify({ action: "getBlockedVsActive" }),
+                    contentType: "application/json",
+                    success: function(data) {
+                        const parsedData = JSON.parse(data);
+                        if (parsedData) { 
+                            updateIPStatusChart(parsedData); 
+                        } else { 
+                            console.warn("No data for IP status chart");
+                        }
+                    },
+                    error: function(err) { console.error("Failed to fetch IP status data", err); }
+                });
+    
+                // Fetch Threat Types Distribution
+                $.ajax({
+                    url: "../logic/ThreatModel.php",
+                    method: "POST",
+                    data: JSON.stringify({ action: "getThreatPercentage" }),
+                    contentType: "application/json",
+                    success: function(data) {
+                        const parsedData = JSON.parse(data);
+                        if (parsedData && parsedData.length) { 
+                            updateThreatPercentageChart(parsedData); 
+                        } else { 
+                            console.warn("No data for threat percentage chart");
+                        }
+                    },
+                    error: function(err) { console.error("Failed to fetch threat percentage data", err); }
+                });
+            }
+    
+            // Function to update Threat Trend Chart
+            function updateThreatTrendChart(data) {
+                threatTrendChart.data.labels = data.map(item => new Date(item.detected_at).toLocaleTimeString());
+                threatTrendChart.data.datasets[0].data = data.map(item => item.threat_count); // Make sure 'threat_count' exists in your data structure
+                threatTrendChart.update();
+            }
+    
+            // Function to update IP Status Chart
+            function updateIPStatusChart(data) {
+                ipStatusChart.data.datasets[0].data = [data.blocked, data.active];
+                ipStatusChart.update();
+            }
+    
+            // Function to update Threat Percentage Chart
+            function updateThreatPercentageChart(data) {
+                threatPercentageChart.data.labels = data.map(item => item.threat_type);
+                threatPercentageChart.data.datasets[0].data = data.map(item => item.percentage);
+                threatPercentageChart.update();
+            }
+    
+            // Initial fetch of data
+            fetchData();
+            setInterval(fetchData, 5000); // Update every 5 seconds
+        });
+    </script>
+    
+    
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Scanner Control</title>
+    <style>
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button.stop {
+            background-color: #dc3545;
+        }
+
+        .button:hover {
+            opacity: 0.8;
+        }
+    </style>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to start network scanner
+            function startNetworkScanner() {
+                $.ajax({
+                    url: '../logic/NetworkController.php',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json', // Expect JSON response
+                    data: JSON.stringify({ action: 'startNetworkScanner' }),
+                    success: function (response) {
+                        if (response.status) {
+                            alert('Network Scanner Started');
+                        } else {
+                            alert('Error: ' + (response.status || 'Unknown error'));
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('An error occurred: ' + textStatus);
+                    }
+                });
+            }
+
+            // Function to stop network scanner
+            function stopNetworkScanner() {
+                $.ajax({
+                    url: '../logic/NetworkController.php',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json', // Expect JSON response
+                    data: JSON.stringify({ action: 'stopNetworkScanner' }),
+                    success: function (response) {
+                        if (response.status) {
+                            alert('Network Scanner Stopped');
+                        } else {
+                            alert('Error: ' + (response.status || 'Unknown error'));
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('An error occurred: ' + textStatus);
+                    }
+                });
+            }
+
+            // Attach events to the buttons
+            $('#startButton').on('click', startNetworkScanner);
+            $('#stopButton').on('click', stopNetworkScanner);
+        });
+    </script>
+</head>
+<body>
+    <button id="startButton" class="button">Start Network Scanner</button>
+    <button id="stopButton" class="button stop">Stop Network Scanner</button>
+</body>
+</html>

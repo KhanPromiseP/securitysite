@@ -2,6 +2,7 @@
 
 require_once 'ThreatModel.php';
 
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -9,6 +10,9 @@ error_reporting(E_ALL);
 class WebsiteController
 {
     private $threatModel;
+    private $processIdFile = '/tmp/network_scanner_pid.txt'; 
+    private $processNameFile = 'network_scanner_process_name.txt'; 
+
     public function __construct()
     {
         $this->threatModel = new ThreatModel();
@@ -21,31 +25,50 @@ class WebsiteController
 
     public function startWebsiteMonitor()
     {
+        $scriptPath = "/opt/lampp/htdocs/securitysite/scripts/WebsiteMonitor.py";
         $os = $this->detectOS();
-        $websiteMonitorPath = escapeshellarg("C:\\Users\\EMILE\\Downloads\\downloads\\htdocs\\securitysite\\logic\\WebsiteMonitor.py");
-        $pythonPath = escapeshellarg("C:\\Users\\EMILE\\AppData\\Local\\Programs\\Python\\Python312\\python.exe");
 
-        try {
-            if ($os === 'linux') {
-                $output = shell_exec("crontab -l | { cat; echo \"*/5 * * * * python3 $websiteMonitorPath > /dev/null 2>&1\"; } |
-    crontab
-    - 2>&1");
-                if ($output === null)
-                    throw new Exception("Failed to schedule cron jobs for Linux.");
-                return json_encode(['status' => 'Website monitoring started on Linux.']);
-            } elseif ($os === 'windows') {
-                $output = shell_exec("schtasks /create /tn \"WebsiteMonitor\" /tr \"$pythonPath $websiteMonitorPath\" /sc minute /mo
-    5
-    /f 2>&1");
-                if ($output === null)
-                    throw new Exception("Failed to schedule tasks for Windows.");
-                return json_encode(['status' => 'Website monitoring started on Windows']);
-            } else {
-                throw new Exception('Unsupported OS specified.');
+        if ($os === 'linux') {
+            $output = shell_exec("nohup /usr/bin/python3 $scriptPath > /dev/null 2>&1 & echo $!");
+            if ($output) {
+                file_put_contents($this->processIdFile, $output);
+                return json_encode(['status' => 'Website monitoring started on Linux', 'pid' => trim($output)]);
             }
-        } catch (Exception $e) {
-            error_log("System Start Error: " . $e->getMessage());
-            return json_encode(['status' => 'Error: ' . $e->getMessage()]);
+            return json_encode(['status' => 'Failed to start Website monitoring on Linux']);
+        } elseif ($os === 'windows') {
+            $output = shell_exec("powershell -Command \"Start-Process python -ArgumentList '$scriptPath' -WindowStyle Hidden -PassThru | Select-Object -ExpandProperty Id\"");
+            if ($output) {
+                file_put_contents($this->processNameFile, $output);
+                return json_encode(['status' => 'Website monitoring started on Windows', 'pid' => trim($output)]);
+            }
+            return json_encode(['status' => 'Failed to start Website monitoring on Windows']);
+        } else {
+            return json_encode(['status' => 'Unsupported OS']);
+        }
+    }
+
+    public function stopWebsiteMonitor()
+    {
+        $os = $this->detectOS();
+
+        if ($os === 'linux') {
+            if (file_exists($this->processIdFile)) {
+                $pid = trim(file_get_contents($this->processIdFile));
+                shell_exec("kill $pid"); 
+                unlink($this->processIdFile); 
+                return json_encode(['status' => 'Website monitoring stopped on Linux']);
+            }
+            return json_encode(['status' => 'No running Website monitoring process found on Linux']);
+        } elseif ($os === 'windows') {
+            if (file_exists($this->processNameFile)) {
+                $pid = trim(file_get_contents($this->processNameFile));
+                shell_exec("powershell -Command \"Stop-Process -Id $pid -Force\"");
+                unlink($this->processNameFile); 
+                return json_encode(['status' => 'Website monitoring stopped on Windows']);
+            }
+            return json_encode(['status' => 'No running Website monitoring process found on Windows']);
+        } else {
+            return json_encode(['status' => 'Unsupported OS']);
         }
     }
 
@@ -67,9 +90,7 @@ class WebsiteController
                     return json_encode(['status' => "IP $ipAddress blocked on Linux"]);
                 }
             } elseif ($os === 'windows') {
-                $output = shell_exec("netsh advfirewall firewall add rule name=\"Block IP $ipAddress\" dir=in interface=any
-    action=block
-    remoteip=$ipAddress 2>&1");
+                $output = shell_exec("netsh advfirewall firewall add rule name=\"Block IP $ipAddress\" dir=in interface=any action=block remoteip=$ipAddress 2>&1");
                 if ($output === null)
                     throw new Exception("Failed to block IP on Windows.");
                 if ($this->threatModel->blockIP($ipAddress)) {
@@ -113,15 +134,18 @@ class WebsiteController
     }
 }
 
-// Handle AJAX request
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     $websiteController = new WebsiteController();
-
+    $threatModel->getAllWebsiteThreats();
     if (isset($input['action'])) {
         switch ($input['action']) {
             case 'startWebsiteMonitor':
                 echo $websiteController->startWebsiteMonitor();
+                break;
+            case 'stopWebsiteMonitor':
+                echo $websiteController->stopWebsiteMonitor();
                 break;
             case 'fetchThreats':
                 echo $websiteController->fetchWebsiteThreats();

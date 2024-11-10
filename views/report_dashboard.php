@@ -17,7 +17,7 @@
     <?php  include '../includes/navbar.php';?>
     <div class="d-flex">
         <?php  include '../includes/sidebar.php';?>
-        <div class="container flex-fill main-content">
+        <div class="flex-fill main-content">
             <h1 class="text-center my-4">Real-time Security Reports</h1>
 
             <div id="reports" class="report-container"></div>

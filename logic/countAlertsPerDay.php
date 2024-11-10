@@ -24,11 +24,8 @@ class AlertCounter
 
      
         $queries = [
-            'suspicious_behavior' => "SELECT COUNT(*) AS alert_count FROM suspicious_behavior WHERE DATE(detection_time) = :today",
-            'suspicious_files' => "SELECT COUNT(*) AS alert_count FROM suspicious_files WHERE DATE(upload_time) = :today",
-            'detected_vulnerabilities' => "SELECT COUNT(*) AS alert_count FROM detected_vulnerabilities WHERE DATE(detection_time) = :today",
-            'suspicious_traffic' => "SELECT COUNT(*) AS alert_count FROM suspicious_traffic WHERE DATE(timestamp) = :today",
-            'suspicious_emails' => "SELECT COUNT(*) AS alert_count FROM suspicious_emails WHERE DATE(timestamp) = :today"
+            'network_logs' => "SELECT COUNT(*) AS alert_count FROM network_logs WHERE DATE(detected_at) = :today",
+            'website_logs' => "SELECT COUNT(*) AS alert_count FROM website_logs WHERE DATE(checked_at) = :today",
         ];
 
         $totalAlerts = 0;
@@ -40,7 +37,6 @@ class AlertCounter
                 $stmt->execute();
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                // check to ensure $result is not null and accumulate total alerts
                 if ($result && isset($result['alert_count'])) {
                     $totalAlerts += (int)$result['alert_count'];
                 }

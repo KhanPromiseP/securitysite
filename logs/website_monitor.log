@@ -1,0 +1,146 @@
+2024-11-04 18:21:26,180 - DEBUG - Starting WebsiteMonitor script.
+2024-11-04 18:21:26,180 - DEBUG - Starting scheduled monitoring...
+2024-11-04 18:21:26,180 - DEBUG - Attempting to connect to the database...
+2024-11-04 18:21:26,183 - DEBUG - Database connection established.
+2024-11-04 18:21:26,183 - DEBUG - Monitoring website: https://github.com
+2024-11-04 18:21:26,183 - DEBUG - Monitoring website: https://github.com
+2024-11-04 18:21:26,184 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-04 18:21:26,195 - WARNING - Attempt 1 failed for https://github.com. Error: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fbef671bbd0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-04 18:21:27,196 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-04 18:21:27,244 - WARNING - Attempt 2 failed for https://github.com. Error: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fbef6521dd0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-04 18:21:29,247 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-04 18:21:29,293 - WARNING - Attempt 3 failed for https://github.com. Error: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fbef6522350>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-04 18:21:33,294 - DEBUG - Website https://github.com is DOWN after 3 attempts.
+2024-11-04 18:21:33,295 - DEBUG - Monitoring website: https://yourwebsite.com
+2024-11-04 18:21:33,295 - DEBUG - Monitoring website: https://yourwebsite.com
+2024-11-04 18:21:33,297 - DEBUG - Starting new HTTPS connection (1): yourwebsite.com:443
+2024-11-04 18:21:33,341 - WARNING - Attempt 1 failed for https://yourwebsite.com. Error: HTTPSConnectionPool(host='yourwebsite.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fbef6522810>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-04 18:21:34,344 - DEBUG - Starting new HTTPS connection (1): yourwebsite.com:443
+2024-11-04 18:21:34,388 - WARNING - Attempt 2 failed for https://yourwebsite.com. Error: HTTPSConnectionPool(host='yourwebsite.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fbef6522a10>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-04 18:21:36,391 - DEBUG - Starting new HTTPS connection (1): yourwebsite.com:443
+2024-11-04 18:21:36,434 - WARNING - Attempt 3 failed for https://yourwebsite.com. Error: HTTPSConnectionPool(host='yourwebsite.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fbef6522b90>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-04 18:21:40,435 - DEBUG - Website https://yourwebsite.com is DOWN after 3 attempts.
+2024-11-04 18:21:40,435 - DEBUG - Monitoring website: https://another-website.com
+2024-11-04 18:21:40,435 - DEBUG - Monitoring website: https://another-website.com
+2024-11-04 18:21:40,438 - DEBUG - Starting new HTTPS connection (1): another-website.com:443
+2024-11-04 18:21:40,488 - WARNING - Attempt 1 failed for https://another-website.com. Error: HTTPSConnectionPool(host='another-website.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fbef6522910>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-04 18:21:41,492 - DEBUG - Starting new HTTPS connection (1): another-website.com:443
+2024-11-04 18:21:41,540 - WARNING - Attempt 2 failed for https://another-website.com. Error: HTTPSConnectionPool(host='another-website.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fbef6522410>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-04 18:21:43,543 - DEBUG - Starting new HTTPS connection (1): another-website.com:443
+2024-11-04 18:21:43,586 - WARNING - Attempt 3 failed for https://another-website.com. Error: HTTPSConnectionPool(host='another-website.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fbef6522410>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-04 18:21:47,586 - DEBUG - Website https://another-website.com is DOWN after 3 attempts.
+2024-11-04 18:21:47,587 - DEBUG - Closing database connection.
+2024-11-04 18:21:47,587 - DEBUG - Scheduled monitoring completed.
+2024-11-04 18:21:47,587 - DEBUG - WebsiteMonitor script completed.
+2024-11-05 15:18:05,690 - DEBUG - Starting WebsiteMonitor script.
+2024-11-05 15:18:05,690 - DEBUG - Starting scheduled monitoring...
+2024-11-05 15:18:05,690 - DEBUG - Attempting to connect to the database...
+2024-11-05 15:18:05,702 - DEBUG - Database connection established.
+2024-11-05 15:18:05,702 - DEBUG - Monitoring website: https://github.com
+2024-11-05 15:18:05,702 - DEBUG - Monitoring website: https://github.com
+2024-11-05 15:18:05,705 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-05 15:18:07,768 - DEBUG - https://github.com:443 "GET / HTTP/1.1" 200 None
+2024-11-05 17:00:22,019 - DEBUG - Starting WebsiteMonitor script.
+2024-11-05 17:00:22,019 - DEBUG - Starting scheduled monitoring...
+2024-11-05 17:00:22,019 - DEBUG - Attempting to connect to the database...
+2024-11-05 17:00:22,021 - DEBUG - Database connection established.
+2024-11-05 17:00:22,021 - DEBUG - Monitoring website: https://github.com
+2024-11-05 17:00:22,021 - DEBUG - Monitoring website: https://github.com
+2024-11-05 17:00:22,023 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-05 17:00:23,045 - DEBUG - https://github.com:443 "GET / HTTP/1.1" 200 None
+2024-11-05 17:01:09,303 - DEBUG - Starting WebsiteMonitor script.
+2024-11-05 17:01:09,303 - DEBUG - Starting scheduled monitoring...
+2024-11-05 17:01:09,303 - DEBUG - Attempting to connect to the database...
+2024-11-05 17:01:09,305 - DEBUG - Database connection established.
+2024-11-05 17:01:09,305 - DEBUG - Monitoring website: https://github.com
+2024-11-05 17:01:09,305 - DEBUG - Monitoring website: https://github.com
+2024-11-05 17:01:09,306 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-05 17:01:10,019 - DEBUG - https://github.com:443 "GET / HTTP/1.1" 200 None
+2024-11-05 17:30:18,297 - DEBUG - Starting WebsiteMonitor script.
+2024-11-05 17:30:18,297 - DEBUG - Starting scheduled monitoring...
+2024-11-05 17:30:18,298 - DEBUG - Attempting to connect to the database...
+2024-11-05 17:30:18,300 - DEBUG - Database connection established.
+2024-11-05 17:30:18,300 - DEBUG - Monitoring website: https://github.com
+2024-11-05 17:30:18,300 - DEBUG - Monitoring website: https://github.com
+2024-11-05 17:30:18,302 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-05 17:30:19,125 - DEBUG - https://github.com:443 "GET / HTTP/1.1" 200 None
+2024-11-05 17:30:19,535 - DEBUG - Website https://github.com is UP. Response Time: 1.234, IP: 140.82.121.4
+2024-11-05 18:59:25,751 - DEBUG - Starting WebsiteMonitor script.
+2024-11-05 18:59:25,751 - DEBUG - Starting scheduled monitoring...
+2024-11-05 18:59:25,751 - DEBUG - Attempting to connect to the database...
+2024-11-05 18:59:25,765 - DEBUG - Database connection established.
+2024-11-05 18:59:25,765 - DEBUG - Monitoring website: https://github.com
+2024-11-05 18:59:25,765 - DEBUG - Monitoring website: https://github.com
+2024-11-05 18:59:25,769 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-05 18:59:25,770 - WARNING - Attempt 1 failed for https://github.com. Error: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f14a4bfd1d0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-05 18:59:26,773 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-05 18:59:26,774 - WARNING - Attempt 2 failed for https://github.com. Error: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f14a3754310>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-05 18:59:28,778 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-05 18:59:28,779 - WARNING - Attempt 3 failed for https://github.com. Error: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f14a3754890>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-05 18:59:32,780 - DEBUG - Website https://github.com is DOWN after 3 attempts.
+2024-11-05 18:59:32,780 - DEBUG - Closing database connection.
+2024-11-05 18:59:32,780 - DEBUG - Scheduled monitoring completed.
+2024-11-05 18:59:32,781 - DEBUG - WebsiteMonitor script completed.
+2024-11-05 19:01:57,391 - DEBUG - Starting WebsiteMonitor script.
+2024-11-05 19:01:57,391 - DEBUG - Starting scheduled monitoring...
+2024-11-05 19:01:57,391 - DEBUG - Attempting to connect to the database...
+2024-11-05 19:01:57,393 - DEBUG - Database connection established.
+2024-11-05 19:01:57,393 - DEBUG - Monitoring website: https://github.com
+2024-11-05 19:01:57,393 - DEBUG - Monitoring website: https://github.com
+2024-11-05 19:01:57,395 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-05 19:01:57,395 - WARNING - Attempt 1 failed for https://github.com. Error: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f492fc651d0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-05 19:01:58,399 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-05 19:01:58,400 - WARNING - Attempt 2 failed for https://github.com. Error: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f492ee10210>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-05 19:02:00,404 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-05 19:02:00,405 - WARNING - Attempt 3 failed for https://github.com. Error: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f492ee138d0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2024-11-05 19:02:04,405 - DEBUG - Website https://github.com is DOWN after 3 attempts.
+2024-11-05 19:02:04,406 - DEBUG - Closing database connection.
+2024-11-05 19:02:04,406 - DEBUG - Scheduled monitoring completed.
+2024-11-05 19:02:04,406 - DEBUG - WebsiteMonitor script completed.
+2024-11-06 08:03:05,605 - DEBUG - Starting WebsiteMonitor script.
+2024-11-06 08:03:05,605 - DEBUG - Starting scheduled monitoring...
+2024-11-06 08:03:05,605 - DEBUG - Attempting to connect to the database...
+2024-11-06 08:03:05,607 - DEBUG - Database connection established.
+2024-11-06 08:03:05,607 - DEBUG - Monitoring website: https://github.com
+2024-11-06 08:03:05,607 - DEBUG - Monitoring website: https://github.com
+2024-11-06 08:03:05,608 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-06 08:03:06,684 - DEBUG - https://github.com:443 "GET / HTTP/1.1" 200 None
+2024-11-06 08:03:07,197 - DEBUG - Website https://github.com is UP. Response Time: 1.587, IP: 140.82.121.3
+2024-11-06 08:16:49,831 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-06 08:16:51,121 - DEBUG - https://github.com:443 "GET / HTTP/1.1" 200 None
+2024-11-06 08:17:14,740 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-06 08:17:15,597 - DEBUG - https://github.com:443 "GET / HTTP/1.1" 200 None
+2024-11-06 08:21:43,806 - INFO - WebsiteMonitor script initiated.
+2024-11-06 08:21:43,806 - DEBUG - Starting scheduled monitoring session...
+2024-11-06 08:21:43,806 - DEBUG - Attempting to establish database connection...
+2024-11-06 08:21:43,808 - INFO - Database connection established successfully.
+2024-11-06 08:21:43,808 - DEBUG - Processing URL: https://github.com
+2024-11-06 08:21:43,809 - INFO - Starting monitoring for URL: https://github.com
+2024-11-06 08:21:43,809 - DEBUG - Attempt 1 for monitoring URL: https://github.com
+2024-11-06 08:21:43,810 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-06 08:21:44,624 - DEBUG - https://github.com:443 "GET / HTTP/1.1" 200 None
+2024-11-06 08:21:45,035 - INFO - Website https://github.com is UP. Response Time: 1.225 seconds. IP Address: 140.82.121.3
+2024-11-06 08:21:45,040 - DEBUG - Starting anomaly detection on response times: [1.225]
+2024-11-06 08:21:45,042 - WARNING - Insufficient data points for anomaly detection.
+2024-11-06 08:21:45,042 - DEBUG - Logging event - URL: https://github.com, Status: UP, Response Time: 1.225, Issue: None, IP: 140.82.121.3, Blocked: 0
+2024-11-06 08:21:45,046 - INFO - Event logged successfully for URL: https://github.com
+2024-11-06 08:21:45,047 - DEBUG - Closing database connection.
+2024-11-06 08:21:45,047 - INFO - Scheduled monitoring session completed.
+2024-11-06 08:21:45,047 - INFO - WebsiteMonitor script finished.
+2024-11-06 08:22:01,902 - INFO - WebsiteMonitor script initiated.
+2024-11-06 08:22:01,902 - DEBUG - Starting scheduled monitoring session...
+2024-11-06 08:22:01,902 - DEBUG - Attempting to establish database connection...
+2024-11-06 08:22:01,904 - INFO - Database connection established successfully.
+2024-11-06 08:22:01,904 - DEBUG - Processing URL: https://github.com
+2024-11-06 08:22:01,904 - INFO - Starting monitoring for URL: https://github.com
+2024-11-06 08:22:01,904 - DEBUG - Attempt 1 for monitoring URL: https://github.com
+2024-11-06 08:22:01,906 - DEBUG - Starting new HTTPS connection (1): github.com:443
+2024-11-06 08:22:02,853 - DEBUG - https://github.com:443 "GET / HTTP/1.1" 200 None
+2024-11-06 08:22:03,265 - INFO - Website https://github.com is UP. Response Time: 1.358 seconds. IP Address: 140.82.121.3
+2024-11-06 08:22:03,268 - DEBUG - Starting anomaly detection on response times: [1.358]
+2024-11-06 08:22:03,269 - WARNING - Insufficient data points for anomaly detection.
+2024-11-06 08:22:03,269 - DEBUG - Logging event - URL: https://github.com, Status: UP, Response Time: 1.358, Issue: None, IP: 140.82.121.3, Blocked: 0
+2024-11-06 08:22:03,274 - INFO - Event logged successfully for URL: https://github.com
+2024-11-06 08:22:03,275 - DEBUG - Closing database connection.
+2024-11-06 08:22:03,275 - INFO - Scheduled monitoring session completed.
+2024-11-06 08:22:03,275 - INFO - WebsiteMonitor script finished.

@@ -9,7 +9,7 @@ class ActiveUserMonitor {
         $this->conn = $dbConnection;
     }
 
-    // Function to get the count of active users
+
     public function getActiveUserCount() {
         $query = "SELECT COUNT(*) AS active_user_count FROM active_users_log WHERE is_active = 1";
         $stmt = $this->conn->prepare($query);
@@ -23,12 +23,11 @@ class ActiveUserMonitor {
     }
 }
 
-// Initialize the Database connection
+
 $database = new Database();
 $db = $database->getConnection();
 $monitor = new ActiveUserMonitor($db);
 
-// Return active user count upon request
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     echo json_encode($monitor->getActiveUserCount());
 } else {

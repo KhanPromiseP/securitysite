@@ -14,19 +14,15 @@ class AlertDisplay
     public function getAlertCounts()
     {
         $counts = [
-            'suspicious_behavior' => 0,
-            'suspicious_files' => 0,
-            'detected_vulnerabilities' => 0,
-            'suspicious_traffic' => 0,
-            'suspicious_emails' => 0,
+            'network_logs' => 0,
+            'website_logs' => 0,
+           
         ];
 
         $queries = [
-            'suspicious_behavior' => "SELECT COUNT(*) as count FROM suspicious_behavior",
-            'suspicious_files' => "SELECT COUNT(*) as count FROM suspicious_files",
-            'detected_vulnerabilities' => "SELECT COUNT(*) as count FROM detected_vulnerabilities",
-            'suspicious_traffic' => "SELECT COUNT(*) as count FROM suspicious_traffic",
-            'suspicious_emails' => "SELECT COUNT(*) as count FROM suspicious_emails"
+            'network_logs' => "SELECT COUNT(*) as count FROM network_logs",
+            'website_logs' => "SELECT COUNT(*) as count FROM website_logs",
+        
         ];
 
         foreach ($queries as $table => $query) {

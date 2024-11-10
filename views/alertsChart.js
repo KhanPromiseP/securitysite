@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
             labels: [], 
             datasets: [
                 {
-                    label: 'Suspicious Behavior',
+                    label: 'network_logs',
                     data: [], 
                     borderColor: 'rgba(255, 99, 132, 1)',
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     tension: 0.4 
                 },
                 {
-                    label: 'Suspicious Files',
+                    label: 'website_logs',
                     data: [],
                     borderColor: 'rgba(54, 162, 235, 1)',
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -32,42 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     fill: true,
                     tension: 0.4
                 },
-                {
-                    label: 'Detected Vulnerabilities',
-                    data: [],
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                    borderWidth: 2,
-                    pointStyle: 'circle',
-                    pointRadius: 4,
-                    pointHoverRadius: 6,
-                    fill: true,
-                    tension: 0.4
-                },
-                {
-                    label: 'Suspicious Traffic',
-                    data: [],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderWidth: 2,
-                    pointStyle: 'circle',
-                    pointRadius: 4,
-                    pointHoverRadius: 6,
-                    fill: true,
-                    tension: 0.4
-                },
-                {
-                    label: 'Suspicious Emails',
-                    data: [],
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                    borderWidth: 2,
-                    pointStyle: 'circle',
-                    pointRadius: 4,
-                    pointHoverRadius: 6,
-                    fill: true,
-                    tension: 0.4
-                }
+               
             ]
         },
         options: {
@@ -130,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 title: {
                     display: true,
-                    text: 'Security Alerts Dashboard - Real-time Monitoring',
+                    text: 'Security Network Vs Website Results',
                     color: '#ccd',
                     font: {
                         size: 18,
@@ -196,12 +161,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 var now = new Date().toLocaleTimeString();
                 alertsChart.data.labels.push(now);
 
-                alertsChart.data.datasets[0].data.push(alertCounts.suspicious_behavior || 0);
-                alertsChart.data.datasets[1].data.push(alertCounts.suspicious_files || 0);
-                alertsChart.data.datasets[2].data.push(alertCounts.detected_vulnerabilities || 0);
-                alertsChart.data.datasets[3].data.push(alertCounts.suspicious_traffic || 0);
-                alertsChart.data.datasets[4].data.push(alertCounts.suspicious_emails || 0);
-
+                alertsChart.data.datasets[0].data.push(alertCounts.network_logs || 0);
+                alertsChart.data.datasets[1].data.push(alertCounts.website_logs || 0);
+             
                 if (alertsChart.data.labels.length > 10) {
                     alertsChart.data.labels.shift(); 
                     alertsChart.data.datasets.forEach(dataset => dataset.data.shift()); 
