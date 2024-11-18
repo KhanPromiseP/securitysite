@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <nav class="sidebar bg-dark" id="sidebar">
     <div class="sidebar-header p-3 mt-4">
-        <a href="../views/startsystem.html" class="btn btn-danger w-100 mb-4">Start System</a>
+        <a href="../views/buttonDasboard.html" class="btn btn-danger w-100 mb-4">Start System</a>
     </div>
     <ul class="nav flex-column">
         <li class="nav-item">
@@ -17,7 +17,7 @@
             <a href="../views/report_dashboard.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'report_dashboard.php' ? 'active' : '' ?>">Reports</a>
         </li>
         <li class="nav-item">
-            <a href="users.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'users.php' ? 'active' : '' ?>">User Management</a>
+            <a href="../views/user_management.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'users.php' ? 'active' : '' ?>">User Management</a>
         </li>
         <li class="nav-item">
             <a href="settings.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'settings.php' ? 'active' : '' ?>">Settings</a>

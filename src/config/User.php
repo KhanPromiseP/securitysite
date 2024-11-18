@@ -7,14 +7,14 @@ class User {
     public $username;
     public $email;
     public $password_hash;
+    public $role_id;
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    public function register($username, $email, $password) {
-        $query = "INSERT INTO $this->table (username, email, password_hash) VALUES (:username, :email, :password_hash)";
-
+    public function register($username, $email, $password, $role_id = 2) { // Default role_id 2 (is the User)
+        $query = "INSERT INTO $this->table (username, email, password_hash, role_id) VALUES (:username, :email, :password_hash, :role_id)";
         $stmt = $this->conn->prepare($query);
 
         $this->username = htmlspecialchars(strip_tags($username));
@@ -24,52 +24,59 @@ class User {
         $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':password_hash', $this->password_hash);
+        $stmt->bindParam(':role_id', $role_id);
 
-        if ($stmt->execute()) {
-            return true;
-        }
-        return false;
+        return $stmt->execute();
     }
 
-    /**
-     *  Authenticate user login
-     *  @param mixed $username
-     * 
-     *  @param mixed $password 
-     */
-    public function login($username, $password):bool {
-        $query = "SELECT id, password_hash FROM $this->table WHERE username = :username LIMIT 1";
+    public function login($username, $password) {
+        $query = "SELECT id, password_hash, role_id FROM $this->table WHERE username = :username LIMIT 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':username', $username);
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user && password_verify($password, $user['password_hash'])) {
-          
             session_start();
+            session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $username;
-
+            $_SESSION['role_id'] = $user['role_id'];
             return true;
         }
         return false;
     }
 
-    /**
-     * Logout user
-    */   
- public function logout():bool {
+    public function logout() {
         session_start();
+        session_unset();
         session_destroy();
         return true;
     }
 
-    /**
-     * Check if a user is logged in 
-     *
-    */   
-    public function isLoggedIn() {
-        session_start();
-        return isset($_SESSION['user_id']);
+    public function getAllUsers() {
+        $query = "SELECT users.id, users.username, users.email, roles.role_name 
+                  FROM $this->table
+                  JOIN roles ON users.role_id = roles.id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function deleteUser($id) {
+        $query = "DELETE FROM $this->table WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
+    
+    public function updateUser($id, $username, $email, $role_id) {
+        $query = "UPDATE $this->table SET username = :username, email = :email, role_id = :role_id WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':role_id', $role_id);
+        return $stmt->execute();
     }
 }
+?>

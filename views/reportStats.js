@@ -6,7 +6,6 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'json',
             success: function (data) {
-                // Update the report count
                 $('#report-count').text(data.report_count);
             }
         });

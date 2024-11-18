@@ -23,9 +23,8 @@
             xhr.send();
         }
 
-        // Fetch user count every 5 seconds
         setInterval(fetchUserCount, 5000);
-        fetchUserCount();  // Initial fetch
+        fetchUserCount();  
     </script>
 </body>
 </html>

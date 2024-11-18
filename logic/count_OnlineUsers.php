@@ -14,4 +14,5 @@ if ($command) {
 } else {
     echo json_encode(["error" => "Unsupported OS."]);
 }
+
 ?>

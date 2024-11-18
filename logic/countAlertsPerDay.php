@@ -4,9 +4,6 @@ header("Access-Control-Allow-Methods: GET, POST");
 header("Content-Type: application/json");
 
 
-ini_set('display_errors', 0); 
-error_reporting(0); 
-
 include '../src/config/Database.php'; 
 
 class AlertCounter

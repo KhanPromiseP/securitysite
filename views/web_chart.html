@@ -72,7 +72,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Chart Contexts
             const threatTrendCtx = document.getElementById('threatTrendChart').getContext('2d');
             const ipStatusCtx = document.getElementById('ipStatusChart').getContext('2d');
             const threatPercentageCtx = document.getElementById('threatPercentageChart').getContext('2d');
@@ -84,8 +83,7 @@
                 trendLine: '#1e90ff',
                 trendBg: 'rgba(30, 144, 255, 0.2)'
             };
-    
-            // Initialize the charts
+
             const threatTrendChart = new Chart(threatTrendCtx, {
                 type: 'line',
                 data: {
@@ -134,10 +132,8 @@
                 data: { labels: [], datasets: [{ data: [], backgroundColor: colors.threatTypes }] },
                 options: { responsive: true }
             });
-    
-            // Fetch data function
+
             function fetchData() {
-                // Fetch Real-Time Threat Detection Trends
                 $.ajax({
                     url: "../logic/WebThreatModel.php",
                     method: "POST",
@@ -153,8 +149,7 @@
                     },
                     error: function(err) { console.error("Failed to fetch threat trend data", err); }
                 });
-    
-                // Fetch IP Status Overview
+
                 $.ajax({
                     url: "../logic/WebThreatModel.php",
                     method: "POST",
@@ -171,7 +166,6 @@
                     error: function(err) { console.error("Failed to fetch IP status data", err); }
                 });
 
-                // Fetch Threat Types Distribution
                 $.ajax({
                     url: "../logic/WebThreatModel.php",
                     method: "POST",
@@ -210,10 +204,8 @@
                 threatPercentageChart.update();
             }
 
-            // Initial data fetch
             fetchData();
-    
-            // Set interval for updating data every 5 minutes
+
             setInterval(fetchData, 300000);
         });
     </script>

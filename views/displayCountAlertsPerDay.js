@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // function for real time update of total number of alerts using AJAX
     function updateAlertCount() {
         $.ajax({
             url: '../logic/countAlertsPerDay.php?_=' + new Date().getTime(), 

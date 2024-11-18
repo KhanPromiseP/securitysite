@@ -72,7 +72,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Chart Contexts
             const threatTrendCtx = document.getElementById('threatTrendChart').getContext('2d');
             const ipStatusCtx = document.getElementById('ipStatusChart').getContext('2d');
             const threatPercentageCtx = document.getElementById('threatPercentageChart').getContext('2d');
@@ -84,8 +83,7 @@
                 trendLine: '#1e90ff',
                 trendBg: 'rgba(30, 144, 255, 0.2)'
             };
-    
-            // Initialize the charts
+
             const threatTrendChart = new Chart(threatTrendCtx, {
                 type: 'line',
                 data: {
@@ -139,9 +137,7 @@
                 options: { responsive: true }
             });
     
-            // Fetch data function
             function fetchData() {
-                // Fetch Real-Time Threat Detection Trends
                 $.ajax({
                     url: "../logic/ThreatModel.php",
                     method: "POST",
@@ -157,8 +153,7 @@
                     },
                     error: function(err) { console.error("Failed to fetch threat trend data", err); }
                 });
-    
-                // Fetch IP Status Overview
+
                 $.ajax({
                     url: "../logic/ThreatModel.php",
                     method: "POST",
@@ -174,8 +169,7 @@
                     },
                     error: function(err) { console.error("Failed to fetch IP status data", err); }
                 });
-    
-                // Fetch Threat Types Distribution
+
                 $.ajax({
                     url: "../logic/ThreatModel.php",
                     method: "POST",
@@ -192,30 +186,26 @@
                     error: function(err) { console.error("Failed to fetch threat percentage data", err); }
                 });
             }
-    
-            // Function to update Threat Trend Chart
+   
             function updateThreatTrendChart(data) {
                 threatTrendChart.data.labels = data.map(item => new Date(item.detected_at).toLocaleTimeString());
-                threatTrendChart.data.datasets[0].data = data.map(item => item.threat_count); // Make sure 'threat_count' exists in your data structure
+                threatTrendChart.data.datasets[0].data = data.map(item => item.threat_count); 
                 threatTrendChart.update();
             }
-    
-            // Function to update IP Status Chart
+
             function updateIPStatusChart(data) {
                 ipStatusChart.data.datasets[0].data = [data.blocked, data.active];
                 ipStatusChart.update();
             }
     
-            // Function to update Threat Percentage Chart
             function updateThreatPercentageChart(data) {
                 threatPercentageChart.data.labels = data.map(item => item.threat_type);
                 threatPercentageChart.data.datasets[0].data = data.map(item => item.percentage);
                 threatPercentageChart.update();
             }
     
-            // Initial fetch of data
             fetchData();
-            setInterval(fetchData, 5000); // Update every 5 seconds
+            setInterval(fetchData, 5000); 
         });
     </script>
     

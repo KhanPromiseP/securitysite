@@ -29,57 +29,56 @@ SimpleMiddleware::requireLogin();
         <div class="flex-fill main-content p-4">
             <div class="container-fluid">
                 <header class="mb-4">
-                    <div style='height: 60px; radius: 10px' class="h2 bg-black text-center text-white flex-fill">Welcome, <?php echo $_SESSION['username']; ?>! Here’s an overview of your security status.</div>
+                    <div style='height: 60px; radius: 10px' class="h2 bg-black text-center text-white flex-fill" role="banner">
+                        Welcome, <span id="username"><?php echo htmlspecialchars($_SESSION['username']); ?></span>! Here’s an overview of your security status.
+                    </div>
                 </header>
 
                 <!-- Info Cards -->
-                <div class="row g-4">
+                <div class="row g-4" role="region" aria-label="Information Cards">
                     <div class="col-md-4">
-                        <div class="card text-center bg-danger text-white">
+                        <div class="card text-center bg-danger text-white" role="contentinfo" aria-label="Total Alerts">
                             <div class="card-body">
                                 <h5 class="card-title">Total Alerts</h5>
-                                <p class="display-4"><span id="alertCounter">0</span></p>
+                                <p class="display-4" aria-live="polite"><span id="alertCounter">0</span></p>
                                 <p>New alerts today</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card text-center bg-warning text-dark">
+                        <div class="card text-center bg-warning text-dark" role="contentinfo" aria-label="Users Online">
                             <div class="card-body">
                                 <h5 class="card-title">Users Online</h5>
-                                <p class="display-4"><span id="onlineUserCount">0</span></p>
+                                <p class="display-4" aria-live="polite"><span id="deviceCount">0</span></p>
                                 <p>Active connections</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card text-center bg-success text-white">
+                        <div class="card text-center bg-success text-white" role="contentinfo" aria-label="Threats Reported">
                             <div class="card-body">
                                 <h5 class="card-title">Threats Reported</h5>
-                                <p class="display-4"><span id="report-count">0</span></p>
+                                <p class="display-4" aria-live="polite"><span id="report-count">0</span></p>
                                 <p>In the last week</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-
-                 <!-- Network Traffic Overview -->
-                <div class="card mt-4">
-                        <iframe src="../views/net_chart.html" class="w-100" style="height: 600px; border: none;"></iframe>
+                <!-- Network Traffic Overview -->
+                <div class="card mt-4" role="region" aria-label="Network Traffic Overview">
+                    <iframe src="../views/net_chart.html" class="w-100" style="height: 600px; border: none;" title="Network Traffic Overview"></iframe>
                 </div>
 
-
-                <div class="card mt-4">
-                        <iframe src="../views/web_chart.html" class="w-100" style="height: 600px; border: none;"></iframe>
+                <!-- Website Traffic Overview -->
+                <div class="card mt-4" role="region" aria-label="Website Traffic Overview">
+                    <iframe src="../views/web_chart.html" class="w-100" style="height: 600px; border: none;" title="Website Traffic Overview"></iframe>
                 </div>
 
-      
-                <!-- Real-Time Network/website result-->
-                <div class="card mt-4">
-                            <canvas style='background-color: #1c1c29; max-height: 500px' id="alertsChart"></canvas> 
+                <!-- Real-Time Alerts Chart -->
+                <div class="card mt-4" role="region" aria-label="Real-Time Alerts Chart">
+                    <canvas style="background-color: #1c1c29; max-height: 500px" id="alertsChart" role="img" aria-label="Real-Time Alerts Data Visualization"></canvas> 
                 </div>
-
             </div>
         </div>
     </div>

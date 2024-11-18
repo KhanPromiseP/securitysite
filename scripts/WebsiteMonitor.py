@@ -1,4 +1,3 @@
-# WebsiteMonitor.py
 import requests
 import mysql.connector
 import logging
@@ -12,11 +11,9 @@ import platform
 import subprocess
 import socket
 
-# Detailed logging configuration
 logging.basicConfig(filename='../logs/website_monitor.log', filemode='a', level=logging.DEBUG, 
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Database configuration
 DB_CONFIG = {
     'host': 'localhost',
     'user': 'root',
@@ -52,7 +49,7 @@ def log_event(conn, url, status, response_time, issue, ip_address, is_blocked):
 
 def monitor_website(url):
     logging.info(f"Starting monitoring for URL: {url}")
-    for attempt in range(3):  # Retry up to 3 times
+    for attempt in range(3):  
         logging.debug(f"Attempt {attempt + 1} for monitoring URL: {url}")
         try:
             headers = {"User-Agent": "Mozilla/5.0"}
@@ -64,7 +61,7 @@ def monitor_website(url):
             return ("UP", response_time, None, ip_address)
         except requests.exceptions.RequestException as e:
             logging.warning(f"Attempt {attempt + 1} failed for URL {url}. Error: {e}")
-            time.sleep(2 ** attempt)  # Exponential backoff
+            time.sleep(2 ** attempt)  
     logging.error(f"Website {url} is DOWN after 3 attempts.")
     return ("DOWN", None, "Request failed after retries", None)
 
@@ -107,11 +104,9 @@ def scheduled_monitoring():
         logging.debug(f"Processing URL: {url}")
         status, response_time, issue, ip_address = monitor_website(url)
         
-        # Track response times for anomaly detection
         if response_time:
             response_times_by_url[url].append(response_time)
 
-        # Detect anomalies for the website's response times
         anomalies = detect_anomalies(response_times_by_url[url])
         
         if anomalies:

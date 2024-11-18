@@ -1,36 +1,34 @@
 <?php
-class SimpleMiddleware
-{
-    /**
-     *  Check if the user is logged in
-     */
-    public static function requireLogin()
-    {
-        session_start(); 
+class SimpleMiddleware {
+    public static function requireLogin() {
+        session_start();
         if (!isset($_SESSION['user_id'])) {
             header('Location: ../src/config/login.php');
-            exit(); 
+            exit();
         }
     }
 
-    /**
-     *  Method to prevent logged-in users from accessing public login, register pages
-     *  
-     */
-    public static function preventLoggedInAccess()
-    {
+    public static function requireAdmin() {
+        session_start();
+        if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+            header('Location: ../views/access_denied.php');
+            exit();
+        }
+    }
+
+    public static function preventLoggedInAccess() {
         session_start();
         if (isset($_SESSION['user_id'])) {
-            header('Location: ../../public/index.php');
-            exit(); 
+            header('Location: ../public/index.php');
+            exit();
         }
     }
 
-    public static function logout()
-    {
-        session_start(); 
-        session_destroy(); 
-        header('Location: src/config/login.php'); 
+    public static function logout() {
+        session_start();
+        session_unset();
+        session_destroy();
+        header('Location: src/config/login.php');
         exit();
     }
 }

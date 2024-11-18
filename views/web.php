@@ -91,7 +91,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Table content populated by AJAX -->
+                                        <!-- Table content will be populated by AJAX here-->
                                     </tbody>
                                 </table>
 
@@ -149,7 +149,7 @@
                                                 }),
                                                 success: function(response) {
                                                     alert(response.message);
-                                                    fetchThreatLogs(); // Re-fetch data after blocking
+                                                    fetchThreatLogs(); 
                                                 },
                                                 error: function(xhr, status, error) {
                                                     alert('Error blocking IP: ' + error);
@@ -169,7 +169,7 @@
                                                 }),
                                                 success: function(response) {
                                                     alert(response.message);
-                                                    fetchThreatLogs(); // Re-fetch data after unblocking
+                                                    fetchThreatLogs(); 
                                                 },
                                                 error: function(xhr, status, error) {
                                                     alert('Error unblocking IP: ' + error);
@@ -177,7 +177,6 @@
                                             });
                                         });
 
-                                        // Initial data load
                                         fetchThreatLogs();
                                     });
                                 </script>

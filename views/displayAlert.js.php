@@ -1,4 +1,4 @@
-<?php  include '../includes/header.php';?>
+<!-- <?php  include '../includes/header.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,8 +23,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <div id="alerts-container">
-                                <!-- Alert inserted here -->
-
+                                
                             </div>
                         </div>
                     </div>
@@ -132,4 +131,4 @@
     </div>
 </body>
 
-</html>
+</html> -->
