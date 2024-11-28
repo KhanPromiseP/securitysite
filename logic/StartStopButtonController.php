@@ -2,7 +2,7 @@
 
 class StartStopButtonController {
     private $processIdFiles = [
-        'network_scan' => __DIR__ . '/../scripts/network_scan_pid.txt',
+        'network_scan' => 'network_scan_pid.txt',
         'website_monitor' => __DIR__ . '/../scripts/website_monitor_pid.txt'
     ];
 
@@ -11,7 +11,7 @@ class StartStopButtonController {
     }
 
     public function startProcess($process) {
-        $scriptPath = __DIR__ . '/../scripts/' . ($process === 'network_scan' ? 'NetworkScanner.py' : 'WebsiteMonitor.py');
+        $scriptPath = __DIR__ . '/../scripts/' . ($process === 'network_scan' ? 'NetworkScanner.py scan' : 'WebsiteMonitor.py');
         $os = $this->detectOS();
         $output = [];
         $return_var = 0;

@@ -2,8 +2,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
         <img src="../assets/images/r.png" alt="Company Logo"
-             class="img-fluid rounded-circle align-items-center d-flex mb-3"
-             style="height: 50px; width: 100px;">
+             class="img-fluid rounded-circle align-items-center d-flex mb-1"
+             style="height: 30px; width: 80px;">
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

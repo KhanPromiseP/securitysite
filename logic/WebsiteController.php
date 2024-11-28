@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 class WebsiteController
 {
     private $threatModel;
-    private $processIdFile = '/tmp/network_scanner_pid.txt'; 
+    private $processIdFile = '/tmp/website_monitor_pid.txt'; 
     private $processNameFile = 'network_scanner_process_name.txt'; 
 
     public function __construct()

@@ -1,18 +1,17 @@
 <?php
-$os = php_uname("s");
-$command = "";
+header("Content-Type: application/json");
 
-if (stripos($os, "Linux") !== false) {
-    $command = "python3 ../scripts/count_OnlineUsers.py";
-} elseif (stripos($os, "Windows") !== false) {
-    $command = "python C:\\windows\\path\\to\\count_OnlineUsers.py";
-}
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, "http://localhost:5000/active-devices");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-if ($command) {
-    $user_count = intval(shell_exec($command));
-    echo json_encode(["count" => $user_count]);
+$response = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    echo json_encode(["error" => "Failed to fetch active device count."]);
 } else {
-    echo json_encode(["error" => "Unsupported OS."]);
+    echo $response;
 }
 
+curl_close($ch);
 ?>

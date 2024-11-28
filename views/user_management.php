@@ -5,7 +5,8 @@
 
 
 include '../src/config/Database.php';
-include '../src/config/User.php';
+include '../src/config/User.php'; 
+include '../includes/header.php'; 
 $database = new Database();
 $db = $database->getConnection();
 $user = new User($db);

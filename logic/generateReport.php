@@ -1,129 +1,98 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 class ReportGenerator
 {
     private $conn;
+
     public function __construct($db)
     {
         $this->conn = $db;
     }
 
-    public function generateAIReport($alertType, $reportDetails)
-    {
-        try {
-            $description = $this->formatReportDetails($alertType, $reportDetails);
-
-            $data = [
-                'model' => 'text-davinci-003',
-                'prompt' => "Generate a detailed report for the following alert type: " . ucfirst(str_replace('_', ' ', $alertType))
-                    .
-                    "\n" . $description,
-                'max_tokens' => 1000,
-            ];
-
-            $apiKey =
-                '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';
-
-            $options = [
-                'http' => [
-                    'header' => "Content-type: application/json\r\nAuthorization: Bearer $apiKey\r\n",
-                    'method' => 'POST',
-                    'content' => json_encode($data),
-                ],
-            ];
-
-            $context = stream_context_create($options);
-            $result = file_get_contents('https://api.openai.com/v1/completions', false, $context);
-
-            if ($result === FALSE) {
-                throw new Exception("Failed to call AI API.");
-            }
-
-            $response = json_decode($result, true);
-            return $response['choices'][0]['text'];
-
-        } catch (Exception $e) {
-            echo "OpenAI API failed: " . $e->getMessage();
-            return false;
-        }
-    }
-
-
-    // Function to call the Python script as a fallback
-    public function generateFallbackReport($alertType, $reportDetails)
-    {
-        $reportDetailsJson = json_encode($reportDetails);
-        echo "JSON passed to Python: " . $reportDetailsJson;
-
-        $command = escapeshellcmd("python3 generate_report.py '$alertType' '$reportDetailsJson' 2>&1");
-        $output = shell_exec($command);
-
-        if ($output) {
-            return $output;
-        } else {
-            echo "Error running Python script: " . $output;
-            return false;
-        }
-    }
-
     private function formatReportDetails($alertType, $reportDetails)
     {
         $formatted = "Report Details:\n";
-        $formatted .= "Alert Type: " . ucfirst($alertType) . "\n";
-        $formatted .= "Details: " . $reportDetails . "\n";
-        $formatted .= "--------------------------------------------\n";
+        $formatted .= "Alert Type: " . ucfirst(str_replace('_', ' ', $alertType)) . "\n";
+        $formatted .= "Details:\n";
+
+        foreach ($reportDetails as $key => $value) {
+            $formatted .= ucfirst(str_replace('_', ' ', $key)) . ": $value\n";
+        }
+
+        $formatted .= str_repeat('-', 40) . "\n";
         return $formatted;
     }
 
-    private function saveGeneratedReport($alertType, $reportDetails)
+    private function generateReport($alertType, $reportDetails)
     {
-        $sql = "INSERT INTO generated_reports (alert_type, report_details, generated_at) VALUES (:alert_type,
-    :report_details,
-    NOW())";
+        $currentDate = date('Y-m-d H:i:s');
+        $header = "Generated Report - $currentDate\n";
+        $header .= str_repeat('=', 50) . "\n";
+
+        $body = $this->formatReportDetails($alertType, $reportDetails);
+
+        return $header . $body;
+    }
+
+    private function reportExists($alertType, $entryId)
+    {
+        $sql = "SELECT id FROM generated_reports WHERE alert_type = :alert_type AND entry_id = :entry_id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':alert_type', $alertType);
-        $stmt->bindParam(':report_details', $reportDetails);
+        $stmt->bindParam(':entry_id', $entryId);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+    }
+
+    private function saveGeneratedReport($alertType, $entryId, $report)
+    {
+        $sql = "INSERT INTO generated_reports (alert_type, entry_id, report_details, generated_at) 
+                VALUES (:alert_type, :entry_id, :report_details, NOW())";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':alert_type', $alertType);
+        $stmt->bindParam(':entry_id', $entryId);
+        $stmt->bindParam(':report_details', $report);
         $stmt->execute();
     }
 
     public function monitorDatabaseForReports()
     {
         $tables = [
-            'network_logs' => "SELECT * FROM network_logs",
-            'website_logs' => "SELECT * FROM website_logs",
+            'network_logs' => "SELECT * FROM network_logs WHERE detected_at >= NOW() - INTERVAL 0.5 MINUTE",
+            'website_logs' => "SELECT * FROM website_logs WHERE checked_at >= NOW() - INTERVAL 0.5 MINUTE",
         ];
-// var_dump($tables);
-        foreach ($tables as $alertType => $sql) {
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
 
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $reportDetails = json_encode($row);
+        while (true) {
+            foreach ($tables as $alertType => $sql) {
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute();
 
-                $aiReport = $this->generateAIReport($alertType, $reportDetails);
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $entryId = $row['id']; 
+                    $reportDetails = $row; 
 
-                if ($aiReport) {
+                    if (!$this->reportExists($alertType, $entryId)) {
+                        $generatedReport = $this->generateReport($alertType, $reportDetails);
+                        $this->saveGeneratedReport($alertType, $entryId, $generatedReport);
 
-                    $this->saveGeneratedReport($alertType, $aiReport);
-                    echo "AI Report Generated and Saved for $alertType:\n";
-                } else {
-
-                    $fallbackReport = $this->generateFallbackReport($alertType, $reportDetails);
-
-                    if ($fallbackReport) {
-
-                        $this->saveGeneratedReport($alertType, $fallbackReport);
-                        echo "Fallback Report Generated and Saved for $alertType:\n";
+                        echo "Report Generated and Saved for $alertType (Entry ID: $entryId)\n";
                     } else {
-                        echo "Failed to generate report for $alertType.";
+                        echo "Report already exists for $alertType (Entry ID: $entryId). Skipping...\n";
                     }
                 }
             }
+
+            sleep(10);
         }
     }
 }
 
 require_once '../src/config/Database.php';
-
 $database = new Database();
 $conn = $database->getConnection();
 

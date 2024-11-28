@@ -124,6 +124,8 @@ def scheduled_monitoring():
     logging.info("Scheduled monitoring session completed.")
 
 if __name__ == "__main__":
-    logging.info("WebsiteMonitor script initiated.")
-    scheduled_monitoring()
-    logging.info("WebsiteMonitor script finished.")
+    while True:
+        logging.info("WebsiteMonitor script initiated.")
+        scheduled_monitoring()
+        logging.info("WebsiteMonitor script finished.")
+    time.sleep(5) 

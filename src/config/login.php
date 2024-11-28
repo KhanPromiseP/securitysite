@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'middleware.php';
 SimpleMiddleware::preventLoggedInAccess();
 include 'Database.php';
@@ -10,6 +11,7 @@ $user = new User($db);
 
 $message = '';
 
+$username = $_SESSION['username'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];

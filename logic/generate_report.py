@@ -19,9 +19,7 @@ def generate_detailed_report(alert_type, report_details):
   
     full_report = report_header + report_body
 
-    file_name = f"report_{alert_type}.txt"
-    with open(file_name, 'w') as report_file:
-        report_file.write(full_report)
+
     
     return file_name
 

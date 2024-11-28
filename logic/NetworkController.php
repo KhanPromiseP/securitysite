@@ -8,8 +8,8 @@ error_reporting(E_ALL);
 class NetworkController
 {
     private $threatModel;
-    private $processIdFile = '/tmp/network_scanner_pid.txt';
-    private $processNameFile = 'network_scanner_process_name.txt';
+    private $processIdFile = '/tmp/network_scanner_pid.txt'; // Ensure this directory is writable
+    private $processNameFile = '/tmp/network_scanner_process_name.txt'; // Updated for consistency
 
     public function __construct()
     {
@@ -23,24 +23,24 @@ class NetworkController
 
     public function startNetworkScanner()
     {
-        $scriptPath = "/opt/lampp/htdocs/securitysite/scripts/NetworkScanner.py scan";
+        $scriptPath = escapeshellcmd("/opt/lampp/htdocs/securitysite/scripts/NetworkScanner.py scan");
         $os = $this->detectOS();
 
         if ($os === 'linux') {
             $output = shell_exec("nohup sudo python3 $scriptPath > /dev/null 2>&1 & echo $!");
-            if ($output) {
+            if ($output && is_numeric(trim($output))) {
                 file_put_contents($this->processIdFile, trim($output));
                 return ['status' => 'Network scanning started on Linux', 'pid' => trim($output)];
             } else {
-                return ['status' => 'Failed to start network scanning on Linux'];
+                return ['status' => 'Failed to start network scanning on Linux. Check script path or permissions.'];
             }
         } elseif ($os === 'windows') {
             $output = shell_exec("powershell -Command \"Start-Process python -ArgumentList '$scriptPath' -WindowStyle Hidden -PassThru | Select-Object -ExpandProperty Id\"");
-            if ($output) {
+            if ($output && is_numeric(trim($output))) {
                 file_put_contents($this->processNameFile, trim($output));
                 return ['status' => 'Network scanning started on Windows', 'pid' => trim($output)];
             } else {
-                return ['status' => 'Failed to start network scanning on Windows'];
+                return ['status' => 'Failed to start network scanning on Windows. Check script path or permissions.'];
             }
         } else {
             return ['status' => 'Unsupported OS'];
@@ -54,7 +54,7 @@ class NetworkController
         if ($os === 'linux') {
             if (file_exists($this->processIdFile)) {
                 $pid = trim(file_get_contents($this->processIdFile));
-                shell_exec("kill $pid");
+                shell_exec("kill $pid 2>&1");
                 unlink($this->processIdFile);
                 return ['status' => 'Network scanning stopped on Linux'];
             }
@@ -74,32 +74,35 @@ class NetworkController
 
     public function fetchNetworkThreats()
     {
-        $threats = $this->threatModel->getAllNetworkThreats();
-        return $threats;
+        try {
+            $threats = $this->threatModel->getAllNetworkThreats();
+            return ['status' => 'success', 'threats' => $threats];
+        } catch (Exception $e) {
+            return ['status' => 'Error fetching threats: ' . $e->getMessage()];
+        }
     }
 
     public function blockIPAddress($ipAddress)
     {
         $os = $this->detectOS();
+        $sanitizedIP = filter_var($ipAddress, FILTER_VALIDATE_IP);
+        if (!$sanitizedIP) {
+            return ['status' => 'Invalid IP address provided'];
+        }
+
         try {
             if ($os === 'linux') {
-                $output = shell_exec("sudo iptables -A INPUT -s $ipAddress -j DROP 2>&1");
-                if ($output === null) {
-                    throw new Exception("Failed to block IP on Linux.");
-                }
-                if ($this->threatModel->blockIP($ipAddress)) {
-                    return ['status' => "IP $ipAddress blocked on Linux"];
+                shell_exec("sudo iptables -A INPUT -s $sanitizedIP -j DROP");
+                if ($this->threatModel->blockIP($sanitizedIP)) {
+                    return ['status' => "IP $sanitizedIP blocked on Linux"];
                 }
             } elseif ($os === 'windows') {
-                $output = shell_exec("netsh advfirewall firewall add rule name=\"Block IP $ipAddress\" dir=in interface=any action=block remoteip=$ipAddress 2>&1");
-                if ($output === null) {
-                    throw new Exception("Failed to block IP on Windows.");
-                }
-                if ($this->threatModel->blockIP($ipAddress)) {
-                    return ['status' => "IP $ipAddress blocked on Windows"];
+                shell_exec("netsh advfirewall firewall add rule name=\"Block IP $sanitizedIP\" dir=in interface=any action=block remoteip=$sanitizedIP");
+                if ($this->threatModel->blockIP($sanitizedIP)) {
+                    return ['status' => "IP $sanitizedIP blocked on Windows"];
                 }
             } else {
-                throw new Exception('Unsupported OS');
+                return ['status' => 'Unsupported OS'];
             }
         } catch (Exception $e) {
             return ['status' => 'Error: ' . $e->getMessage()];
@@ -109,22 +112,24 @@ class NetworkController
     public function unblockIPAddress($ipAddress)
     {
         $os = $this->detectOS();
+        $sanitizedIP = filter_var($ipAddress, FILTER_VALIDATE_IP);
+        if (!$sanitizedIP) {
+            return ['status' => 'Invalid IP address provided'];
+        }
 
         try {
             if ($os === 'linux') {
-                $output = shell_exec("sudo iptables -D INPUT -s $ipAddress -j DROP 2>&1");
-                if ($output === null) throw new Exception("Failed to unblock IP on Linux.");
-                if ($this->threatModel->unblockIP($ipAddress)) {
-                    return ['status' => "IP $ipAddress unblocked on Linux"];
+                shell_exec("sudo iptables -D INPUT -s $sanitizedIP -j DROP");
+                if ($this->threatModel->unblockIP($sanitizedIP)) {
+                    return ['status' => "IP $sanitizedIP unblocked on Linux"];
                 }
             } elseif ($os === 'windows') {
-                $output = shell_exec("netsh advfirewall firewall delete rule name=\"Block IP $ipAddress\" 2>&1");
-                if ($output === null) throw new Exception("Failed to unblock IP on Windows.");
-                if ($this->threatModel->unblockIP($ipAddress)) {
-                    return ['status' => "IP $ipAddress unblocked on Windows"];
+                shell_exec("netsh advfirewall firewall delete rule name=\"Block IP $sanitizedIP\"");
+                if ($this->threatModel->unblockIP($sanitizedIP)) {
+                    return ['status' => "IP $sanitizedIP unblocked on Windows"];
                 }
             } else {
-                throw new Exception('Unsupported OS');
+                return ['status' => 'Unsupported OS'];
             }
         } catch (Exception $e) {
             return ['status' => 'Error: ' . $e->getMessage()];
@@ -132,57 +137,28 @@ class NetworkController
     }
 }
 
-// Clear any previous output and start buffering
-ob_start();
+header('Content-Type: application/json');
+$input = json_decode(file_get_contents('php://input'), true);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = json_decode(file_get_contents('php://input'), true);
-
-    // Ensure input is valid
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        echo json_encode(['status' => 'Error: Invalid JSON input']);
-        exit;
-    }
-
-    // Log input for debugging purposes
-    // var_dump($input); // Uncomment this line to check what you're receiving
-
-    $networkController = new NetworkController();
-
-    header('Content-Type: application/json'); // Ensure JSON response
-    if (isset($input['action']) && !empty($input['action'])) {
-        switch ($input['action']) {
-            case 'startNetworkScanner':
-                echo json_encode($networkController->startNetworkScanner());
-                break;
-            case 'stopNetworkScanner':
-                echo json_encode($networkController->stopNetworkScanner());
-                break;
-            case 'fetchThreats':
-                echo json_encode($networkController->fetchNetworkThreats());
-                break;
-            case 'blockIPAddress':
-                if (isset($input['ipAddress'])) {
-                    echo json_encode($networkController->blockIPAddress($input['ipAddress']));
-                } else {
-                    echo json_encode(['status' => 'Error: IP address not provided']);
-                }
-                break;
-            case 'unblockIPAddress':
-                if (isset($input['ipAddress'])) {
-                    echo json_encode($networkController->unblockIPAddress($input['ipAddress']));
-                } else {
-                    echo json_encode(['status' => 'Error: IP address not provided']);
-                }
-                break;
-            default:
-                echo json_encode(['status' => 'Error: Invalid action']);
-                break;
-        }
-    } else {
-        echo json_encode(['status' => 'Error: No action specified']);
-    }
+if ($input === null) {
+    echo json_encode(['status' => 'Error: Invalid JSON input']);
+    exit;
 }
 
-// Send and clear buffer to ensure no additional output
-ob_end_clean();
+$controller = new NetworkController();
+if (isset($input['action'])) {
+    $action = $input['action'];
+    $response = match ($action) {
+        'startNetworkScanner' => $controller->startNetworkScanner(),
+        'stopNetworkScanner' => $controller->stopNetworkScanner(),
+        'fetchThreats' => $controller->fetchNetworkThreats(),
+        'blockIPAddress' => isset($input['ipAddress']) ? $controller->blockIPAddress($input['ipAddress']) : ['status' => 'IP address missing'],
+        'unblockIPAddress' => isset($input['ipAddress']) ? $controller->unblockIPAddress($input['ipAddress']) : ['status' => 'IP address missing'],
+        default => ['status' => 'Unknown action'],
+    };
+    echo json_encode($response);
+    exit;
+} else {
+    echo json_encode(['status' => 'No action specified']);
+    exit;
+}

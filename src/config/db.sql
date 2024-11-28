@@ -3,16 +3,13 @@ CREATE DATABASE security_app;
 
 use security_app;
 
--- Table for storing user roles
 CREATE TABLE roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     role_name VARCHAR(50) NOT NULL UNIQUE
 );
 
--- Insert default roles
 INSERT INTO roles (role_name) VALUES ('Admin'), ('User');
 
--- Table for storing users with security enhancements
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -30,11 +27,18 @@ CREATE TABLE active_users_log (
 );
 
 
-CREATE TABLE generated_reports (
+CREATE TABLE IF NOT EXISTS generated_reports (
     id INT AUTO_INCREMENT PRIMARY KEY,
     alert_type VARCHAR(255) NOT NULL,
     report_details TEXT NOT NULL,
-    generated_at DATETIME NOT NULL
+    generated_at DATETIME NOT NULL,
+    entry_id INT NOT NULL,
+    CONSTRAINT fk_network_logs_entry FOREIGN KEY (entry_id)
+        REFERENCES network_logs (id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_website_logs_entry FOREIGN KEY (entry_id)
+        REFERENCES website_logs (id)
+        ON DELETE CASCADE
 );
 
 
