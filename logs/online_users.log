@@ -649,3 +649,1956 @@
 2024-11-28 08:38:36,977 - INFO - Threat data inserted successfully.
 2024-11-28 08:38:36,977 - INFO - Blocking IP 172.64.155.209 using OS-specific firewall rules...
 2024-11-28 08:38:36,991 - INFO - IP 172.64.155.209 successfully blocked with Linux IPtables.
+2024-11-29 02:40:30,354 - INFO - Starting network monitoring script.
+2024-11-29 02:40:30,355 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 02:40:30,356 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:40:30,356 - INFO - Getting local network interface details...
+2024-11-29 02:40:30,356 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:40:30,564 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 02:40:30,565 - INFO - Active devices: 1
+2024-11-29 02:40:45,435 - INFO - Packets captured: 6
+2024-11-29 02:40:45,435 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:40:45,596 - INFO - Anomaly detection completed.
+2024-11-29 02:40:45,596 - INFO - Anomalies detected: 1
+2024-11-29 02:40:45,597 - INFO - Attempting to connect to the database...
+2024-11-29 02:40:45,598 - INFO - Database connection successful.
+2024-11-29 02:40:45,599 - INFO - Classifying the threat based on packet analysis...
+2024-11-29 02:40:45,599 - INFO - Threat detected: Unusual Activity from IP 192.168.53.27
+2024-11-29 02:40:45,599 - INFO - Inserting threat data for IP 192.168.53.27 into database...
+2024-11-29 02:40:45,599 - INFO - Attempting to connect to the database...
+2024-11-29 02:40:45,600 - INFO - Database connection successful.
+2024-11-29 02:40:45,603 - INFO - Threat data inserted successfully.
+2024-11-29 02:40:45,603 - INFO - Blocking IP 192.168.53.27 using OS-specific firewall rules...
+2024-11-29 02:40:45,655 - INFO - IP 192.168.53.27 successfully blocked with Linux IPtables.
+2024-11-29 02:40:50,657 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:40:50,657 - INFO - Getting local network interface details...
+2024-11-29 02:40:50,658 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:41:00,566 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 02:41:05,706 - INFO - Packets captured: 4
+2024-11-29 02:41:05,707 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:41:05,826 - INFO - Anomaly detection completed.
+2024-11-29 02:41:05,826 - INFO - Anomalies detected: 1
+2024-11-29 02:41:05,826 - INFO - Attempting to connect to the database...
+2024-11-29 02:41:05,828 - INFO - Database connection successful.
+2024-11-29 02:41:05,828 - INFO - IP 192.168.53.27 is already blocked and not functional.
+2024-11-29 02:41:05,829 - INFO - Skipping IP 192.168.53.27 as it is already blocked.
+2024-11-29 02:41:10,831 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:41:10,831 - INFO - Getting local network interface details...
+2024-11-29 02:41:10,832 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:41:25,883 - INFO - Packets captured: 0
+2024-11-29 02:41:25,883 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:41:25,884 - INFO - Not enough data to detect anomalies.
+2024-11-29 02:41:25,884 - INFO - Anomalies detected: 0
+2024-11-29 02:41:30,887 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:41:30,887 - INFO - Getting local network interface details...
+2024-11-29 02:41:30,888 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:41:45,942 - INFO - Packets captured: 0
+2024-11-29 02:41:45,943 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:41:45,943 - INFO - Not enough data to detect anomalies.
+2024-11-29 02:41:45,943 - INFO - Anomalies detected: 0
+2024-11-29 02:41:50,945 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:41:50,946 - INFO - Getting local network interface details...
+2024-11-29 02:41:50,946 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:42:05,990 - INFO - Packets captured: 22
+2024-11-29 02:42:05,991 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:42:06,108 - INFO - Anomaly detection completed.
+2024-11-29 02:42:06,108 - INFO - Anomalies detected: 0
+2024-11-29 02:42:11,110 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:42:11,111 - INFO - Getting local network interface details...
+2024-11-29 02:42:11,111 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:42:26,158 - INFO - Packets captured: 2
+2024-11-29 02:42:26,159 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:42:26,304 - INFO - Anomaly detection completed.
+2024-11-29 02:42:26,304 - INFO - Anomalies detected: 0
+2024-11-29 02:42:31,306 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:42:31,306 - INFO - Getting local network interface details...
+2024-11-29 02:42:31,307 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:42:46,346 - INFO - Packets captured: 0
+2024-11-29 02:42:46,347 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:42:46,347 - INFO - Not enough data to detect anomalies.
+2024-11-29 02:42:46,348 - INFO - Anomalies detected: 0
+2024-11-29 02:42:51,349 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:42:51,349 - INFO - Getting local network interface details...
+2024-11-29 02:42:51,349 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:43:06,403 - INFO - Packets captured: 20
+2024-11-29 02:43:06,403 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:43:06,573 - INFO - Anomaly detection completed.
+2024-11-29 02:43:06,573 - INFO - Anomalies detected: 0
+2024-11-29 02:43:11,575 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:43:11,575 - INFO - Getting local network interface details...
+2024-11-29 02:43:11,575 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:43:26,638 - INFO - Packets captured: 16
+2024-11-29 02:43:26,639 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:43:26,849 - INFO - Anomaly detection completed.
+2024-11-29 02:43:26,849 - INFO - Anomalies detected: 0
+2024-11-29 02:43:31,850 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:43:31,850 - INFO - Getting local network interface details...
+2024-11-29 02:43:31,851 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:43:46,899 - INFO - Packets captured: 29
+2024-11-29 02:43:46,899 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:43:47,028 - INFO - Anomaly detection completed.
+2024-11-29 02:43:47,028 - INFO - Anomalies detected: 1
+2024-11-29 02:43:47,029 - INFO - Attempting to connect to the database...
+2024-11-29 02:43:47,030 - INFO - Database connection successful.
+2024-11-29 02:43:47,030 - INFO - Classifying the threat based on packet analysis...
+2024-11-29 02:43:47,031 - INFO - Threat detected: Unusual Activity from IP 35.190.80.1
+2024-11-29 02:43:47,031 - INFO - Inserting threat data for IP 35.190.80.1 into database...
+2024-11-29 02:43:47,031 - INFO - Attempting to connect to the database...
+2024-11-29 02:43:47,032 - INFO - Database connection successful.
+2024-11-29 02:43:47,035 - INFO - Threat data inserted successfully.
+2024-11-29 02:43:47,035 - INFO - Blocking IP 35.190.80.1 using OS-specific firewall rules...
+2024-11-29 02:43:47,046 - INFO - IP 35.190.80.1 successfully blocked with Linux IPtables.
+2024-11-29 02:43:52,047 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:43:52,047 - INFO - Getting local network interface details...
+2024-11-29 02:43:52,048 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:44:07,095 - INFO - Packets captured: 6
+2024-11-29 02:44:07,095 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:44:07,209 - INFO - Anomaly detection completed.
+2024-11-29 02:44:07,210 - INFO - Anomalies detected: 1
+2024-11-29 02:44:07,210 - INFO - Attempting to connect to the database...
+2024-11-29 02:44:07,211 - INFO - Database connection successful.
+2024-11-29 02:44:07,212 - INFO - Classifying the threat based on packet analysis...
+2024-11-29 02:44:07,212 - INFO - Threat detected: Unusual Activity from IP 192.168.53.122
+2024-11-29 02:44:07,212 - INFO - Inserting threat data for IP 192.168.53.122 into database...
+2024-11-29 02:44:07,212 - INFO - Attempting to connect to the database...
+2024-11-29 02:44:07,213 - INFO - Database connection successful.
+2024-11-29 02:44:07,216 - INFO - Threat data inserted successfully.
+2024-11-29 02:44:07,216 - INFO - Blocking IP 192.168.53.122 using OS-specific firewall rules...
+2024-11-29 02:44:07,226 - INFO - IP 192.168.53.122 successfully blocked with Linux IPtables.
+2024-11-29 02:44:12,228 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:44:12,228 - INFO - Getting local network interface details...
+2024-11-29 02:44:12,229 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:44:27,287 - INFO - Packets captured: 23
+2024-11-29 02:44:27,287 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:44:27,404 - INFO - Anomaly detection completed.
+2024-11-29 02:44:27,404 - INFO - Anomalies detected: 1
+2024-11-29 02:44:27,405 - INFO - Attempting to connect to the database...
+2024-11-29 02:44:27,406 - INFO - Database connection successful.
+2024-11-29 02:44:27,406 - INFO - IP 192.168.53.122 is already blocked and not functional.
+2024-11-29 02:44:27,407 - INFO - Skipping IP 192.168.53.122 as it is already blocked.
+2024-11-29 02:44:32,409 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:44:32,409 - INFO - Getting local network interface details...
+2024-11-29 02:44:32,410 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:44:47,454 - INFO - Packets captured: 18
+2024-11-29 02:44:47,455 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:44:47,570 - INFO - Anomaly detection completed.
+2024-11-29 02:44:47,571 - INFO - Anomalies detected: 0
+2024-11-29 02:44:52,573 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:44:52,573 - INFO - Getting local network interface details...
+2024-11-29 02:44:52,574 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:45:07,626 - INFO - Packets captured: 18
+2024-11-29 02:45:07,627 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:45:07,863 - INFO - Anomaly detection completed.
+2024-11-29 02:45:07,863 - INFO - Anomalies detected: 0
+2024-11-29 02:45:12,866 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:45:12,867 - INFO - Getting local network interface details...
+2024-11-29 02:45:12,867 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:45:27,907 - INFO - Packets captured: 10
+2024-11-29 02:45:27,907 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:45:28,093 - INFO - Anomaly detection completed.
+2024-11-29 02:45:28,093 - INFO - Anomalies detected: 0
+2024-11-29 02:45:33,095 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:45:33,096 - INFO - Getting local network interface details...
+2024-11-29 02:45:33,096 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:45:48,150 - INFO - Packets captured: 0
+2024-11-29 02:45:48,151 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:45:48,152 - INFO - Not enough data to detect anomalies.
+2024-11-29 02:45:48,152 - INFO - Anomalies detected: 0
+2024-11-29 02:45:53,154 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:45:53,155 - INFO - Getting local network interface details...
+2024-11-29 02:45:53,156 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:46:08,199 - INFO - Packets captured: 4
+2024-11-29 02:46:08,199 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:46:08,367 - INFO - Anomaly detection completed.
+2024-11-29 02:46:08,367 - INFO - Anomalies detected: 0
+2024-11-29 02:46:13,372 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:46:13,372 - INFO - Getting local network interface details...
+2024-11-29 02:46:13,372 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:46:25,751 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 02:46:25,752 - INFO - Active devices: 0
+2024-11-29 02:46:25,766 - INFO - Packets captured: 0
+2024-11-29 02:46:25,767 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:46:25,767 - INFO - Not enough data to detect anomalies.
+2024-11-29 02:46:25,767 - INFO - Anomalies detected: 0
+2024-11-29 02:48:49,120 - INFO - Starting network monitoring script.
+2024-11-29 02:48:49,121 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 02:48:49,122 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:48:49,122 - INFO - Getting local network interface details...
+2024-11-29 02:48:49,123 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:49:04,195 - INFO - Packets captured: 4
+2024-11-29 02:49:04,195 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:49:04,318 - INFO - Anomaly detection completed.
+2024-11-29 02:49:04,319 - INFO - Anomalies detected: 1
+2024-11-29 02:49:04,319 - INFO - Attempting to connect to the database...
+2024-11-29 02:49:04,321 - INFO - Database connection successful.
+2024-11-29 02:49:04,322 - INFO - IP 192.168.53.27 is already blocked and not functional.
+2024-11-29 02:49:04,322 - INFO - Skipping IP 192.168.53.27 as it is already blocked.
+2024-11-29 02:49:09,324 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 02:49:09,324 - INFO - Getting local network interface details...
+2024-11-29 02:49:09,325 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 02:49:24,375 - INFO - Packets captured: 0
+2024-11-29 02:49:24,375 - INFO - Detecting anomalies in captured packets...
+2024-11-29 02:49:24,375 - INFO - Not enough data to detect anomalies.
+2024-11-29 02:49:24,376 - INFO - Anomalies detected: 0
+2024-11-29 05:57:08,627 - INFO - Starting network monitoring script.
+2024-11-29 05:57:08,628 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 05:57:08,630 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 05:57:08,630 - INFO - Getting local network interface details...
+2024-11-29 05:57:08,630 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 05:57:08,907 - ERROR - Error connecting to MySQL: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (111)
+2024-11-29 05:57:08,909 - INFO - Active devices: 1
+2024-11-29 05:57:09,308 - INFO - Packets captured: 100
+2024-11-29 05:57:09,309 - INFO - Detecting anomalies in captured packets...
+2024-11-29 05:57:09,593 - INFO - Anomaly detection completed.
+2024-11-29 05:57:09,593 - INFO - Anomalies detected: 0
+2024-11-29 05:57:14,595 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 05:57:14,595 - INFO - Getting local network interface details...
+2024-11-29 05:57:14,596 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 05:57:29,657 - INFO - Packets captured: 0
+2024-11-29 05:57:29,657 - INFO - Detecting anomalies in captured packets...
+2024-11-29 05:57:29,658 - INFO - Not enough data to detect anomalies.
+2024-11-29 05:57:29,658 - INFO - Anomalies detected: 0
+2024-11-29 05:57:34,661 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 05:57:34,661 - INFO - Getting local network interface details...
+2024-11-29 05:57:34,662 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 05:57:38,910 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 05:57:39,035 - ERROR - Error connecting to MySQL: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (111)
+2024-11-29 05:57:39,036 - INFO - Active devices: 1
+2024-11-29 05:57:49,701 - INFO - Packets captured: 6
+2024-11-29 05:57:49,701 - INFO - Detecting anomalies in captured packets...
+2024-11-29 05:57:49,833 - INFO - Anomaly detection completed.
+2024-11-29 05:57:49,834 - INFO - Anomalies detected: 1
+2024-11-29 05:57:49,834 - INFO - Attempting to connect to the database...
+2024-11-29 05:57:49,834 - ERROR - Database connection error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (111)
+2024-11-29 05:57:49,835 - INFO - Classifying the threat based on packet analysis...
+2024-11-29 05:57:49,835 - INFO - Threat detected: Unusual Activity from IP 192.168.53.27
+2024-11-29 05:57:49,835 - INFO - Inserting threat data for IP 192.168.53.27 into database...
+2024-11-29 05:57:49,835 - INFO - Attempting to connect to the database...
+2024-11-29 05:57:49,835 - ERROR - Database connection error: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (111)
+2024-11-29 05:57:54,838 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 05:57:54,838 - INFO - Getting local network interface details...
+2024-11-29 05:57:54,839 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 05:58:08,120 - INFO - Packets captured: 0
+2024-11-29 05:58:08,121 - INFO - Detecting anomalies in captured packets...
+2024-11-29 05:58:08,121 - INFO - Not enough data to detect anomalies.
+2024-11-29 05:58:08,121 - INFO - Anomalies detected: 0
+2024-11-29 05:58:09,037 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 05:58:09,235 - ERROR - Error connecting to MySQL: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (111)
+2024-11-29 05:58:09,235 - INFO - Active devices: 1
+2024-11-29 05:58:54,406 - INFO - Starting network monitoring script.
+2024-11-29 05:58:54,407 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 05:58:54,408 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 05:58:54,408 - INFO - Getting local network interface details...
+2024-11-29 05:58:54,408 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 05:58:54,570 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 05:58:54,571 - INFO - Active devices: 1
+2024-11-29 05:59:09,484 - INFO - Packets captured: 6
+2024-11-29 05:59:09,485 - INFO - Detecting anomalies in captured packets...
+2024-11-29 05:59:09,638 - INFO - Anomaly detection completed.
+2024-11-29 05:59:09,638 - INFO - Anomalies detected: 1
+2024-11-29 05:59:09,638 - INFO - Attempting to connect to the database...
+2024-11-29 05:59:09,641 - INFO - Database connection successful.
+2024-11-29 05:59:09,647 - INFO - IP 192.168.53.27 is already blocked and not functional.
+2024-11-29 05:59:09,648 - INFO - Skipping IP 192.168.53.27 as it is already blocked.
+2024-11-29 05:59:14,650 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 05:59:14,650 - INFO - Getting local network interface details...
+2024-11-29 05:59:14,651 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 05:59:24,572 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 05:59:24,720 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 05:59:24,720 - INFO - Active devices: 1
+2024-11-29 05:59:29,696 - INFO - Packets captured: 6
+2024-11-29 05:59:29,697 - INFO - Detecting anomalies in captured packets...
+2024-11-29 05:59:29,953 - INFO - Anomaly detection completed.
+2024-11-29 05:59:29,954 - INFO - Anomalies detected: 1
+2024-11-29 05:59:29,954 - INFO - Attempting to connect to the database...
+2024-11-29 05:59:29,955 - INFO - Database connection successful.
+2024-11-29 05:59:29,955 - INFO - IP 192.168.53.27 is already blocked and not functional.
+2024-11-29 05:59:29,956 - INFO - Skipping IP 192.168.53.27 as it is already blocked.
+2024-11-29 05:59:34,957 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 05:59:34,957 - INFO - Getting local network interface details...
+2024-11-29 05:59:34,957 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 05:59:50,012 - INFO - Packets captured: 0
+2024-11-29 05:59:50,012 - INFO - Detecting anomalies in captured packets...
+2024-11-29 05:59:50,013 - INFO - Not enough data to detect anomalies.
+2024-11-29 05:59:50,013 - INFO - Anomalies detected: 0
+2024-11-29 05:59:54,720 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 05:59:54,831 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 05:59:54,832 - INFO - Active devices: 1
+2024-11-29 05:59:55,014 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 05:59:55,015 - INFO - Getting local network interface details...
+2024-11-29 05:59:55,015 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 06:00:10,104 - INFO - Packets captured: 1
+2024-11-29 06:00:10,105 - INFO - Detecting anomalies in captured packets...
+2024-11-29 06:00:10,105 - INFO - Not enough data to detect anomalies.
+2024-11-29 06:00:10,105 - INFO - Anomalies detected: 0
+2024-11-29 06:00:15,107 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 06:00:15,107 - INFO - Getting local network interface details...
+2024-11-29 06:00:15,108 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 06:00:24,832 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:00:24,987 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:00:24,988 - INFO - Active devices: 1
+2024-11-29 06:00:28,333 - INFO - Packets captured: 8
+2024-11-29 06:00:28,334 - INFO - Detecting anomalies in captured packets...
+2024-11-29 06:00:28,554 - INFO - Anomaly detection completed.
+2024-11-29 06:00:28,554 - INFO - Anomalies detected: 1
+2024-11-29 06:00:28,554 - INFO - Attempting to connect to the database...
+2024-11-29 06:00:28,556 - INFO - Database connection successful.
+2024-11-29 06:00:28,556 - INFO - IP 192.168.53.122 is already blocked and not functional.
+2024-11-29 06:00:28,556 - INFO - Skipping IP 192.168.53.122 as it is already blocked.
+2024-11-29 06:03:18,416 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:03:18,557 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:03:18,557 - INFO - Active devices: 1
+2024-11-29 06:03:19,416 - INFO - Active devices: 1
+2024-11-29 06:03:20,417 - INFO - Active devices: 1
+2024-11-29 06:03:21,417 - INFO - Active devices: 1
+2024-11-29 06:03:22,417 - INFO - Active devices: 1
+2024-11-29 06:03:23,418 - INFO - Active devices: 1
+2024-11-29 06:03:24,418 - INFO - Active devices: 1
+2024-11-29 06:03:25,418 - INFO - Active devices: 1
+2024-11-29 06:03:26,419 - INFO - Active devices: 1
+2024-11-29 06:03:27,419 - INFO - Active devices: 1
+2024-11-29 06:03:28,419 - INFO - Active devices: 1
+2024-11-29 06:03:29,420 - INFO - Active devices: 1
+2024-11-29 06:03:30,421 - INFO - Active devices: 1
+2024-11-29 06:03:31,421 - INFO - Active devices: 1
+2024-11-29 06:03:32,422 - INFO - Active devices: 1
+2024-11-29 06:03:33,422 - INFO - Active devices: 1
+2024-11-29 06:03:34,422 - INFO - Active devices: 1
+2024-11-29 06:03:35,423 - INFO - Active devices: 1
+2024-11-29 06:03:36,423 - INFO - Active devices: 1
+2024-11-29 06:03:37,424 - INFO - Active devices: 1
+2024-11-29 06:03:38,424 - INFO - Active devices: 1
+2024-11-29 06:03:39,424 - INFO - Active devices: 1
+2024-11-29 06:03:40,425 - INFO - Active devices: 1
+2024-11-29 06:03:41,426 - INFO - Active devices: 1
+2024-11-29 06:03:42,426 - INFO - Active devices: 1
+2024-11-29 06:03:43,427 - INFO - Active devices: 1
+2024-11-29 06:03:44,427 - INFO - Active devices: 1
+2024-11-29 06:03:45,428 - INFO - Active devices: 1
+2024-11-29 06:03:46,428 - INFO - Active devices: 1
+2024-11-29 06:03:47,429 - INFO - Active devices: 1
+2024-11-29 06:03:48,430 - INFO - Active devices: 1
+2024-11-29 06:03:48,558 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:03:48,714 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:03:48,715 - INFO - Active devices: 1
+2024-11-29 06:03:49,430 - INFO - Active devices: 1
+2024-11-29 06:03:50,430 - INFO - Active devices: 1
+2024-11-29 06:03:51,431 - INFO - Active devices: 1
+2024-11-29 06:03:52,431 - INFO - Active devices: 1
+2024-11-29 06:03:53,432 - INFO - Active devices: 1
+2024-11-29 06:03:54,432 - INFO - Active devices: 1
+2024-11-29 06:03:55,433 - INFO - Active devices: 1
+2024-11-29 06:03:56,433 - INFO - Active devices: 1
+2024-11-29 06:03:57,433 - INFO - Active devices: 1
+2024-11-29 06:03:58,434 - INFO - Active devices: 1
+2024-11-29 06:03:59,434 - INFO - Active devices: 1
+2024-11-29 06:04:00,435 - INFO - Active devices: 1
+2024-11-29 06:04:01,435 - INFO - Active devices: 1
+2024-11-29 06:04:02,436 - INFO - Active devices: 1
+2024-11-29 06:04:03,436 - INFO - Active devices: 1
+2024-11-29 06:04:04,437 - INFO - Active devices: 1
+2024-11-29 06:04:05,437 - INFO - Active devices: 1
+2024-11-29 06:04:06,437 - INFO - Active devices: 1
+2024-11-29 06:04:07,438 - INFO - Active devices: 1
+2024-11-29 06:04:08,438 - INFO - Active devices: 1
+2024-11-29 06:04:09,439 - INFO - Active devices: 1
+2024-11-29 06:04:10,439 - INFO - Active devices: 1
+2024-11-29 06:04:11,440 - INFO - Active devices: 1
+2024-11-29 06:04:12,440 - INFO - Active devices: 1
+2024-11-29 06:04:13,441 - INFO - Active devices: 1
+2024-11-29 06:04:14,441 - INFO - Active devices: 1
+2024-11-29 06:04:15,442 - INFO - Active devices: 1
+2024-11-29 06:04:16,442 - INFO - Active devices: 1
+2024-11-29 06:04:17,442 - INFO - Active devices: 1
+2024-11-29 06:04:18,443 - INFO - Active devices: 1
+2024-11-29 06:04:18,716 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:04:18,905 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:04:18,906 - INFO - Active devices: 1
+2024-11-29 06:04:19,443 - INFO - Active devices: 1
+2024-11-29 06:04:20,444 - INFO - Active devices: 1
+2024-11-29 06:04:21,444 - INFO - Active devices: 1
+2024-11-29 06:04:22,444 - INFO - Active devices: 1
+2024-11-29 06:04:23,445 - INFO - Active devices: 1
+2024-11-29 06:04:24,445 - INFO - Active devices: 1
+2024-11-29 06:05:23,030 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:05:23,172 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:05:23,172 - INFO - Active devices: 1
+2024-11-29 06:05:28,030 - INFO - Active devices: 1
+2024-11-29 06:05:28,173 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:05:28,320 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:05:28,321 - INFO - Active devices: 1
+2024-11-29 06:05:33,031 - INFO - Active devices: 1
+2024-11-29 06:05:33,322 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:05:33,463 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:05:33,463 - INFO - Active devices: 1
+2024-11-29 06:05:38,031 - INFO - Active devices: 1
+2024-11-29 06:05:38,464 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:05:38,646 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:05:38,647 - INFO - Active devices: 1
+2024-11-29 06:05:43,032 - INFO - Active devices: 1
+2024-11-29 06:05:43,648 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:05:43,854 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:05:43,855 - INFO - Active devices: 1
+2024-11-29 06:05:48,032 - INFO - Active devices: 1
+2024-11-29 06:05:48,856 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:05:49,020 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:05:49,021 - INFO - Active devices: 1
+2024-11-29 06:05:53,033 - INFO - Active devices: 1
+2024-11-29 06:05:54,021 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:05:54,169 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:05:54,169 - INFO - Active devices: 1
+2024-11-29 06:05:58,033 - INFO - Active devices: 1
+2024-11-29 06:05:59,169 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:05:59,321 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:05:59,322 - INFO - Active devices: 1
+2024-11-29 06:06:03,034 - INFO - Active devices: 1
+2024-11-29 06:06:04,322 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:06:04,469 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:06:04,470 - INFO - Active devices: 1
+2024-11-29 06:06:08,034 - INFO - Active devices: 1
+2024-11-29 06:06:09,470 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:06:09,615 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:06:09,616 - INFO - Active devices: 1
+2024-11-29 06:06:13,035 - INFO - Active devices: 1
+2024-11-29 06:06:14,617 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:06:14,773 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:06:14,773 - INFO - Active devices: 1
+2024-11-29 06:06:18,035 - INFO - Active devices: 1
+2024-11-29 06:06:19,774 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:06:19,923 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:06:19,923 - INFO - Active devices: 1
+2024-11-29 06:06:23,036 - INFO - Active devices: 1
+2024-11-29 06:06:24,924 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:06:25,069 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:06:25,069 - INFO - Active devices: 1
+2024-11-29 06:06:28,036 - INFO - Active devices: 1
+2024-11-29 06:06:30,070 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:06:30,181 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:06:30,182 - INFO - Active devices: 1
+2024-11-29 06:06:33,037 - INFO - Active devices: 1
+2024-11-29 06:06:35,182 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:06:35,329 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:06:35,330 - INFO - Active devices: 1
+2024-11-29 06:06:38,037 - INFO - Active devices: 1
+2024-11-29 06:06:40,330 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:06:40,475 - ERROR - Error connecting to MySQL: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2024-11-29 06:06:40,476 - INFO - Active devices: 1
+2024-11-29 06:06:43,038 - INFO - Active devices: 1
+2024-11-29 06:10:32,620 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:10:32,729 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:10:32,730 - INFO - Active devices: 1
+2024-11-29 06:10:37,620 - INFO - Active devices: 1
+2024-11-29 06:10:37,731 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:10:37,867 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:10:37,867 - INFO - Active devices: 1
+2024-11-29 06:10:42,620 - INFO - Active devices: 1
+2024-11-29 06:10:42,867 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:10:42,974 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:10:42,974 - INFO - Active devices: 1
+2024-11-29 06:10:47,621 - INFO - Active devices: 1
+2024-11-29 06:10:47,975 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:10:48,091 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:10:48,092 - INFO - Active devices: 1
+2024-11-29 06:10:52,621 - INFO - Active devices: 1
+2024-11-29 06:10:53,092 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:10:53,242 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:10:53,243 - INFO - Active devices: 1
+2024-11-29 06:10:57,622 - INFO - Active devices: 1
+2024-11-29 06:10:58,243 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:10:58,423 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:10:58,424 - INFO - Active devices: 1
+2024-11-29 06:11:02,622 - INFO - Active devices: 1
+2024-11-29 06:11:03,424 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:11:03,586 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:11:03,586 - INFO - Active devices: 1
+2024-11-29 06:11:07,623 - INFO - Active devices: 1
+2024-11-29 06:11:08,587 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:11:08,746 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:11:08,747 - INFO - Active devices: 1
+2024-11-29 06:11:12,623 - INFO - Active devices: 1
+2024-11-29 06:11:13,747 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:11:13,982 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:11:13,983 - INFO - Active devices: 1
+2024-11-29 06:11:17,624 - INFO - Active devices: 1
+2024-11-29 06:11:18,984 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:11:19,138 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:11:19,139 - INFO - Active devices: 1
+2024-11-29 06:11:22,625 - INFO - Active devices: 1
+2024-11-29 06:11:24,139 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:11:24,386 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:11:24,386 - INFO - Active devices: 1
+2024-11-29 06:11:27,625 - INFO - Active devices: 1
+2024-11-29 06:11:29,386 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:11:29,574 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:11:29,575 - INFO - Active devices: 1
+2024-11-29 06:11:32,625 - INFO - Active devices: 1
+2024-11-29 06:11:34,576 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:11:34,725 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:11:34,725 - INFO - Active devices: 1
+2024-11-29 06:11:37,626 - INFO - Active devices: 1
+2024-11-29 06:11:39,726 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:11:39,877 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:11:39,877 - INFO - Active devices: 1
+2024-11-29 06:11:42,626 - INFO - Active devices: 1
+2024-11-29 06:11:44,878 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:11:44,992 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:11:44,992 - INFO - Active devices: 1
+2024-11-29 06:11:47,627 - INFO - Active devices: 1
+2024-11-29 06:11:49,992 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:11:50,108 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:11:50,109 - INFO - Active devices: 1
+2024-11-29 06:11:52,627 - INFO - Active devices: 1
+2024-11-29 06:11:55,109 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:11:55,251 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:11:55,251 - INFO - Active devices: 1
+2024-11-29 06:11:57,627 - INFO - Active devices: 1
+2024-11-29 06:12:00,252 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:12:00,401 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:12:00,401 - INFO - Active devices: 1
+2024-11-29 06:12:02,628 - INFO - Active devices: 1
+2024-11-29 06:12:05,402 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:12:05,522 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:12:05,522 - INFO - Active devices: 1
+2024-11-29 06:18:20,821 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:18:20,936 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:18:20,936 - INFO - Active devices: 1
+2024-11-29 06:18:25,821 - INFO - Active devices: 1
+2024-11-29 06:18:25,936 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:18:26,050 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:18:26,051 - INFO - Active devices: 1
+2024-11-29 06:18:30,822 - INFO - Active devices: 1
+2024-11-29 06:18:31,051 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:18:31,206 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:18:31,207 - INFO - Active devices: 1
+2024-11-29 06:18:35,822 - INFO - Active devices: 1
+2024-11-29 06:18:36,208 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:18:36,379 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:18:36,379 - INFO - Active devices: 1
+2024-11-29 06:18:40,822 - INFO - Active devices: 1
+2024-11-29 06:18:41,380 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:18:41,491 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:18:41,492 - INFO - Active devices: 1
+2024-11-29 06:18:45,823 - INFO - Active devices: 1
+2024-11-29 06:18:46,492 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:18:46,620 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:18:46,621 - INFO - Active devices: 1
+2024-11-29 06:18:50,823 - INFO - Active devices: 1
+2024-11-29 06:18:51,621 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:18:51,767 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:18:51,768 - INFO - Active devices: 1
+2024-11-29 06:18:55,824 - INFO - Active devices: 1
+2024-11-29 06:18:56,768 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:18:56,902 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:18:56,904 - INFO - Active devices: 1
+2024-11-29 06:19:00,824 - INFO - Active devices: 1
+2024-11-29 06:19:01,905 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:02,056 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:02,057 - INFO - Active devices: 1
+2024-11-29 06:19:05,825 - INFO - Active devices: 1
+2024-11-29 06:19:07,057 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:07,205 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:07,205 - INFO - Active devices: 1
+2024-11-29 06:19:10,825 - INFO - Active devices: 1
+2024-11-29 06:19:12,206 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:12,326 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:12,327 - INFO - Active devices: 1
+2024-11-29 06:19:15,825 - INFO - Active devices: 1
+2024-11-29 06:19:17,327 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:17,490 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:17,491 - INFO - Active devices: 1
+2024-11-29 06:19:20,826 - INFO - Active devices: 1
+2024-11-29 06:19:22,491 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:22,617 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:22,618 - INFO - Active devices: 1
+2024-11-29 06:19:25,827 - INFO - Active devices: 1
+2024-11-29 06:19:27,618 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:27,786 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:27,787 - INFO - Active devices: 1
+2024-11-29 06:19:30,827 - INFO - Active devices: 1
+2024-11-29 06:19:32,787 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:33,070 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:33,071 - INFO - Active devices: 1
+2024-11-29 06:19:35,827 - INFO - Active devices: 1
+2024-11-29 06:19:38,071 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:38,187 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:38,187 - INFO - Active devices: 1
+2024-11-29 06:19:40,828 - INFO - Active devices: 1
+2024-11-29 06:19:43,188 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:43,348 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:43,348 - INFO - Active devices: 1
+2024-11-29 06:19:45,828 - INFO - Active devices: 1
+2024-11-29 06:19:48,348 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:48,464 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:48,464 - INFO - Active devices: 1
+2024-11-29 06:19:50,829 - INFO - Active devices: 1
+2024-11-29 06:19:53,465 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:53,580 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:53,580 - INFO - Active devices: 1
+2024-11-29 06:19:55,829 - INFO - Active devices: 1
+2024-11-29 06:19:58,581 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:19:58,719 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:19:58,719 - INFO - Active devices: 1
+2024-11-29 06:20:00,829 - INFO - Active devices: 1
+2024-11-29 06:20:03,720 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:20:03,837 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:20:03,838 - INFO - Active devices: 1
+2024-11-29 06:20:05,830 - INFO - Active devices: 1
+2024-11-29 06:20:08,838 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:20:08,953 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:20:08,954 - INFO - Active devices: 1
+2024-11-29 06:20:10,831 - INFO - Active devices: 1
+2024-11-29 06:20:13,954 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:20:14,163 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:20:14,165 - INFO - Active devices: 1
+2024-11-29 06:20:15,831 - INFO - Active devices: 1
+2024-11-29 06:20:19,165 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:20:19,310 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:20:19,310 - INFO - Active devices: 1
+2024-11-29 06:20:20,831 - INFO - Active devices: 1
+2024-11-29 06:20:24,311 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:20:24,492 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:20:24,492 - INFO - Active devices: 1
+2024-11-29 06:20:25,832 - INFO - Active devices: 1
+2024-11-29 06:20:29,492 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:20:29,620 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:20:29,621 - INFO - Active devices: 1
+2024-11-29 06:20:30,833 - INFO - Active devices: 1
+2024-11-29 06:20:34,621 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:20:34,748 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:20:34,748 - INFO - Active devices: 1
+2024-11-29 06:20:35,833 - INFO - Active devices: 1
+2024-11-29 06:20:39,749 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:20:39,865 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:20:39,865 - INFO - Active devices: 1
+2024-11-29 06:20:40,834 - INFO - Active devices: 1
+2024-11-29 06:20:44,866 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:20:45,041 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:20:45,041 - INFO - Active devices: 1
+2024-11-29 06:20:45,834 - INFO - Active devices: 1
+2024-11-29 06:20:50,042 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:20:50,210 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:20:50,211 - INFO - Active devices: 1
+2024-11-29 06:20:50,834 - INFO - Active devices: 1
+2024-11-29 06:20:55,211 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:20:55,360 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:20:55,360 - INFO - Active devices: 1
+2024-11-29 06:20:55,835 - INFO - Active devices: 1
+2024-11-29 06:21:00,361 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:21:00,536 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:21:00,537 - INFO - Active devices: 1
+2024-11-29 06:21:00,835 - INFO - Active devices: 1
+2024-11-29 06:21:05,537 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:21:05,707 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:21:05,708 - INFO - Active devices: 1
+2024-11-29 06:21:05,836 - INFO - Active devices: 1
+2024-11-29 06:21:10,708 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:21:10,823 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:21:10,824 - INFO - Active devices: 1
+2024-11-29 06:21:10,836 - INFO - Active devices: 1
+2024-11-29 06:21:15,824 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:21:15,837 - INFO - Active devices: 1
+2024-11-29 06:21:15,976 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:21:15,977 - INFO - Active devices: 1
+2024-11-29 06:21:20,837 - INFO - Active devices: 1
+2024-11-29 06:21:20,977 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:21:21,103 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:21:21,103 - INFO - Active devices: 1
+2024-11-29 06:21:25,838 - INFO - Active devices: 1
+2024-11-29 06:21:26,104 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:21:26,254 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:21:26,254 - INFO - Active devices: 1
+2024-11-29 06:21:30,839 - INFO - Active devices: 1
+2024-11-29 06:21:31,254 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:21:31,426 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:21:31,426 - INFO - Active devices: 1
+2024-11-29 06:21:35,839 - INFO - Active devices: 1
+2024-11-29 06:21:36,427 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:21:36,578 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:21:36,579 - INFO - Active devices: 1
+2024-11-29 06:21:40,840 - INFO - Active devices: 1
+2024-11-29 06:21:41,579 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:21:41,692 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:21:41,692 - INFO - Active devices: 1
+2024-11-29 06:21:45,840 - INFO - Active devices: 1
+2024-11-29 06:21:46,692 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:21:46,833 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:21:46,833 - INFO - Active devices: 1
+2024-11-29 06:21:50,841 - INFO - Active devices: 1
+2024-11-29 06:21:51,834 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:21:51,952 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:21:51,953 - INFO - Active devices: 1
+2024-11-29 06:22:32,957 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:22:33,103 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:22:33,104 - INFO - Active devices: 1
+2024-11-29 06:22:37,958 - INFO - Active devices: 1
+2024-11-29 06:22:38,104 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:22:38,297 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:22:38,298 - INFO - Active devices: 1
+2024-11-29 06:22:42,958 - INFO - Active devices: 1
+2024-11-29 06:22:43,298 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:22:43,512 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:22:43,513 - INFO - Active devices: 1
+2024-11-29 06:22:47,959 - INFO - Active devices: 1
+2024-11-29 06:22:48,513 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:22:48,684 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:22:48,685 - INFO - Active devices: 1
+2024-11-29 06:22:52,959 - INFO - Active devices: 1
+2024-11-29 06:22:53,685 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:22:53,845 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:22:53,845 - INFO - Active devices: 1
+2024-11-29 06:22:57,960 - INFO - Active devices: 1
+2024-11-29 06:22:58,846 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:22:58,970 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:22:58,970 - INFO - Active devices: 1
+2024-11-29 06:23:02,960 - INFO - Active devices: 1
+2024-11-29 06:23:03,971 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:23:04,095 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:23:04,095 - INFO - Active devices: 1
+2024-11-29 06:23:07,961 - INFO - Active devices: 1
+2024-11-29 06:23:09,096 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:23:09,216 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:23:09,216 - INFO - Active devices: 1
+2024-11-29 06:23:12,961 - INFO - Active devices: 1
+2024-11-29 06:23:14,217 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:23:14,319 - INFO - Active devices: 0
+2024-11-29 06:23:17,962 - INFO - No active devices detected.
+2024-11-29 06:23:19,320 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:23:19,422 - INFO - Active devices: 0
+2024-11-29 06:23:22,963 - INFO - No active devices detected.
+2024-11-29 06:23:24,422 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:23:24,569 - INFO - Active devices: 0
+2024-11-29 06:23:27,963 - INFO - No active devices detected.
+2024-11-29 06:23:29,569 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:23:29,700 - INFO - Active devices: 0
+2024-11-29 06:23:32,964 - INFO - No active devices detected.
+2024-11-29 06:23:34,700 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:23:34,802 - INFO - Active devices: 0
+2024-11-29 06:23:37,964 - INFO - No active devices detected.
+2024-11-29 06:23:39,803 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:23:39,911 - INFO - Active devices: 0
+2024-11-29 06:38:39,264 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:38:39,420 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:38:39,422 - INFO - Active devices: 1
+2024-11-29 06:38:44,264 - INFO - Active devices: 1
+2024-11-29 06:38:44,422 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:38:44,558 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:38:44,563 - INFO - Active devices: 1
+2024-11-29 06:38:49,265 - INFO - Active devices: 1
+2024-11-29 06:38:49,564 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:38:49,680 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:38:49,683 - INFO - Active devices: 1
+2024-11-29 06:38:54,266 - INFO - Active devices: 1
+2024-11-29 06:38:54,684 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:38:54,806 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:38:54,810 - INFO - Active devices: 1
+2024-11-29 06:38:59,266 - INFO - Active devices: 1
+2024-11-29 06:38:59,810 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:38:59,934 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:38:59,938 - INFO - Active devices: 1
+2024-11-29 06:39:04,267 - INFO - Active devices: 1
+2024-11-29 06:39:04,939 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:39:05,062 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:39:05,063 - INFO - Active devices: 1
+2024-11-29 06:39:09,267 - INFO - Active devices: 1
+2024-11-29 06:39:10,064 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:39:10,186 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:39:10,190 - INFO - Active devices: 1
+2024-11-29 06:39:14,268 - INFO - Active devices: 1
+2024-11-29 06:39:15,191 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:39:15,312 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 06:39:15,313 - INFO - Active devices: 1
+2024-11-29 06:40:14,044 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:40:14,355 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:40:14,358 - INFO - Removed inactive device: 192.168.53.27
+2024-11-29 06:40:14,358 - INFO - Active devices: 1
+2024-11-29 06:40:19,044 - INFO - Active devices: 1
+2024-11-29 06:40:19,359 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:40:19,472 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:40:19,473 - INFO - Active devices: 1
+2024-11-29 06:40:24,044 - INFO - Active devices: 1
+2024-11-29 06:40:24,474 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:40:24,588 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:40:24,590 - INFO - Active devices: 1
+2024-11-29 06:40:29,045 - INFO - Active devices: 1
+2024-11-29 06:40:29,590 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:40:29,710 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:40:29,711 - INFO - Active devices: 1
+2024-11-29 06:40:34,045 - INFO - Active devices: 1
+2024-11-29 06:40:34,712 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:40:34,829 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:40:34,830 - INFO - Active devices: 1
+2024-11-29 06:40:39,045 - INFO - Active devices: 1
+2024-11-29 06:40:39,831 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:40:39,994 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:40:39,996 - INFO - Active devices: 1
+2024-11-29 06:40:44,046 - INFO - Active devices: 1
+2024-11-29 06:40:44,996 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:40:45,161 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:40:45,163 - INFO - Active devices: 1
+2024-11-29 06:40:49,046 - INFO - Active devices: 1
+2024-11-29 06:40:50,163 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:40:50,388 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:40:50,390 - INFO - Active devices: 1
+2024-11-29 06:40:54,046 - INFO - Active devices: 1
+2024-11-29 06:40:55,391 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:40:55,650 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:40:55,653 - INFO - Active devices: 1
+2024-11-29 06:40:59,047 - INFO - Active devices: 1
+2024-11-29 06:41:00,653 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:41:00,810 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:41:00,811 - INFO - Active devices: 1
+2024-11-29 06:41:04,047 - INFO - Active devices: 1
+2024-11-29 06:41:05,812 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:41:05,930 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:41:05,932 - INFO - Active devices: 1
+2024-11-29 06:41:09,048 - INFO - Active devices: 1
+2024-11-29 06:41:10,932 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:41:11,054 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:41:11,055 - INFO - Active devices: 1
+2024-11-29 06:41:14,048 - INFO - Active devices: 1
+2024-11-29 06:41:16,056 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 06:41:16,184 - INFO - Stored/Updated active device: 192.168.108.254 - 06:10:3b:94:76:71 - _gateway
+2024-11-29 06:41:16,187 - INFO - Active devices: 1
+2024-11-29 07:26:45,465 - INFO - Starting device detection...
+2024-11-29 07:26:45,466 - INFO - Determined local subnet: 192.168.53.0/24
+2024-11-29 07:27:01,362 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:28:57,639 - INFO - Starting device detection...
+2024-11-29 07:28:57,640 - INFO - Determined local subnet: 192.168.53.0/24
+2024-11-29 07:31:24,319 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:31:29,319 - INFO - No active devices detected.
+2024-11-29 07:31:34,319 - INFO - No active devices detected.
+2024-11-29 07:31:39,320 - INFO - No active devices detected.
+2024-11-29 07:31:42,863 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:31:44,321 - INFO - No active devices detected.
+2024-11-29 07:31:49,321 - INFO - No active devices detected.
+2024-11-29 07:31:54,322 - INFO - No active devices detected.
+2024-11-29 07:31:59,323 - INFO - No active devices detected.
+2024-11-29 07:32:04,323 - INFO - No active devices detected.
+2024-11-29 07:32:09,324 - INFO - No active devices detected.
+2024-11-29 07:32:14,324 - INFO - No active devices detected.
+2024-11-29 07:32:19,325 - INFO - No active devices detected.
+2024-11-29 07:32:24,325 - INFO - No active devices detected.
+2024-11-29 07:32:29,326 - INFO - No active devices detected.
+2024-11-29 07:32:34,326 - INFO - No active devices detected.
+2024-11-29 07:32:39,327 - INFO - No active devices detected.
+2024-11-29 07:32:44,327 - INFO - No active devices detected.
+2024-11-29 07:32:49,328 - INFO - No active devices detected.
+2024-11-29 07:32:54,329 - INFO - No active devices detected.
+2024-11-29 07:32:59,329 - INFO - No active devices detected.
+2024-11-29 07:33:04,330 - INFO - No active devices detected.
+2024-11-29 07:33:09,330 - INFO - No active devices detected.
+2024-11-29 07:33:14,331 - INFO - No active devices detected.
+2024-11-29 07:33:35,878 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:33:36,353 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:33:36,360 - INFO - Removed inactive device: 192.168.108.254
+2024-11-29 07:33:36,360 - INFO - Active devices: 1
+2024-11-29 07:33:40,878 - INFO - Active devices: 1
+2024-11-29 07:33:41,360 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:33:41,537 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:33:41,540 - INFO - Active devices: 1
+2024-11-29 07:33:45,879 - INFO - Active devices: 1
+2024-11-29 07:33:46,541 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:33:46,670 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:33:46,672 - INFO - Active devices: 1
+2024-11-29 07:33:50,879 - INFO - Active devices: 1
+2024-11-29 07:33:51,673 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:33:51,791 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:33:51,797 - INFO - Active devices: 1
+2024-11-29 07:33:55,880 - INFO - Active devices: 1
+2024-11-29 07:33:56,798 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:33:56,918 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:33:56,920 - INFO - Active devices: 1
+2024-11-29 07:34:00,880 - INFO - Active devices: 1
+2024-11-29 07:34:01,920 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:02,089 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:34:02,093 - INFO - Active devices: 1
+2024-11-29 07:34:05,881 - INFO - Active devices: 1
+2024-11-29 07:34:07,094 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:07,375 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:34:07,378 - INFO - Active devices: 1
+2024-11-29 07:34:10,881 - INFO - Active devices: 1
+2024-11-29 07:34:12,378 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:12,528 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:34:12,529 - INFO - Active devices: 1
+2024-11-29 07:34:15,882 - INFO - Active devices: 1
+2024-11-29 07:34:17,530 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:17,678 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:34:17,679 - INFO - Active devices: 1
+2024-11-29 07:34:20,882 - INFO - Active devices: 1
+2024-11-29 07:34:22,679 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:22,792 - INFO - Removed inactive device: 192.168.53.27
+2024-11-29 07:34:22,792 - INFO - Active devices: 0
+2024-11-29 07:34:25,883 - INFO - No active devices detected.
+2024-11-29 07:34:27,792 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:28,007 - INFO - Active devices: 0
+2024-11-29 07:34:30,883 - INFO - No active devices detected.
+2024-11-29 07:34:33,007 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:33,175 - INFO - Active devices: 0
+2024-11-29 07:34:35,884 - INFO - No active devices detected.
+2024-11-29 07:34:38,176 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:38,279 - INFO - Active devices: 0
+2024-11-29 07:34:40,885 - INFO - No active devices detected.
+2024-11-29 07:34:43,280 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:43,496 - INFO - Active devices: 0
+2024-11-29 07:34:45,885 - INFO - No active devices detected.
+2024-11-29 07:34:48,496 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:48,679 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:34:48,683 - INFO - Active devices: 1
+2024-11-29 07:34:50,885 - INFO - Active devices: 1
+2024-11-29 07:34:53,683 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:53,811 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:34:53,812 - INFO - Active devices: 1
+2024-11-29 07:34:55,886 - INFO - Active devices: 1
+2024-11-29 07:34:58,813 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:34:58,924 - INFO - Removed inactive device: 192.168.53.27
+2024-11-29 07:34:58,925 - INFO - Active devices: 0
+2024-11-29 07:35:00,892 - INFO - No active devices detected.
+2024-11-29 07:35:03,925 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:35:04,058 - INFO - Active devices: 0
+2024-11-29 07:35:05,893 - INFO - No active devices detected.
+2024-11-29 07:35:09,058 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:35:09,162 - INFO - Active devices: 0
+2024-11-29 07:35:10,893 - INFO - No active devices detected.
+2024-11-29 07:35:14,163 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:35:14,264 - INFO - Active devices: 0
+2024-11-29 07:35:15,894 - INFO - No active devices detected.
+2024-11-29 07:35:19,265 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:35:19,439 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:35:19,443 - INFO - Active devices: 1
+2024-11-29 07:35:20,895 - INFO - Active devices: 1
+2024-11-29 07:35:24,443 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:35:24,561 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:35:24,565 - INFO - Active devices: 1
+2024-11-29 07:35:25,895 - INFO - Active devices: 1
+2024-11-29 07:35:29,566 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:35:29,682 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:35:29,683 - INFO - Active devices: 1
+2024-11-29 07:35:30,896 - INFO - Active devices: 1
+2024-11-29 07:35:34,684 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:35:34,799 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:35:34,802 - INFO - Active devices: 1
+2024-11-29 07:35:35,896 - INFO - Active devices: 1
+2024-11-29 07:35:39,803 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:35:39,911 - INFO - Removed inactive device: 192.168.53.27
+2024-11-29 07:35:39,912 - INFO - Active devices: 0
+2024-11-29 07:35:40,897 - INFO - No active devices detected.
+2024-11-29 07:35:44,912 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:35:45,015 - INFO - Active devices: 0
+2024-11-29 07:35:45,897 - INFO - No active devices detected.
+2024-11-29 07:35:50,016 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:35:50,117 - INFO - Active devices: 0
+2024-11-29 07:35:50,898 - INFO - No active devices detected.
+2024-11-29 07:35:55,118 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:35:55,250 - INFO - Active devices: 0
+2024-11-29 07:35:55,898 - INFO - No active devices detected.
+2024-11-29 07:36:00,250 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:00,359 - INFO - Active devices: 0
+2024-11-29 07:36:00,899 - INFO - No active devices detected.
+2024-11-29 07:36:05,360 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:05,474 - INFO - Active devices: 0
+2024-11-29 07:36:05,900 - INFO - No active devices detected.
+2024-11-29 07:36:10,474 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:10,576 - INFO - Active devices: 0
+2024-11-29 07:36:10,900 - INFO - No active devices detected.
+2024-11-29 07:36:15,577 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:15,684 - INFO - Active devices: 0
+2024-11-29 07:36:15,901 - INFO - No active devices detected.
+2024-11-29 07:36:20,684 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:20,782 - INFO - Active devices: 0
+2024-11-29 07:36:20,901 - INFO - No active devices detected.
+2024-11-29 07:36:25,783 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:25,883 - INFO - Active devices: 0
+2024-11-29 07:36:25,902 - INFO - No active devices detected.
+2024-11-29 07:36:30,884 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:30,902 - INFO - No active devices detected.
+2024-11-29 07:36:31,003 - INFO - Active devices: 0
+2024-11-29 07:36:35,902 - INFO - No active devices detected.
+2024-11-29 07:36:36,003 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:36,141 - INFO - Active devices: 0
+2024-11-29 07:36:40,903 - INFO - No active devices detected.
+2024-11-29 07:36:41,141 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:41,238 - INFO - Active devices: 0
+2024-11-29 07:36:45,904 - INFO - No active devices detected.
+2024-11-29 07:36:46,239 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:46,367 - INFO - Active devices: 0
+2024-11-29 07:36:50,904 - INFO - No active devices detected.
+2024-11-29 07:36:51,367 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:51,509 - INFO - Active devices: 0
+2024-11-29 07:36:55,904 - INFO - No active devices detected.
+2024-11-29 07:36:56,509 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:36:56,628 - INFO - Active devices: 0
+2024-11-29 07:37:00,905 - INFO - No active devices detected.
+2024-11-29 07:37:01,628 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:01,786 - INFO - Active devices: 0
+2024-11-29 07:37:05,905 - INFO - No active devices detected.
+2024-11-29 07:37:06,787 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:06,955 - INFO - Active devices: 0
+2024-11-29 07:37:10,906 - INFO - No active devices detected.
+2024-11-29 07:37:11,956 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:12,085 - INFO - Active devices: 0
+2024-11-29 07:37:15,906 - INFO - No active devices detected.
+2024-11-29 07:37:17,085 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:17,245 - INFO - Active devices: 0
+2024-11-29 07:37:20,907 - INFO - No active devices detected.
+2024-11-29 07:37:22,245 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:22,402 - INFO - Active devices: 0
+2024-11-29 07:37:25,907 - INFO - No active devices detected.
+2024-11-29 07:37:27,403 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:27,564 - INFO - Active devices: 0
+2024-11-29 07:37:30,908 - INFO - No active devices detected.
+2024-11-29 07:37:32,564 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:32,664 - INFO - Active devices: 0
+2024-11-29 07:37:35,908 - INFO - No active devices detected.
+2024-11-29 07:37:37,664 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:37,792 - INFO - Active devices: 0
+2024-11-29 07:37:40,909 - INFO - No active devices detected.
+2024-11-29 07:37:42,792 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:42,990 - INFO - Active devices: 0
+2024-11-29 07:37:45,909 - INFO - No active devices detected.
+2024-11-29 07:37:47,991 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:48,105 - INFO - Active devices: 0
+2024-11-29 07:37:50,909 - INFO - No active devices detected.
+2024-11-29 07:37:53,106 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:53,260 - INFO - Active devices: 0
+2024-11-29 07:37:55,910 - INFO - No active devices detected.
+2024-11-29 07:37:58,260 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:37:58,372 - INFO - Active devices: 0
+2024-11-29 07:38:00,910 - INFO - No active devices detected.
+2024-11-29 07:38:03,373 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:03,475 - INFO - Active devices: 0
+2024-11-29 07:38:05,911 - INFO - No active devices detected.
+2024-11-29 07:38:08,476 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:08,684 - INFO - Active devices: 0
+2024-11-29 07:38:10,912 - INFO - No active devices detected.
+2024-11-29 07:38:13,685 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:13,785 - INFO - Active devices: 0
+2024-11-29 07:38:15,913 - INFO - No active devices detected.
+2024-11-29 07:38:18,785 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:18,895 - INFO - Active devices: 0
+2024-11-29 07:38:20,913 - INFO - No active devices detected.
+2024-11-29 07:38:23,895 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:24,006 - INFO - Active devices: 0
+2024-11-29 07:38:25,914 - INFO - No active devices detected.
+2024-11-29 07:38:29,007 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:29,109 - INFO - Active devices: 0
+2024-11-29 07:38:30,914 - INFO - No active devices detected.
+2024-11-29 07:38:34,109 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:34,205 - INFO - Active devices: 0
+2024-11-29 07:38:35,914 - INFO - No active devices detected.
+2024-11-29 07:38:39,205 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:39,333 - INFO - Active devices: 0
+2024-11-29 07:38:40,915 - INFO - No active devices detected.
+2024-11-29 07:38:44,333 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:44,439 - INFO - Active devices: 0
+2024-11-29 07:38:45,915 - INFO - No active devices detected.
+2024-11-29 07:38:49,440 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:49,545 - INFO - Active devices: 0
+2024-11-29 07:38:50,916 - INFO - No active devices detected.
+2024-11-29 07:38:54,545 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:54,685 - INFO - Active devices: 0
+2024-11-29 07:38:55,916 - INFO - No active devices detected.
+2024-11-29 07:38:59,685 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:38:59,803 - INFO - Active devices: 0
+2024-11-29 07:39:00,917 - INFO - No active devices detected.
+2024-11-29 07:39:04,803 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:39:04,951 - INFO - Active devices: 0
+2024-11-29 07:39:05,917 - INFO - No active devices detected.
+2024-11-29 07:39:09,951 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:39:10,065 - INFO - Active devices: 0
+2024-11-29 07:39:10,917 - INFO - No active devices detected.
+2024-11-29 07:39:15,066 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:39:15,164 - INFO - Active devices: 0
+2024-11-29 07:39:15,918 - INFO - No active devices detected.
+2024-11-29 07:39:20,164 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:39:20,293 - INFO - Active devices: 0
+2024-11-29 07:39:20,918 - INFO - No active devices detected.
+2024-11-29 07:39:25,293 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:39:25,428 - INFO - Active devices: 0
+2024-11-29 07:39:25,919 - INFO - No active devices detected.
+2024-11-29 07:39:30,429 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:39:30,532 - INFO - Active devices: 0
+2024-11-29 07:39:30,919 - INFO - No active devices detected.
+2024-11-29 07:39:35,533 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:39:35,660 - INFO - Active devices: 0
+2024-11-29 07:39:35,920 - INFO - No active devices detected.
+2024-11-29 07:39:40,661 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:39:40,761 - INFO - Active devices: 0
+2024-11-29 07:39:40,921 - INFO - No active devices detected.
+2024-11-29 07:39:45,762 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:39:45,863 - INFO - Active devices: 0
+2024-11-29 07:39:45,921 - INFO - No active devices detected.
+2024-11-29 07:39:50,863 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:39:50,921 - INFO - No active devices detected.
+2024-11-29 07:39:50,981 - INFO - Active devices: 0
+2024-11-29 07:39:55,922 - INFO - No active devices detected.
+2024-11-29 07:39:55,981 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:39:56,086 - INFO - Active devices: 0
+2024-11-29 07:40:00,923 - INFO - No active devices detected.
+2024-11-29 07:40:01,087 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:01,223 - INFO - Active devices: 0
+2024-11-29 07:40:05,923 - INFO - No active devices detected.
+2024-11-29 07:40:06,223 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:06,323 - INFO - Active devices: 0
+2024-11-29 07:40:10,924 - INFO - No active devices detected.
+2024-11-29 07:40:11,323 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:11,451 - INFO - Active devices: 0
+2024-11-29 07:40:15,925 - INFO - No active devices detected.
+2024-11-29 07:40:16,451 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:16,579 - INFO - Active devices: 0
+2024-11-29 07:40:20,925 - INFO - No active devices detected.
+2024-11-29 07:40:21,579 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:21,680 - INFO - Active devices: 0
+2024-11-29 07:40:25,926 - INFO - No active devices detected.
+2024-11-29 07:40:26,681 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:26,784 - INFO - Active devices: 0
+2024-11-29 07:40:30,927 - INFO - No active devices detected.
+2024-11-29 07:40:31,784 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:31,883 - INFO - Active devices: 0
+2024-11-29 07:40:35,927 - INFO - No active devices detected.
+2024-11-29 07:40:36,883 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:36,985 - INFO - Active devices: 0
+2024-11-29 07:40:40,927 - INFO - No active devices detected.
+2024-11-29 07:40:41,985 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:42,133 - INFO - Active devices: 0
+2024-11-29 07:40:45,928 - INFO - No active devices detected.
+2024-11-29 07:40:47,134 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:47,238 - INFO - Active devices: 0
+2024-11-29 07:40:50,928 - INFO - No active devices detected.
+2024-11-29 07:40:52,239 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:52,334 - INFO - Active devices: 0
+2024-11-29 07:40:55,929 - INFO - No active devices detected.
+2024-11-29 07:40:57,334 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:40:57,432 - INFO - Active devices: 0
+2024-11-29 07:41:00,929 - INFO - No active devices detected.
+2024-11-29 07:41:02,433 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:02,526 - INFO - Active devices: 0
+2024-11-29 07:41:05,930 - INFO - No active devices detected.
+2024-11-29 07:41:07,527 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:07,630 - INFO - Active devices: 0
+2024-11-29 07:41:10,930 - INFO - No active devices detected.
+2024-11-29 07:41:12,630 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:12,748 - INFO - Active devices: 0
+2024-11-29 07:41:15,931 - INFO - No active devices detected.
+2024-11-29 07:41:17,748 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:17,912 - INFO - Active devices: 0
+2024-11-29 07:41:20,931 - INFO - No active devices detected.
+2024-11-29 07:41:22,912 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:23,012 - INFO - Active devices: 0
+2024-11-29 07:41:25,931 - INFO - No active devices detected.
+2024-11-29 07:41:28,013 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:28,111 - INFO - Active devices: 0
+2024-11-29 07:41:30,932 - INFO - No active devices detected.
+2024-11-29 07:41:33,111 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:33,214 - INFO - Active devices: 0
+2024-11-29 07:41:35,933 - INFO - No active devices detected.
+2024-11-29 07:41:38,214 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:38,316 - INFO - Active devices: 0
+2024-11-29 07:41:40,933 - INFO - No active devices detected.
+2024-11-29 07:41:43,317 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:43,418 - INFO - Active devices: 0
+2024-11-29 07:41:45,934 - INFO - No active devices detected.
+2024-11-29 07:41:48,419 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:48,522 - INFO - Active devices: 0
+2024-11-29 07:41:50,934 - INFO - No active devices detected.
+2024-11-29 07:41:53,523 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:53,627 - INFO - Active devices: 0
+2024-11-29 07:41:55,935 - INFO - No active devices detected.
+2024-11-29 07:41:58,628 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:41:58,731 - INFO - Active devices: 0
+2024-11-29 07:42:00,936 - INFO - No active devices detected.
+2024-11-29 07:42:03,732 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:42:03,861 - INFO - Active devices: 0
+2024-11-29 07:42:05,936 - INFO - No active devices detected.
+2024-11-29 07:42:08,862 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:42:08,971 - INFO - Active devices: 0
+2024-11-29 07:42:10,937 - INFO - No active devices detected.
+2024-11-29 07:42:13,971 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:42:14,074 - INFO - Active devices: 0
+2024-11-29 07:42:15,938 - INFO - No active devices detected.
+2024-11-29 07:42:19,075 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:42:19,175 - INFO - Active devices: 0
+2024-11-29 07:42:20,938 - INFO - No active devices detected.
+2024-11-29 07:42:24,176 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:42:24,303 - INFO - Active devices: 0
+2024-11-29 07:42:25,939 - INFO - No active devices detected.
+2024-11-29 07:42:29,303 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:42:29,430 - INFO - Active devices: 0
+2024-11-29 07:42:30,939 - INFO - No active devices detected.
+2024-11-29 07:42:34,430 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:42:34,546 - INFO - Active devices: 0
+2024-11-29 07:42:35,940 - INFO - No active devices detected.
+2024-11-29 07:42:39,547 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:42:39,689 - INFO - Active devices: 0
+2024-11-29 07:42:40,940 - INFO - No active devices detected.
+2024-11-29 07:42:44,689 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:42:44,788 - INFO - Active devices: 0
+2024-11-29 07:42:45,940 - INFO - No active devices detected.
+2024-11-29 07:42:49,789 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:42:49,890 - INFO - Active devices: 0
+2024-11-29 07:42:50,941 - INFO - No active devices detected.
+2024-11-29 07:42:54,891 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:42:54,992 - INFO - Active devices: 0
+2024-11-29 07:42:55,941 - INFO - No active devices detected.
+2024-11-29 07:42:59,992 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:00,114 - INFO - Active devices: 0
+2024-11-29 07:43:00,942 - INFO - No active devices detected.
+2024-11-29 07:43:05,115 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:05,323 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:43:05,327 - INFO - Active devices: 1
+2024-11-29 07:43:05,943 - INFO - Active devices: 1
+2024-11-29 07:43:10,328 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:10,441 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:43:10,443 - INFO - Active devices: 1
+2024-11-29 07:43:10,943 - INFO - Active devices: 1
+2024-11-29 07:43:15,443 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:15,556 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:43:15,557 - INFO - Active devices: 1
+2024-11-29 07:43:15,944 - INFO - Active devices: 1
+2024-11-29 07:43:20,558 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:20,669 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:43:20,670 - INFO - Active devices: 1
+2024-11-29 07:43:20,944 - INFO - Active devices: 1
+2024-11-29 07:43:25,671 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:25,781 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:43:25,785 - INFO - Active devices: 1
+2024-11-29 07:43:25,945 - INFO - Active devices: 1
+2024-11-29 07:43:30,785 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:30,893 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:43:30,895 - INFO - Active devices: 1
+2024-11-29 07:43:30,945 - INFO - Active devices: 1
+2024-11-29 07:43:35,895 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:35,945 - INFO - Active devices: 1
+2024-11-29 07:43:36,020 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:43:36,023 - INFO - Active devices: 1
+2024-11-29 07:43:40,946 - INFO - Active devices: 1
+2024-11-29 07:43:41,024 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:41,226 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:43:41,227 - INFO - Active devices: 1
+2024-11-29 07:43:45,946 - INFO - Active devices: 1
+2024-11-29 07:43:46,228 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:46,342 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:43:46,346 - INFO - Active devices: 1
+2024-11-29 07:43:50,947 - INFO - Active devices: 1
+2024-11-29 07:43:51,347 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:51,490 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:43:51,493 - INFO - Active devices: 1
+2024-11-29 07:43:55,947 - INFO - Active devices: 1
+2024-11-29 07:43:56,494 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:43:56,652 - INFO - Removed inactive device: 192.168.53.27
+2024-11-29 07:43:56,653 - INFO - Active devices: 0
+2024-11-29 07:44:00,948 - INFO - No active devices detected.
+2024-11-29 07:44:01,653 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:44:05,037 - INFO - Removed inactive device: 192.168.53.27
+2024-11-29 07:44:05,042 - INFO - Active devices: 0
+2024-11-29 07:44:05,948 - INFO - No active devices detected.
+2024-11-29 07:44:10,042 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:44:10,949 - INFO - No active devices detected.
+2024-11-29 07:44:15,949 - INFO - No active devices detected.
+2024-11-29 07:44:20,950 - INFO - No active devices detected.
+2024-11-29 07:44:25,950 - INFO - No active devices detected.
+2024-11-29 07:44:30,951 - INFO - No active devices detected.
+2024-11-29 07:44:35,951 - INFO - No active devices detected.
+2024-11-29 07:44:40,951 - INFO - No active devices detected.
+2024-11-29 07:44:45,952 - INFO - No active devices detected.
+2024-11-29 07:44:50,952 - INFO - No active devices detected.
+2024-11-29 07:44:55,953 - INFO - No active devices detected.
+2024-11-29 07:45:00,953 - INFO - No active devices detected.
+2024-11-29 07:45:05,954 - INFO - No active devices detected.
+2024-11-29 07:45:10,954 - INFO - No active devices detected.
+2024-11-29 07:45:15,955 - INFO - No active devices detected.
+2024-11-29 07:45:20,956 - INFO - No active devices detected.
+2024-11-29 07:45:25,956 - INFO - No active devices detected.
+2024-11-29 07:45:30,956 - INFO - No active devices detected.
+2024-11-29 07:45:35,957 - INFO - No active devices detected.
+2024-11-29 07:45:40,957 - INFO - No active devices detected.
+2024-11-29 07:45:45,958 - INFO - No active devices detected.
+2024-11-29 07:45:50,958 - INFO - No active devices detected.
+2024-11-29 07:45:55,959 - INFO - No active devices detected.
+2024-11-29 07:46:00,959 - INFO - No active devices detected.
+2024-11-29 07:46:05,960 - INFO - No active devices detected.
+2024-11-29 07:46:10,960 - INFO - No active devices detected.
+2024-11-29 07:46:15,960 - INFO - No active devices detected.
+2024-11-29 07:46:20,961 - INFO - No active devices detected.
+2024-11-29 07:46:25,961 - INFO - No active devices detected.
+2024-11-29 07:46:30,962 - INFO - No active devices detected.
+2024-11-29 07:46:35,962 - INFO - No active devices detected.
+2024-11-29 07:46:40,963 - INFO - No active devices detected.
+2024-11-29 07:46:45,964 - INFO - No active devices detected.
+2024-11-29 07:46:50,964 - INFO - No active devices detected.
+2024-11-29 07:46:55,965 - INFO - No active devices detected.
+2024-11-29 07:47:00,965 - INFO - No active devices detected.
+2024-11-29 07:47:05,966 - INFO - No active devices detected.
+2024-11-29 07:47:10,966 - INFO - No active devices detected.
+2024-11-29 07:47:15,967 - INFO - No active devices detected.
+2024-11-29 07:47:20,967 - INFO - No active devices detected.
+2024-11-29 07:47:25,968 - INFO - No active devices detected.
+2024-11-29 07:47:30,968 - INFO - No active devices detected.
+2024-11-29 07:47:35,969 - INFO - No active devices detected.
+2024-11-29 07:47:40,969 - INFO - No active devices detected.
+2024-11-29 07:47:45,970 - INFO - No active devices detected.
+2024-11-29 07:47:50,970 - INFO - No active devices detected.
+2024-11-29 07:47:55,971 - INFO - No active devices detected.
+2024-11-29 07:48:00,971 - INFO - No active devices detected.
+2024-11-29 07:48:05,971 - INFO - No active devices detected.
+2024-11-29 07:48:10,972 - INFO - No active devices detected.
+2024-11-29 07:48:15,972 - INFO - No active devices detected.
+2024-11-29 07:48:20,973 - INFO - No active devices detected.
+2024-11-29 07:48:25,974 - INFO - No active devices detected.
+2024-11-29 07:48:30,974 - INFO - No active devices detected.
+2024-11-29 07:48:35,975 - INFO - No active devices detected.
+2024-11-29 07:48:40,976 - INFO - No active devices detected.
+2024-11-29 07:48:45,976 - INFO - No active devices detected.
+2024-11-29 07:48:50,976 - INFO - No active devices detected.
+2024-11-29 07:48:55,977 - INFO - No active devices detected.
+2024-11-29 07:49:00,977 - INFO - No active devices detected.
+2024-11-29 07:49:05,978 - INFO - No active devices detected.
+2024-11-29 07:49:10,978 - INFO - No active devices detected.
+2024-11-29 07:49:15,978 - INFO - No active devices detected.
+2024-11-29 07:49:20,978 - INFO - No active devices detected.
+2024-11-29 07:49:25,979 - INFO - No active devices detected.
+2024-11-29 07:49:30,979 - INFO - No active devices detected.
+2024-11-29 07:49:35,980 - INFO - No active devices detected.
+2024-11-29 07:49:40,980 - INFO - No active devices detected.
+2024-11-29 07:49:45,980 - INFO - No active devices detected.
+2024-11-29 07:49:50,981 - INFO - No active devices detected.
+2024-11-29 07:49:55,982 - INFO - No active devices detected.
+2024-11-29 07:50:00,982 - INFO - No active devices detected.
+2024-11-29 07:50:05,983 - INFO - No active devices detected.
+2024-11-29 07:50:10,984 - INFO - No active devices detected.
+2024-11-29 07:50:15,984 - INFO - No active devices detected.
+2024-11-29 07:50:20,985 - INFO - No active devices detected.
+2024-11-29 07:50:25,986 - INFO - No active devices detected.
+2024-11-29 07:50:30,986 - INFO - No active devices detected.
+2024-11-29 07:50:35,987 - INFO - No active devices detected.
+2024-11-29 07:50:40,988 - INFO - No active devices detected.
+2024-11-29 07:50:45,988 - INFO - No active devices detected.
+2024-11-29 07:50:50,989 - INFO - No active devices detected.
+2024-11-29 07:50:55,990 - INFO - No active devices detected.
+2024-11-29 07:51:00,990 - INFO - No active devices detected.
+2024-11-29 07:51:05,991 - INFO - No active devices detected.
+2024-11-29 07:51:10,991 - INFO - No active devices detected.
+2024-11-29 07:51:15,992 - INFO - No active devices detected.
+2024-11-29 07:51:20,992 - INFO - No active devices detected.
+2024-11-29 07:51:25,993 - INFO - No active devices detected.
+2024-11-29 07:51:30,994 - INFO - No active devices detected.
+2024-11-29 07:51:35,994 - INFO - No active devices detected.
+2024-11-29 07:51:40,994 - INFO - No active devices detected.
+2024-11-29 07:51:45,995 - INFO - No active devices detected.
+2024-11-29 07:51:50,996 - INFO - No active devices detected.
+2024-11-29 07:51:55,996 - INFO - No active devices detected.
+2024-11-29 07:52:00,997 - INFO - No active devices detected.
+2024-11-29 07:52:05,998 - INFO - No active devices detected.
+2024-11-29 07:52:10,998 - INFO - No active devices detected.
+2024-11-29 07:52:15,999 - INFO - No active devices detected.
+2024-11-29 07:52:20,999 - INFO - No active devices detected.
+2024-11-29 07:52:25,999 - INFO - No active devices detected.
+2024-11-29 07:52:30,655 - INFO - Active devices: 0
+2024-11-29 07:52:31,000 - INFO - No active devices detected.
+2024-11-29 07:52:35,655 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:52:35,828 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:52:35,829 - INFO - Active devices: 1
+2024-11-29 07:52:36,000 - INFO - Active devices: 1
+2024-11-29 07:52:40,830 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:52:40,940 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:52:40,943 - INFO - Active devices: 1
+2024-11-29 07:52:41,000 - INFO - Active devices: 1
+2024-11-29 07:52:45,943 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:52:46,000 - INFO - Active devices: 1
+2024-11-29 07:52:46,069 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:52:46,070 - INFO - Active devices: 1
+2024-11-29 07:52:51,001 - INFO - Active devices: 1
+2024-11-29 07:52:51,071 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:52:51,222 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:52:51,225 - INFO - Active devices: 1
+2024-11-29 07:52:56,001 - INFO - Active devices: 1
+2024-11-29 07:52:56,225 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:52:56,346 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:52:56,347 - INFO - Active devices: 1
+2024-11-29 07:53:01,001 - INFO - Active devices: 1
+2024-11-29 07:53:01,348 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:01,455 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:01,459 - INFO - Active devices: 1
+2024-11-29 07:53:06,001 - INFO - Active devices: 1
+2024-11-29 07:53:06,459 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:06,572 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:06,574 - INFO - Active devices: 1
+2024-11-29 07:53:11,002 - INFO - Active devices: 1
+2024-11-29 07:53:11,574 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:11,684 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:11,687 - INFO - Active devices: 1
+2024-11-29 07:53:16,002 - INFO - Active devices: 1
+2024-11-29 07:53:16,687 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:16,826 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:16,827 - INFO - Active devices: 1
+2024-11-29 07:53:21,002 - INFO - Active devices: 1
+2024-11-29 07:53:21,828 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:21,940 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:21,943 - INFO - Active devices: 1
+2024-11-29 07:53:26,003 - INFO - Active devices: 1
+2024-11-29 07:53:26,943 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:27,061 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:27,062 - INFO - Active devices: 1
+2024-11-29 07:53:31,003 - INFO - Active devices: 1
+2024-11-29 07:53:32,063 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:32,176 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:32,179 - INFO - Active devices: 1
+2024-11-29 07:53:36,003 - INFO - Active devices: 1
+2024-11-29 07:53:37,179 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:37,299 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:37,301 - INFO - Active devices: 1
+2024-11-29 07:53:41,003 - INFO - Active devices: 1
+2024-11-29 07:53:42,301 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:42,414 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:42,417 - INFO - Active devices: 1
+2024-11-29 07:53:46,004 - INFO - Active devices: 1
+2024-11-29 07:53:47,417 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:47,528 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:47,529 - INFO - Active devices: 1
+2024-11-29 07:53:51,004 - INFO - Active devices: 1
+2024-11-29 07:53:52,529 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:52,644 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:52,646 - INFO - Active devices: 1
+2024-11-29 07:53:56,004 - INFO - Active devices: 1
+2024-11-29 07:53:57,646 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:53:57,757 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:53:57,759 - INFO - Active devices: 1
+2024-11-29 07:54:01,004 - INFO - Active devices: 1
+2024-11-29 07:54:02,759 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:02,876 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:02,879 - INFO - Active devices: 1
+2024-11-29 07:54:06,005 - INFO - Active devices: 1
+2024-11-29 07:54:07,880 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:08,001 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:08,004 - INFO - Active devices: 1
+2024-11-29 07:54:11,005 - INFO - Active devices: 1
+2024-11-29 07:54:13,004 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:13,114 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:13,117 - INFO - Active devices: 1
+2024-11-29 07:54:16,005 - INFO - Active devices: 1
+2024-11-29 07:54:18,117 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:18,229 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:18,231 - INFO - Active devices: 1
+2024-11-29 07:54:21,005 - INFO - Active devices: 1
+2024-11-29 07:54:23,231 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:23,381 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:23,385 - INFO - Active devices: 1
+2024-11-29 07:54:26,006 - INFO - Active devices: 1
+2024-11-29 07:54:28,385 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:28,527 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:28,529 - INFO - Active devices: 1
+2024-11-29 07:54:31,006 - INFO - Active devices: 1
+2024-11-29 07:54:33,529 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:33,671 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:33,673 - INFO - Active devices: 1
+2024-11-29 07:54:36,007 - INFO - Active devices: 1
+2024-11-29 07:54:38,673 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:38,811 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:38,812 - INFO - Active devices: 1
+2024-11-29 07:54:41,008 - INFO - Active devices: 1
+2024-11-29 07:54:43,813 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:43,953 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:43,957 - INFO - Active devices: 1
+2024-11-29 07:54:46,008 - INFO - Active devices: 1
+2024-11-29 07:54:48,957 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:49,076 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:49,077 - INFO - Active devices: 1
+2024-11-29 07:54:51,009 - INFO - Active devices: 1
+2024-11-29 07:54:54,077 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:54,219 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:54,221 - INFO - Active devices: 1
+2024-11-29 07:54:56,009 - INFO - Active devices: 1
+2024-11-29 07:54:59,221 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:54:59,366 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:54:59,367 - INFO - Active devices: 1
+2024-11-29 07:55:01,010 - INFO - Active devices: 1
+2024-11-29 07:55:04,368 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:55:04,515 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:55:04,518 - INFO - Active devices: 1
+2024-11-29 07:55:06,010 - INFO - Active devices: 1
+2024-11-29 07:55:09,519 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:55:09,671 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:55:09,672 - INFO - Active devices: 1
+2024-11-29 07:55:11,011 - INFO - Active devices: 1
+2024-11-29 07:55:14,672 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:55:14,814 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:55:14,817 - INFO - Active devices: 1
+2024-11-29 07:55:16,011 - INFO - Active devices: 1
+2024-11-29 07:55:19,817 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:55:19,965 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:55:19,966 - INFO - Active devices: 1
+2024-11-29 07:55:21,012 - INFO - Active devices: 1
+2024-11-29 07:55:24,966 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:55:25,089 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:55:25,093 - INFO - Active devices: 1
+2024-11-29 07:55:26,012 - INFO - Active devices: 1
+2024-11-29 07:55:30,093 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:55:30,249 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:55:30,251 - INFO - Active devices: 1
+2024-11-29 07:55:31,013 - INFO - Active devices: 1
+2024-11-29 07:55:35,251 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:55:35,410 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:55:35,413 - INFO - Active devices: 1
+2024-11-29 07:55:36,013 - INFO - Active devices: 1
+2024-11-29 07:55:40,413 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:55:40,615 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:55:40,618 - INFO - Active devices: 1
+2024-11-29 07:55:41,014 - INFO - Active devices: 1
+2024-11-29 07:55:45,618 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:55:45,768 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:55:45,770 - INFO - Active devices: 1
+2024-11-29 07:55:46,015 - INFO - Active devices: 1
+2024-11-29 07:55:50,770 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:55:50,922 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:55:50,923 - INFO - Active devices: 1
+2024-11-29 07:55:51,015 - INFO - Active devices: 1
+2024-11-29 07:55:55,924 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:55:56,015 - INFO - Active devices: 1
+2024-11-29 07:55:56,141 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:55:56,142 - INFO - Active devices: 1
+2024-11-29 07:56:01,016 - INFO - Active devices: 1
+2024-11-29 07:56:01,143 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 07:56:01,370 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 07:56:01,371 - INFO - Active devices: 1
+2024-11-29 08:04:26,430 - INFO - Starting network monitoring script.
+2024-11-29 08:04:26,431 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:04:26,432 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:04:26,432 - INFO - Getting local network interface details...
+2024-11-29 08:04:26,433 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:04:36,603 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:04:36,606 - INFO - Active devices: 1
+2024-11-29 08:04:41,501 - INFO - Packets captured: 63
+2024-11-29 08:04:41,501 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:04:41,610 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:04:41,755 - INFO - Anomaly detection completed.
+2024-11-29 08:04:41,756 - INFO - Anomalies detected: 1
+2024-11-29 08:04:41,756 - INFO - Attempting to connect to the database...
+2024-11-29 08:04:41,757 - INFO - Database connection successful.
+2024-11-29 08:04:41,757 - INFO - IP 192.168.53.122 is already blocked and not functional.
+2024-11-29 08:04:41,758 - INFO - Skipping IP 192.168.53.122 as it is already blocked.
+2024-11-29 08:04:41,876 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:04:41,877 - INFO - Active devices: 1
+2024-11-29 08:04:46,760 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:04:46,760 - INFO - Getting local network interface details...
+2024-11-29 08:04:46,761 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:04:46,877 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:04:47,043 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:04:47,052 - INFO - Active devices: 1
+2024-11-29 08:04:52,052 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:04:52,230 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:04:52,232 - INFO - Active devices: 1
+2024-11-29 08:04:57,232 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:04:57,390 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:04:57,396 - INFO - Active devices: 1
+2024-11-29 08:05:01,812 - INFO - Packets captured: 44
+2024-11-29 08:05:01,813 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:05:01,946 - INFO - Anomaly detection completed.
+2024-11-29 08:05:01,946 - INFO - Anomalies detected: 1
+2024-11-29 08:05:01,947 - INFO - Attempting to connect to the database...
+2024-11-29 08:05:01,948 - INFO - Database connection successful.
+2024-11-29 08:05:01,948 - INFO - Classifying the threat based on packet analysis...
+2024-11-29 08:05:01,949 - INFO - Threat detected: Unusual Activity from IP 172.64.155.209
+2024-11-29 08:05:01,949 - INFO - Inserting threat data for IP 172.64.155.209 into database...
+2024-11-29 08:05:01,949 - INFO - Attempting to connect to the database...
+2024-11-29 08:05:01,950 - INFO - Database connection successful.
+2024-11-29 08:05:01,953 - INFO - Threat data inserted successfully.
+2024-11-29 08:05:01,953 - INFO - Blocking IP 172.64.155.209 using OS-specific firewall rules...
+2024-11-29 08:05:01,999 - INFO - IP 172.64.155.209 successfully blocked with Linux IPtables.
+2024-11-29 08:05:02,396 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:02,504 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:02,506 - INFO - Active devices: 1
+2024-11-29 08:05:07,000 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:05:07,000 - INFO - Getting local network interface details...
+2024-11-29 08:05:07,001 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:05:07,506 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:07,678 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:07,681 - INFO - Active devices: 1
+2024-11-29 08:05:12,682 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:12,812 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:12,814 - INFO - Active devices: 1
+2024-11-29 08:05:17,815 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:17,937 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:17,948 - INFO - Active devices: 1
+2024-11-29 08:05:22,053 - INFO - Packets captured: 40
+2024-11-29 08:05:22,053 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:05:22,172 - INFO - Anomaly detection completed.
+2024-11-29 08:05:22,172 - INFO - Anomalies detected: 1
+2024-11-29 08:05:22,172 - INFO - Attempting to connect to the database...
+2024-11-29 08:05:22,174 - INFO - Database connection successful.
+2024-11-29 08:05:22,174 - INFO - IP 192.168.53.122 is already blocked and not functional.
+2024-11-29 08:05:22,174 - INFO - Skipping IP 192.168.53.122 as it is already blocked.
+2024-11-29 08:05:22,949 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:23,164 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:23,167 - INFO - Active devices: 1
+2024-11-29 08:05:27,175 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:05:27,176 - INFO - Getting local network interface details...
+2024-11-29 08:05:27,176 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:05:28,168 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:28,368 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:28,372 - INFO - Active devices: 1
+2024-11-29 08:05:33,373 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:33,590 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:33,592 - INFO - Active devices: 1
+2024-11-29 08:05:34,053 - INFO - Packets captured: 100
+2024-11-29 08:05:34,053 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:05:34,204 - INFO - Anomaly detection completed.
+2024-11-29 08:05:34,205 - INFO - Anomalies detected: 1
+2024-11-29 08:05:34,205 - INFO - Attempting to connect to the database...
+2024-11-29 08:05:34,206 - INFO - Database connection successful.
+2024-11-29 08:05:34,206 - INFO - Classifying the threat based on packet analysis...
+2024-11-29 08:05:34,206 - INFO - Threat detected: Unusual Activity from IP 104.18.187.31
+2024-11-29 08:05:34,207 - INFO - Inserting threat data for IP 104.18.187.31 into database...
+2024-11-29 08:05:34,207 - INFO - Attempting to connect to the database...
+2024-11-29 08:05:34,207 - INFO - Database connection successful.
+2024-11-29 08:05:34,210 - INFO - Threat data inserted successfully.
+2024-11-29 08:05:34,211 - INFO - Blocking IP 104.18.187.31 using OS-specific firewall rules...
+2024-11-29 08:05:34,224 - INFO - IP 104.18.187.31 successfully blocked with Linux IPtables.
+2024-11-29 08:05:38,592 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:38,728 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:38,735 - INFO - Active devices: 1
+2024-11-29 08:05:39,225 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:05:39,226 - INFO - Getting local network interface details...
+2024-11-29 08:05:39,226 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:05:43,735 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:43,890 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:43,894 - INFO - Active devices: 1
+2024-11-29 08:05:48,895 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:49,057 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:49,062 - INFO - Active devices: 1
+2024-11-29 08:05:54,062 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:54,214 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:54,215 - INFO - Active devices: 1
+2024-11-29 08:05:54,277 - INFO - Packets captured: 39
+2024-11-29 08:05:54,277 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:05:54,442 - INFO - Anomaly detection completed.
+2024-11-29 08:05:54,442 - INFO - Anomalies detected: 1
+2024-11-29 08:05:54,442 - INFO - Attempting to connect to the database...
+2024-11-29 08:05:54,443 - INFO - Database connection successful.
+2024-11-29 08:05:54,444 - INFO - IP 192.168.53.122 is already blocked and not functional.
+2024-11-29 08:05:54,444 - INFO - Skipping IP 192.168.53.122 as it is already blocked.
+2024-11-29 08:05:59,216 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:05:59,393 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:05:59,398 - INFO - Active devices: 1
+2024-11-29 08:05:59,445 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:05:59,445 - INFO - Getting local network interface details...
+2024-11-29 08:05:59,445 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:06:04,399 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:06:04,563 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:06:04,564 - INFO - Active devices: 1
+2024-11-29 08:06:09,565 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:06:09,688 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:06:09,692 - INFO - Active devices: 1
+2024-11-29 08:06:14,513 - INFO - Packets captured: 59
+2024-11-29 08:06:14,513 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:06:14,694 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:06:14,740 - INFO - Anomaly detection completed.
+2024-11-29 08:06:14,740 - INFO - Anomalies detected: 1
+2024-11-29 08:06:14,741 - INFO - Attempting to connect to the database...
+2024-11-29 08:06:14,742 - INFO - Database connection successful.
+2024-11-29 08:06:14,743 - INFO - IP 192.168.53.122 is already blocked and not functional.
+2024-11-29 08:06:14,743 - INFO - Skipping IP 192.168.53.122 as it is already blocked.
+2024-11-29 08:06:14,868 - INFO - Stored/Updated active device: 192.168.53.27 - 0a:a7:77:db:44:f9 - _gateway
+2024-11-29 08:06:14,870 - INFO - Active devices: 1
+2024-11-29 08:06:19,745 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:06:19,745 - INFO - Getting local network interface details...
+2024-11-29 08:06:19,746 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:06:19,870 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:06:22,353 - INFO - Removed inactive device: 192.168.53.27
+2024-11-29 08:06:22,358 - INFO - Active devices: 0
+2024-11-29 08:06:27,358 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:06:28,335 - INFO - Active devices: 0
+2024-11-29 08:06:33,335 - INFO - Determined local subnet: 127.0.1.1/24
+2024-11-29 08:06:34,371 - INFO - Packets captured: 0
+2024-11-29 08:06:34,372 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:06:34,373 - INFO - Not enough data to detect anomalies.
+2024-11-29 08:06:34,373 - INFO - Anomalies detected: 0
+2024-11-29 08:06:39,375 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:06:39,375 - INFO - Getting local network interface details...
+2024-11-29 08:06:39,375 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:06:39,375 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:06:44,377 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:06:44,377 - INFO - Getting local network interface details...
+2024-11-29 08:06:44,378 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:06:44,379 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:06:49,382 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:06:49,382 - INFO - Getting local network interface details...
+2024-11-29 08:06:49,383 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:06:49,383 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:06:54,386 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:06:54,386 - INFO - Getting local network interface details...
+2024-11-29 08:06:54,387 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:06:54,387 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:06:59,390 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:06:59,390 - INFO - Getting local network interface details...
+2024-11-29 08:06:59,391 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:06:59,391 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:04,393 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:04,394 - INFO - Getting local network interface details...
+2024-11-29 08:07:04,395 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:04,395 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:09,398 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:09,398 - INFO - Getting local network interface details...
+2024-11-29 08:07:09,400 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:09,400 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:14,401 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:14,401 - INFO - Getting local network interface details...
+2024-11-29 08:07:14,402 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:14,402 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:19,404 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:19,404 - INFO - Getting local network interface details...
+2024-11-29 08:07:19,405 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:19,405 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:24,406 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:24,406 - INFO - Getting local network interface details...
+2024-11-29 08:07:24,406 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:24,407 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:29,407 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:29,407 - INFO - Getting local network interface details...
+2024-11-29 08:07:29,407 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:29,408 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:34,409 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:34,409 - INFO - Getting local network interface details...
+2024-11-29 08:07:34,410 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:34,410 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:39,410 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:39,410 - INFO - Getting local network interface details...
+2024-11-29 08:07:39,411 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:39,411 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:44,412 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:44,413 - INFO - Getting local network interface details...
+2024-11-29 08:07:44,414 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:44,414 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:49,417 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:49,417 - INFO - Getting local network interface details...
+2024-11-29 08:07:49,418 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:49,418 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:54,420 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:54,421 - INFO - Getting local network interface details...
+2024-11-29 08:07:54,421 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:54,422 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:07:59,424 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:07:59,424 - INFO - Getting local network interface details...
+2024-11-29 08:07:59,425 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:07:59,425 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:04,427 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:04,427 - INFO - Getting local network interface details...
+2024-11-29 08:08:04,428 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:04,428 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:09,431 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:09,431 - INFO - Getting local network interface details...
+2024-11-29 08:08:09,432 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:09,432 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:14,436 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:14,436 - INFO - Getting local network interface details...
+2024-11-29 08:08:14,437 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:14,438 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:19,440 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:19,440 - INFO - Getting local network interface details...
+2024-11-29 08:08:19,441 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:19,441 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:24,443 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:24,443 - INFO - Getting local network interface details...
+2024-11-29 08:08:24,443 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:24,443 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:29,444 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:29,444 - INFO - Getting local network interface details...
+2024-11-29 08:08:29,444 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:29,445 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:34,446 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:34,447 - INFO - Getting local network interface details...
+2024-11-29 08:08:34,447 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:34,447 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:39,448 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:39,448 - INFO - Getting local network interface details...
+2024-11-29 08:08:39,449 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:39,449 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:44,451 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:44,451 - INFO - Getting local network interface details...
+2024-11-29 08:08:44,452 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:44,452 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:49,455 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:49,455 - INFO - Getting local network interface details...
+2024-11-29 08:08:49,456 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:49,457 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:54,458 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:54,459 - INFO - Getting local network interface details...
+2024-11-29 08:08:54,460 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:54,460 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:08:59,461 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:08:59,461 - INFO - Getting local network interface details...
+2024-11-29 08:08:59,462 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:08:59,462 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:09:04,462 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:09:04,463 - INFO - Getting local network interface details...
+2024-11-29 08:09:04,463 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:09:04,463 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:09:09,465 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:09:09,465 - INFO - Getting local network interface details...
+2024-11-29 08:09:09,466 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:09:09,467 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:09:14,469 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:09:14,470 - INFO - Getting local network interface details...
+2024-11-29 08:09:14,471 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:09:14,472 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:09:19,473 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:09:19,473 - INFO - Getting local network interface details...
+2024-11-29 08:09:19,473 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:09:19,473 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:09:24,474 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:09:24,474 - INFO - Getting local network interface details...
+2024-11-29 08:09:24,474 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:09:24,474 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:09:29,475 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:09:29,475 - INFO - Getting local network interface details...
+2024-11-29 08:09:29,476 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:09:36,300 - INFO - Packets captured: 100
+2024-11-29 08:09:36,301 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:09:36,459 - INFO - Anomaly detection completed.
+2024-11-29 08:09:36,460 - INFO - Anomalies detected: 0
+2024-11-29 08:09:41,461 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:09:41,461 - INFO - Getting local network interface details...
+2024-11-29 08:09:41,462 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:09:43,828 - INFO - Packets captured: 100
+2024-11-29 08:09:43,829 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:09:43,957 - INFO - Anomaly detection completed.
+2024-11-29 08:09:43,957 - INFO - Anomalies detected: 1
+2024-11-29 08:09:43,957 - INFO - Attempting to connect to the database...
+2024-11-29 08:09:43,958 - INFO - Database connection successful.
+2024-11-29 08:09:43,959 - INFO - Classifying the threat based on packet analysis...
+2024-11-29 08:09:43,959 - INFO - Threat detected: Unusual Activity from IP 142.250.187.228
+2024-11-29 08:09:43,959 - INFO - Inserting threat data for IP 142.250.187.228 into database...
+2024-11-29 08:09:43,959 - INFO - Attempting to connect to the database...
+2024-11-29 08:09:43,960 - INFO - Database connection successful.
+2024-11-29 08:09:43,963 - INFO - Threat data inserted successfully.
+2024-11-29 08:09:43,963 - INFO - Blocking IP 142.250.187.228 using OS-specific firewall rules...
+2024-11-29 08:09:43,975 - INFO - IP 142.250.187.228 successfully blocked with Linux IPtables.
+2024-11-29 08:09:48,977 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:09:48,977 - INFO - Getting local network interface details...
+2024-11-29 08:09:48,977 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:09:51,517 - INFO - Packets captured: 100
+2024-11-29 08:09:51,517 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:09:51,647 - INFO - Anomaly detection completed.
+2024-11-29 08:09:51,647 - INFO - Anomalies detected: 1
+2024-11-29 08:09:51,647 - INFO - Attempting to connect to the database...
+2024-11-29 08:09:51,648 - INFO - Database connection successful.
+2024-11-29 08:09:51,649 - INFO - Classifying the threat based on packet analysis...
+2024-11-29 08:09:51,649 - INFO - Threat detected: Unusual Activity from IP 104.18.32.47
+2024-11-29 08:09:51,649 - INFO - Inserting threat data for IP 104.18.32.47 into database...
+2024-11-29 08:09:51,649 - INFO - Attempting to connect to the database...
+2024-11-29 08:09:51,650 - INFO - Database connection successful.
+2024-11-29 08:09:51,653 - INFO - Threat data inserted successfully.
+2024-11-29 08:09:51,653 - INFO - Blocking IP 104.18.32.47 using OS-specific firewall rules...
+2024-11-29 08:09:51,662 - INFO - IP 104.18.32.47 successfully blocked with Linux IPtables.
+2024-11-29 08:09:56,664 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:09:56,664 - INFO - Getting local network interface details...
+2024-11-29 08:09:56,665 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:10:11,717 - INFO - Packets captured: 64
+2024-11-29 08:10:11,717 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:10:11,862 - INFO - Anomaly detection completed.
+2024-11-29 08:10:11,862 - INFO - Anomalies detected: 1
+2024-11-29 08:10:11,862 - INFO - Attempting to connect to the database...
+2024-11-29 08:10:11,864 - INFO - Database connection successful.
+2024-11-29 08:10:11,865 - INFO - IP 104.18.32.47 is already blocked and not functional.
+2024-11-29 08:10:11,865 - INFO - Skipping IP 104.18.32.47 as it is already blocked.
+2024-11-29 08:10:16,867 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:10:16,867 - INFO - Getting local network interface details...
+2024-11-29 08:10:16,868 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:10:31,929 - INFO - Packets captured: 30
+2024-11-29 08:10:31,929 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:10:32,078 - INFO - Anomaly detection completed.
+2024-11-29 08:10:32,078 - INFO - Anomalies detected: 1
+2024-11-29 08:10:32,078 - INFO - Attempting to connect to the database...
+2024-11-29 08:10:32,080 - INFO - Database connection successful.
+2024-11-29 08:10:32,081 - INFO - IP 142.250.187.228 is already blocked and not functional.
+2024-11-29 08:10:32,081 - INFO - Skipping IP 142.250.187.228 as it is already blocked.
+2024-11-29 08:10:37,082 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:10:37,083 - INFO - Getting local network interface details...
+2024-11-29 08:10:37,083 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:10:38,001 - INFO - Packets captured: 100
+2024-11-29 08:10:38,001 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:10:38,143 - INFO - Anomaly detection completed.
+2024-11-29 08:10:38,144 - INFO - Anomalies detected: 1
+2024-11-29 08:10:38,144 - INFO - Attempting to connect to the database...
+2024-11-29 08:10:38,145 - INFO - Database connection successful.
+2024-11-29 08:10:38,145 - INFO - IP 142.250.187.228 is already blocked and not functional.
+2024-11-29 08:10:38,145 - INFO - Skipping IP 142.250.187.228 as it is already blocked.
+2024-11-29 08:10:43,147 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:10:43,147 - INFO - Getting local network interface details...
+2024-11-29 08:10:43,148 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:10:58,200 - INFO - Packets captured: 50
+2024-11-29 08:10:58,201 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:10:58,395 - INFO - Anomaly detection completed.
+2024-11-29 08:10:58,395 - INFO - Anomalies detected: 1
+2024-11-29 08:10:58,395 - INFO - Attempting to connect to the database...
+2024-11-29 08:10:58,396 - INFO - Database connection successful.
+2024-11-29 08:10:58,397 - INFO - IP 142.250.187.228 is already blocked and not functional.
+2024-11-29 08:10:58,397 - INFO - Skipping IP 142.250.187.228 as it is already blocked.
+2024-11-29 08:11:03,399 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:11:03,400 - INFO - Getting local network interface details...
+2024-11-29 08:11:03,400 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:11:18,440 - INFO - Packets captured: 65
+2024-11-29 08:11:18,441 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:11:18,593 - INFO - Anomaly detection completed.
+2024-11-29 08:11:18,593 - INFO - Anomalies detected: 1
+2024-11-29 08:11:18,594 - INFO - Attempting to connect to the database...
+2024-11-29 08:11:18,595 - INFO - Database connection successful.
+2024-11-29 08:11:18,596 - INFO - IP 142.250.187.228 is already blocked and not functional.
+2024-11-29 08:11:18,596 - INFO - Skipping IP 142.250.187.228 as it is already blocked.
+2024-11-29 08:11:23,598 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:11:23,598 - INFO - Getting local network interface details...
+2024-11-29 08:11:23,599 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:11:38,649 - INFO - Packets captured: 6
+2024-11-29 08:11:38,649 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:11:38,792 - INFO - Anomaly detection completed.
+2024-11-29 08:11:38,792 - INFO - Anomalies detected: 1
+2024-11-29 08:11:38,792 - INFO - Attempting to connect to the database...
+2024-11-29 08:11:38,793 - INFO - Database connection successful.
+2024-11-29 08:11:38,794 - INFO - IP 104.18.32.47 is already blocked and not functional.
+2024-11-29 08:11:38,794 - INFO - Skipping IP 104.18.32.47 as it is already blocked.
+2024-11-29 08:11:43,796 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:11:43,796 - INFO - Getting local network interface details...
+2024-11-29 08:11:43,797 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:11:58,844 - INFO - Packets captured: 1
+2024-11-29 08:11:58,845 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:11:58,846 - INFO - Not enough data to detect anomalies.
+2024-11-29 08:11:58,846 - INFO - Anomalies detected: 0
+2024-11-29 08:12:03,847 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:12:03,847 - INFO - Getting local network interface details...
+2024-11-29 08:12:03,848 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:12:18,900 - INFO - Packets captured: 57
+2024-11-29 08:12:18,901 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:12:19,101 - INFO - Anomaly detection completed.
+2024-11-29 08:12:19,101 - INFO - Anomalies detected: 0
+2024-11-29 08:12:24,102 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:12:24,103 - INFO - Getting local network interface details...
+2024-11-29 08:12:24,103 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:12:32,334 - INFO - Packets captured: 0
+2024-11-29 08:12:32,334 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:12:32,334 - INFO - Not enough data to detect anomalies.
+2024-11-29 08:12:32,334 - INFO - Anomalies detected: 0
+2024-11-29 08:12:37,337 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:12:37,337 - INFO - Getting local network interface details...
+2024-11-29 08:12:37,338 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:12:37,338 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:12:42,341 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:12:42,341 - INFO - Getting local network interface details...
+2024-11-29 08:12:42,342 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:12:42,342 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:12:47,343 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:12:47,343 - INFO - Getting local network interface details...
+2024-11-29 08:12:47,344 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:12:47,344 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:12:52,346 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:12:52,346 - INFO - Getting local network interface details...
+2024-11-29 08:12:52,347 - INFO - Local subnet detected: 192.168.53.0/24
+2024-11-29 08:12:59,681 - INFO - Packets captured: 10
+2024-11-29 08:12:59,681 - INFO - Detecting anomalies in captured packets...
+2024-11-29 08:12:59,827 - INFO - Anomaly detection completed.
+2024-11-29 08:12:59,828 - INFO - Anomalies detected: 0
+2024-11-29 08:13:04,829 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:13:04,829 - INFO - Getting local network interface details...
+2024-11-29 08:13:04,830 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:13:04,830 - ERROR - Could not retrieve subnet details.
+2024-11-29 08:13:09,831 - INFO - Scanning local subnet for suspicious activity...
+2024-11-29 08:13:09,831 - INFO - Getting local network interface details...
+2024-11-29 08:13:09,832 - ERROR - No valid network interface found. Unable to determine subnet.
+2024-11-29 08:13:09,832 - ERROR - Could not retrieve subnet details.

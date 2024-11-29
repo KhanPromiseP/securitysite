@@ -22,24 +22,28 @@ CREATE TABLE users (
 
 CREATE TABLE active_users_log (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    active_user_count INT NOT NULL
+    ip_address VARCHAR(15) NOT NULL,
+    mac_address VARCHAR(17) NOT NULL,
+    hostname VARCHAR(255),
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_ip (ip_address)
 );
-
 
 CREATE TABLE IF NOT EXISTS generated_reports (
     id INT AUTO_INCREMENT PRIMARY KEY,
     alert_type VARCHAR(255) NOT NULL,
     report_details TEXT NOT NULL,
     generated_at DATETIME NOT NULL,
-    entry_id INT NOT NULL,
-    CONSTRAINT fk_network_logs_entry FOREIGN KEY (entry_id)
+    network_entry_id INT,
+    website_entry_id INT,
+    CONSTRAINT fk_network_logs_entry FOREIGN KEY (network_entry_id)
         REFERENCES network_logs (id)
         ON DELETE CASCADE,
-    CONSTRAINT fk_website_logs_entry FOREIGN KEY (entry_id)
+    CONSTRAINT fk_website_logs_entry FOREIGN KEY (website_entry_id)
         REFERENCES website_logs (id)
         ON DELETE CASCADE
 );
+
 
 
 

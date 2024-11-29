@@ -1,6 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST");
+
 header("Content-Type: application/json");
 
 include '../src/config/Database.php'; 
@@ -16,10 +15,10 @@ class WeeklyReports
 
     public function fetchReportsForLastWeek()
     {
-        date_default_timezone_set('UTC'); // Set the default timezone
+        date_default_timezone_set('UTC'); 
 
-        $endDate = date('Y-m-d H:i:s'); // Current time
-        $startDate = date('Y-m-d H:i:s', strtotime('-7 days')); // 7 days ago
+        $endDate = date('Y-m-d H:i:s'); 
+        $startDate = date('Y-m-d H:i:s', strtotime('-7 days')); 
 
         $query = "SELECT COUNT(*) AS report_count 
                   FROM generated_reports 
@@ -49,5 +48,4 @@ if (!$conn) {
 
 $weeklyReports = new WeeklyReports($conn);
 $reportCount = $weeklyReports->fetchReportsForLastWeek();
-
 echo json_encode(['report_count' => $reportCount]);

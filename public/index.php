@@ -87,7 +87,7 @@ SimpleMiddleware::requireLogin();
     <script src="../views/alertsChart.js"></script>
     <script src="../views/displayCountAlertsPerDay.js"></script>
     <script src="../views/reportStats.js"></script>
-    <script src="../views/onlineUsers.js"></script>
+    <script src="../views/active_device_count..js"></script>
 </body>
 
 </html>

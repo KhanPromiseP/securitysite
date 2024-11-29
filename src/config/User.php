@@ -13,7 +13,7 @@ class User {
         $this->conn = $db;
     }
 
-    public function register($username, $email, $password, $role_id = 2) { // Default role_id 2 (is the User)
+    public function register($username, $email, $password, $role_id = 2) { 
         $query = "INSERT INTO $this->table (username, email, password_hash, role_id) VALUES (:username, :email, :password_hash, :role_id)";
         $stmt = $this->conn->prepare($query);
 

@@ -17,6 +17,9 @@
             <a href="../views/report_dashboard.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'report_dashboard.php' ? 'active' : '' ?>">Reports</a>
         </li>
         <li class="nav-item">
+            <a href="../views/active_devices_display.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'users.php' ? 'active' : '' ?>">Users Online</a>
+        </li>
+        <li class="nav-item">
             <a href="../views/user_management.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'users.php' ? 'active' : '' ?>">User Management</a>
         </li>
         <li class="nav-item">

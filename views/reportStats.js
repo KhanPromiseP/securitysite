@@ -1,14 +1,14 @@
 $(document).ready(function () {
     function fetchWeeklyCount() {
         $.ajax({
-            url: '../logic/getWeeklyReports.php', // PHP file to fetch the weekly report count
+            url: '../logic/getWeeklyReports.php',  
             method: 'GET',
             dataType: 'json',
             success: function (data) {
-                if (data.success) {
-                    $('#report-count').text(data.report_count); // Update the report count in the UI
+                if (data && data.report_count !== undefined) {
+                    $('#report-count').text(data.report_count); 
                 } else {
-                    console.warn(data.message || 'Unexpected response format');
+                    console.warn('Unexpected response format or missing report count');
                 }
             },
             error: function (xhr, status, error) {
@@ -19,9 +19,6 @@ $(document).ready(function () {
         });
     }
 
-    // Initial fetch when the page loads
-    fetchWeeklyCount();
-
-    // Periodic updates every 5 seconds
+    fetchWeeklyCount();  
     setInterval(fetchWeeklyCount, 5000);
 });

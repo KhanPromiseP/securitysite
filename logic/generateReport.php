@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -30,8 +30,8 @@ class ReportGenerator
     private function generateReport($alertType, $reportDetails)
     {
         $currentDate = date('Y-m-d H:i:s');
-        $header = "Generated Report - $currentDate\n";
-        $header .= str_repeat('=', 50) . "\n";
+        $header = "Generated Report - $currentDate\n br";
+        $header .= str_repeat('=', 50) . "\n br";
 
         $body = $this->formatReportDetails($alertType, $reportDetails);
 
@@ -40,56 +40,80 @@ class ReportGenerator
 
     private function reportExists($alertType, $entryId)
     {
-        $sql = "SELECT id FROM generated_reports WHERE alert_type = :alert_type AND entry_id = :entry_id";
+        $column = ($alertType === 'network_logs') ? 'network_entry_id' : 'website_entry_id';
+    
+        $sql = "SELECT id FROM generated_reports WHERE alert_type = :alert_type AND $column = :entry_id";
+
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':alert_type', $alertType);
         $stmt->bindParam(':entry_id', $entryId);
-        $stmt->execute();
-
+    
+        if (!$stmt->execute()) {
+            error_log("Error executing query: " . implode(" ", $stmt->errorInfo()));
+            return false;
+        }
+    
         return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
     }
+    
 
     private function saveGeneratedReport($alertType, $entryId, $report)
     {
-        $sql = "INSERT INTO generated_reports (alert_type, entry_id, report_details, generated_at) 
+        $column = ($alertType === 'network_logs') ? 'network_entry_id' : 'website_entry_id';
+    
+        $sql = "INSERT INTO generated_reports (alert_type, $column, report_details, generated_at) 
                 VALUES (:alert_type, :entry_id, :report_details, NOW())";
         $stmt = $this->conn->prepare($sql);
+    
         $stmt->bindParam(':alert_type', $alertType);
         $stmt->bindParam(':entry_id', $entryId);
         $stmt->bindParam(':report_details', $report);
+    
         $stmt->execute();
     }
+    
 
     public function monitorDatabaseForReports()
     {
-        $tables = [
-            'network_logs' => "SELECT * FROM network_logs WHERE detected_at >= NOW() - INTERVAL 0.5 MINUTE",
-            'website_logs' => "SELECT * FROM website_logs WHERE checked_at >= NOW() - INTERVAL 0.5 MINUTE",
+        $lastChecked = [
+            'network_logs' => '1970-01-01 00:00:00',
+            'website_logs' => '1970-01-01 00:00:00',
         ];
-
+    
         while (true) {
-            foreach ($tables as $alertType => $sql) {
+            foreach ($lastChecked as $alertType => $lastTime) {
+                $table = $alertType;
+                $column = ($alertType === 'network_logs') ? 'detected_at' : 'checked_at';
+                
+                $sql = "SELECT * FROM $table WHERE $column > :last_checked ORDER BY $column ASC";
                 $stmt = $this->conn->prepare($sql);
-                $stmt->execute();
-
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $entryId = $row['id']; 
-                    $reportDetails = $row; 
-
-                    if (!$this->reportExists($alertType, $entryId)) {
-                        $generatedReport = $this->generateReport($alertType, $reportDetails);
-                        $this->saveGeneratedReport($alertType, $entryId, $generatedReport);
-
-                        echo "Report Generated and Saved for $alertType (Entry ID: $entryId)\n";
-                    } else {
-                        echo "Report already exists for $alertType (Entry ID: $entryId). Skipping...\n";
+                $stmt->bindParam(':last_checked', $lastTime);
+    
+                if ($stmt->execute()) {
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $entryId = $row['id'];
+                        $reportDetails = $row;
+                        $lastChecked[$alertType] = $row[$column];  
+                        if (!$this->reportExists($alertType, $entryId)) {
+                            $generatedReport = $this->generateReport($alertType, $reportDetails);
+                            $this->saveGeneratedReport($alertType, $entryId, $generatedReport);
+    
+                            echo "Report Generated and Saved for $alertType (Entry ID: $entryId)\n";
+                            flush();  // Ensure immediate output to the browser
+                        } else {
+                            echo "Report already exists for $alertType (Entry ID: $entryId). Skipping...\n";
+                            flush();  // For immediate output to the browser
+                        }
                     }
+                } else {
+                    error_log("Error fetching records for $alertType: " . implode(" ", $stmt->errorInfo()));
                 }
             }
-
-            sleep(10);
+    
+            sleep(10);  
         }
     }
+    
 }
 
 require_once '../src/config/Database.php';
