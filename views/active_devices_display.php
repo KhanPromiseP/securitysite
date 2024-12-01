@@ -130,7 +130,7 @@
                                         fetchActiveDeviceCount();
                                     }
 
-                                    setInterval(updateRealTime, 5000);
+                                    setInterval(updateRealTime, 1000);
 
                                     $(document).ready(function() {
                                         updateRealTime();

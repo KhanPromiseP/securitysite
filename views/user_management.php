@@ -37,7 +37,7 @@ $users = $user->getAllUsers();
             <div class="row flex-fill main-content">
                 <div class="row mt-2">
                     <div class="col-md-12">
-                        <div class="card">
+                        <div class="card flex-fill main-content">
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <h2>User Management</h2>
@@ -58,7 +58,7 @@ $users = $user->getAllUsers();
                                                     <td><?= htmlspecialchars($user['email']); ?></td>
                                                     <td><?= htmlspecialchars($user['role_name']); ?></td>
                                                     <td>
-                                                        <button class="btn btn-info" onclick="editUser(<?= $user['id']; ?>, '<?= $user['username']; ?>', '<?= $user['email']; ?>', <?= $user['role_id']; ?>)">Edit</button>
+                                                        <button class="btn btn-info" onclick="editUser(<?= $user['id']; ?>, '<?= $user['username']; ?>', '<?= $user['email']; ?>','<?= $user['email']; ?>', <?= $user['role_id']; ?>)">Edit</button>
                                                         <a href="user_management.php?action=delete&id=<?= $user['id']; ?>" class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>
@@ -87,6 +87,10 @@ $users = $user->getAllUsers();
                                                         <input type="email" name="email" id="email" class="form-control" required>
                                                     </div>
                                                     <div class="form-group">
+                                                        <label for="password">Password</label>
+                                                        <input type="password" name="password_hash" id="password" class="form-control" required>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label for="role">Role</label>
                                                         <select name="role" id="role" class="form-control" required>
                                                             <option value="1">Admin</option>
@@ -109,7 +113,8 @@ $users = $user->getAllUsers();
                                     document.getElementById('userId').value = '';
                                     document.getElementById('username').value = '';
                                     document.getElementById('email').value = '';
-                                    document.getElementById('role').value = '2';
+                                    document.getElementById('password_hash').value = '';
+                                    document.getElementById('role').value = 'role';
                                     document.getElementById('action').value = 'create';
                                 }
 
@@ -117,6 +122,7 @@ $users = $user->getAllUsers();
                                     document.getElementById('userId').value = id;
                                     document.getElementById('username').value = username;
                                     document.getElementById('email').value = email;
+                                    document.getElementById('password_hash').value = password_hash;
                                     document.getElementById('role').value = role_id;
                                     document.getElementById('action').value = 'update';
                                     new bootstrap.Modal(document.getElementById('userModal')).show();

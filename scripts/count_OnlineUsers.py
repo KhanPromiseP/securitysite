@@ -1,189 +1,177 @@
-import platform
+import os
 import subprocess
-import re
-import logging
-import socket
 import time
-from ipaddress import ip_network
-from concurrent.futures import ThreadPoolExecutor, as_completed
-import threading
-import json
-import mysql.connector
+import signal
+import logging
+from scapy.all import ARP, Ether, srp  # For sending ARP requests and analyzing responses
+import netifaces  #library to retrieve network interface details
+import mysql.connector  # It is for database operations
+from datetime import datetime  # Responsible for timestamping
+import socket  # socket helps us for resolving hostnames
 
-# MySQL database configuration
-db_config = {
+db_config = { 
     'host': 'localhost',
     'user': 'root',
     'password': '',
     'database': 'security_app'
 }
 
-# Setup logging
-logging.basicConfig(
-    filename="../logs/online_users.log",
-    level=logging.DEBUG,
-    format="%(asctime)s - %(levelname)s - %(message)s"
+# Initialize logger for logging to track events and errors for real time monitoring
+logging.basicConfig(  
+    filename='../logs/online_users.log', 
+    level=logging.INFO, 
+    format='%(asctime)s - %(message)s'
 )
 
-active_device_count = 0
-lock = threading.Lock()  
-active_devices = {}
+# Persistent tracking settings (Number of scans to wait before confirming a device has left). This is to avoid error in counting active devices
+DEVICE_TIMEOUT = 3  
 
-# Establish MySQL connection
-def get_db_connection():
+def get_db_connection():  
     try:
         return mysql.connector.connect(**db_config)
-    except mysql.connector.Error as e:
-        logging.error(f"Error connecting to MySQL: {e}")
+    except mysql.connector.Error as e: 
+        logging.error(f"Error connecting to the database: {e}")
         return None
 
-def get_local_subnet():
-    hostname = socket.gethostname()
-    local_ip = socket.gethostbyname(hostname)
-    subnet = f"{local_ip}/24"
-    logging.info(f"Determined local subnet: {subnet}")
-    return subnet
+def save_to_db(ip, mac_address, hostname="Unknown"): 
+    db_connection = get_db_connection()
+    if not db_connection:
+        return
 
-def ping_sweep(subnet):
-    network = ip_network(subnet, strict=False)
-    for ip in network.hosts():
-        subprocess.Popen(['ping', '-c', '1', '-W', '500', str(ip)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-def fetch_active_ips():
-    os_type = platform.system()
-    active_ips = set()
     try:
-        if os_type == "Linux":
-            result = subprocess.run(['ip', 'neighbor'], stdout=subprocess.PIPE, text=True)
-        elif os_type == "Windows":
-            result = subprocess.run(['arp', '-a'], stdout=subprocess.PIPE, text=True)
-        else:
-            return active_ips
+        cursor = db_connection.cursor()
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        query = """
+            INSERT INTO active_users_log (ip_address, mac_address, hostname, timestamp)
+            VALUES (%s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE hostname = %s, timestamp = %s
+        """ 
+        cursor.execute(query, (ip, mac_address, hostname, timestamp, hostname, timestamp))
+        db_connection.commit()
+        logging.info(f"Device saved to database: IP={ip}, MAC={mac_address}, Hostname={hostname}")
+    except mysql.connector.Error as e: 
+        logging.error(f"Error saving device to database: {e}")
+    finally:  
+        cursor.close()
+        db_connection.close()
 
-        active_ips = set(re.findall(r'(\d+\.\d+\.\d+\.\d+)', result.stdout))
-    except Exception as e:
-        logging.error(f"Error retrieving ARP cache: {e}")
-    return active_ips
+def delete_from_db(ip):  # Remove a specific device entry from the database
+    db_connection = get_db_connection()
+    if not db_connection:
+        return
 
-def is_alive(ip):
     try:
-        socket.setdefaulttimeout(0.5)
-        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((ip, 80))
-        return True
-    except socket.error:
-        response = subprocess.run(['ping', '-c', '1', '-W', '500', ip], stdout=subprocess.DEVNULL)
-        return response.returncode == 0
+        cursor = db_connection.cursor()
+        query = "DELETE FROM active_users_log WHERE ip_address = %s"
+        cursor.execute(query, (ip,))
+        db_connection.commit()
+        logging.info(f"Device removed from database: IP={ip}")
+    except mysql.connector.Error as e: 
+        logging.error(f"Error removing device from database: {e}")
+    finally:  
+        cursor.close()
+        db_connection.close()
 
-def get_mac_address(ip):
+def delete_all_from_db():  # Clear (delete) all device entries in case of network failure
+    db_connection = get_db_connection()
+    if not db_connection:
+        return
+
     try:
-        result = subprocess.run(['arp', '-n', ip], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        match = re.search(r"(\w{2}[-:]\w{2}[-:]\w{2}[-:]\w{2}[-:]\w{2}[-:]\w{2})", result.stdout)
-        if match:
-            return match.group(0)
-        return None
-    except Exception as e:
-        logging.error(f"Error retrieving MAC address for {ip}: {e}")
-        return None
+        cursor = db_connection.cursor()
+        query = "DELETE FROM active_users_log"
+        cursor.execute(query)
+        db_connection.commit()
+        logging.info("All devices removed from database due to network loss.")
+    except mysql.connector.Error as e:  
+        logging.error(f"Error clearing the database: {e}")
+    finally: 
+        cursor.close()
+        db_connection.close()
 
-def save_to_db(ip, mac_address, hostname):
+def get_network_subnet():  # Function that will automatically identify the local subnet for scanning
     try:
-        db_connection = get_db_connection()
-        if db_connection:
-            cursor = db_connection.cursor()
-            timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-            query = """
-                INSERT INTO active_users_log (ip_address, mac_address, hostname, timestamp)
-                VALUES (%s, %s, %s, %s)
-                ON DUPLICATE KEY UPDATE timestamp = %s
-            """
-            cursor.execute(query, (ip, mac_address, hostname, timestamp, timestamp))
-            db_connection.commit()
-            cursor.close()
-            db_connection.close()
-            logging.info(f"Stored/Updated active device: {ip} - {mac_address} - {hostname}")
-    except mysql.connector.Error as e:
-        logging.error(f"Error inserting/updating data into MySQL: {e}")
+        default_gateway = netifaces.gateways()["default"][netifaces.AF_INET][1]
+        iface_data = netifaces.ifaddresses(default_gateway)[netifaces.AF_INET][0]
+        ip_address = iface_data["addr"]
+        netmask = iface_data["netmask"]
+        cidr = sum(bin(int(x)).count("1") for x in netmask.split("."))
+        return f"{ip_address}/{cidr}"
+    except KeyError:  
+        raise RuntimeError("Unable to detect the subnet. Ensure the system is connected to a network.")
 
-def delete_from_db(ip):
+def resolve_hostname(ip):  # Resolving found IP address to a hostname
     try:
-        db_connection = get_db_connection()
-        if db_connection:
-            cursor = db_connection.cursor()
-            query = "DELETE FROM active_users_log WHERE ip_address = %s"
-            cursor.execute(query, (ip,))
-            db_connection.commit()
-            cursor.close()
-            db_connection.close()
-            logging.info(f"Removed inactive device: {ip}")
-    except mysql.connector.Error as e:
-        logging.error(f"Error deleting device from MySQL: {e}")
+        return socket.gethostbyaddr(ip)[0]
+    except (socket.herror, socket.gaierror):  
+        return "Unknown"
 
-def update_active_devices():
-    global active_device_count
-    while True:
-        subnet = get_local_subnet()
-        ping_sweep(subnet=subnet)
-        active_ips = fetch_active_ips()
-        verified_ips = set()
+def scan_network(network):  # The main function that perform network scan to detect active devices ARP request
+    arp_request = ARP(pdst=network) 
+    broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")  # Broadcasting ARP request
+    packet = broadcast / arp_request
+    responses, _ = srp(packet, timeout=2, verbose=False)  # Send and receive responses
+    devices = []
+    for _, resp in responses:
+        ip = resp.psrc  # Extract IP address
+        mac = resp.hwsrc  # Extract MAC address
+        hostname = resolve_hostname(ip)  # Resolve the hostname
+        devices.append((ip, mac, hostname))
+    return devices
 
-        with ThreadPoolExecutor(max_workers=10) as executor:
-            future_to_ip = {executor.submit(is_alive, ip): ip for ip in active_ips}
-            for future in as_completed(future_to_ip):
-                ip = future_to_ip[future]
-                if future.result():  # IP is alive
-                    mac_address = get_mac_address(ip)
-                    if mac_address:
-                        verified_ips.add(ip)
-                        hostname = socket.gethostbyaddr(ip)[0] if ip else 'Unknown'
-                        active_devices[ip] = {'mac': mac_address, 'hostname': hostname}
-                        save_to_db(ip, mac_address, hostname)  
-                else:
-                    if ip in active_devices:
-                        delete_from_db(ip)  
-                        del active_devices[ip]
+def real_time_network_tracker():  # Continuously track devices on the network
+    try:
+        network = get_network_subnet()  # Get the network subnet
+        logging.info(f"Detected subnet: {network}")
 
-        db_connection = get_db_connection()
-        if db_connection:
+        print("\nStarting real-time network tracker. Press Ctrl+C to stop.\n")
+        active_devices = {} 
+        unseen_counts = {} 
+
+# Scanning the network, add new devices
+        while True:
             try:
-                cursor = db_connection.cursor()
-                query = "SELECT ip_address FROM active_users_log"
-                cursor.execute(query)
-                db_ips = {row[0] for row in cursor.fetchall()}  
-                stale_ips = db_ips - verified_ips  
+                scanned_devices = scan_network(network)  
+                current_devices = {ip: (mac, hostname) for ip, mac, hostname in scanned_devices}
 
-                for stale_ip in stale_ips:
-                    delete_from_db(stale_ip)
+                for ip, (mac, hostname) in current_devices.items():
+                    if ip not in active_devices: 
+                        save_to_db(ip, mac, hostname)
+                        # print(f"[+] New device detected: IP={ip}, MAC={mac}, Hostname={hostname}")
+                        logging.info(f"New device detected: IP={ip}, MAC={mac}, Hostname={hostname}")
+                    active_devices[ip] = (mac, hostname)
+                    unseen_counts[ip] = 0  
 
-                cursor.close()
-            except mysql.connector.Error as e:
-                logging.error(f"Error fetching/removing stale IPs: {e}")
-            finally:
-                db_connection.close()
+                # Handling the process of removing devices
+                for ip in list(active_devices.keys()):
+                    if ip not in current_devices:
+                        unseen_counts[ip] += 1  
+                        if unseen_counts[ip] >= DEVICE_TIMEOUT:  # Remove a device after when the device is not found on thenetwork after 3(in this case) consegative scans
+                            delete_from_db(ip)
+                            # print(f"[-] Device removed: IP={ip}")
+                            logging.info(f"Device removed: IP={ip}")
+                            del active_devices[ip]
+                            del unseen_counts[ip]
 
-        with lock:
-            active_device_count = len(verified_ips)
+                device_count = len(active_devices)  
+                logging.info(f"Current device count: {device_count}")
+                # print(f"\rActive devices: {device_count}", end="")
 
-        with open('active_device_count.json', 'w') as f:
-            json.dump({'active_devices': active_device_count, 'devices': active_devices}, f)
-        
-        logging.info(f"Active devices: {active_device_count}")
-        
-        time.sleep(5)
+                time.sleep(1)  # Wait before 1 sec for the next scan
 
+            except Exception as e: 
+                logging.error(f"Error during scanning: {e}")
+                delete_all_from_db()
+                break
 
-def real_time_updates():
-    while True:
-        time.sleep(5)
-        if active_device_count > 0:
-            logging.info(f"Active devices: {active_device_count}")
-            print(f"Active devices: {active_device_count}")
-        else:
-            logging.info("No active devices detected.")
-            print("No active devices detected.")
+    except KeyboardInterrupt:  # Handle manual termination of the system
+        print("\nStopping the network tracker.")
+        logging.info("Network tracker stopped by the Security Admin.")
+        delete_all_from_db()
+    except Exception as e:  
+        logging.error(f"Error: {e}")
+        delete_all_from_db()
 
 if __name__ == "__main__":
-    threading.Thread(target=update_active_devices, daemon=True).start()
-    threading.Thread(target=real_time_updates, daemon=True).start()
-
-    while True:
-        time.sleep(5)
+    signal.signal(signal.SIGTERM, lambda signum, frame: delete_all_from_db())  # Handle termination signals 
+    real_time_network_tracker()  # Start tracking ip addresses in the network

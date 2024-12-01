@@ -41,6 +41,7 @@ class User {
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['role_id'] = $user['role_id'];
+            $_SESSION['username']=$username;
             return true;
         }
         return false;

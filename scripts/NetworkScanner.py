@@ -17,7 +17,7 @@ import threading
 import queue
 import time
 
-from count_OnlineUsers import update_active_devices
+from count_OnlineUsers import real_time_network_tracker
 
 DB_CONFIG = {
     'host': 'localhost',
@@ -136,6 +136,7 @@ def detect_anomalies(packets):
 
     model = IsolationForest(contamination=0.01, n_estimators=100, max_samples='auto')
     predictions = model.fit_predict(data)
+    print(predictions)
     anomalies = [pkt for i, pkt in enumerate(packets) if predictions[i] == -1]
     logging.info("Anomaly detection completed.")
     return anomalies
@@ -200,7 +201,13 @@ def block_ip(ip):
 
 def main():
     logging.info("Starting network monitoring script.")
-    threading.Thread(target=update_active_devices, daemon=True).start()
+    
+    # real_time_network_tracker started in a separate thread
+    try:
+        threading.Thread(target=real_time_network_tracker, daemon=True).start()
+        logging.info("Real-time network tracker started successfully.")
+    except Exception as e:
+        logging.error("Failed to start real-time network tracker: %s", str(e))
 
     while True:
         check_pid_file()
@@ -216,7 +223,7 @@ def main():
             logging.error("Invalid action specified: %s", args.action)
             sys.exit(1)
 
-        time.sleep(5) 
+        time.sleep(1) 
 
     log_queue.put(None)  
     listener_thread.join()

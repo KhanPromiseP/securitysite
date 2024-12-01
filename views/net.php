@@ -78,9 +78,9 @@
 <body>
     <?php include '../includes/navbar.php'; ?>
 
-    <div class="d-flex" style="height:90vh">
+    <div class="d-flex">
         <?php include '../includes/sidebar.php'; ?>
-        <div class="row flex-fill main-content">
+        <div class="row flex-fill main-content" style="height:90vh">
             <div class="row mt-2">
                 <div class="col-md-12">
                     <div class="card">
