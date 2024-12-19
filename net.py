@@ -16,10 +16,8 @@ import os
 import threading
 import queue
 import time
-from collections import defaultdict
-import signal
-from count_OnlineUsers import real_time_network_tracker, signal_all_user
 
+from count_OnlineUsers import real_time_network_tracker
 DB_CONFIG = {
     'host': 'localhost',
     'user': 'root',
@@ -37,12 +35,15 @@ file_handler = logging.FileHandler('../logs/networkmonitor.log', 'a')
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
 
+
+
 PID_FILE = 'network_scan_pid.txt'
 
 def check_pid_file():
     if not os.path.exists(PID_FILE):
         print("PID file not found. Exiting script.")
         sys.exit(0)
+
 
 def log_listener():
     while True:
@@ -118,14 +119,9 @@ def get_local_ip():
         logging.error("Unable to retrieve local IP: %s", e)
         return None
 
+
 def scan_subnet(count=100):
     logging.info("Scanning local subnet for suspicious activity...")
-    
-    # Check if the system has enough resources to proceed
-    if not check_system_resources():
-        logging.warning("System resources are insufficient, aborting scan.")
-        return
-
     subnet = get_network_details()
     if subnet is None:
         logging.error("Could not retrieve subnet details.")
@@ -152,54 +148,6 @@ def scan_subnet(count=100):
         else:
             logging.info("Skipping IP %s as it is already blocked.", ip)
 
-def check_system_resources():
-    """Check if the system has sufficient resources to run the scan."""
-    cpu_usage = psutil.cpu_percent(interval=1)
-    memory = psutil.virtual_memory()
-    logging.info("CPU Usage: %d%%, Memory Usage: %d%%", cpu_usage, memory.percent)
-
-    # Adjust scan behavior based on resource usage
-    if cpu_usage > 80 or memory.percent > 80:
-        logging.warning("High resource usage detected, reducing scan frequency.")
-        return False
-    return True
-
-
-# Rate limiting settings
-RATE_LIMIT_WINDOW = 60  # Time window in seconds
-RATE_LIMIT_THRESHOLD = 100  # Max packets per IP per window
-
-# Whitelist (trusted IPs)
-whitelisted_ips = set([
-    "192.168.239.44", 
-    "192.168.46.233",
-    "172.67.74.152",
-    "104.26.12.205",
-    "192.168.239.122",
-])
-
-# IP request counts
-ip_request_counts = defaultdict(list)
-
-def log_rate_limited_ip(ip):
-    logging.warning(f"Rate limit exceeded for IP {ip}. Blocking temporarily.")
-
-def is_ip_whitelisted(ip):
-    return ip in whitelisted_ips
-
-def is_rate_limited(ip):
-    current_time = time.time()
-    # Remove old entries outside the rate limit window
-    ip_request_counts[ip] = [timestamp for timestamp in ip_request_counts[ip] if current_time - timestamp < RATE_LIMIT_WINDOW]
-    # Add current request time
-    ip_request_counts[ip].append(current_time)
-    
-    if len(ip_request_counts[ip]) > RATE_LIMIT_THRESHOLD:
-        log_rate_limited_ip(ip)
-        return True
-    return False
-
-
 def detect_anomalies(packets):
     logging.info("Detecting anomalies in captured packets...")
     data = np.array([[pkt.time, len(pkt), pkt[scapy.IP].ttl] for pkt in packets if hasattr(pkt, 'time') and pkt.haslayer(scapy.IP)])
@@ -209,6 +157,7 @@ def detect_anomalies(packets):
 
     model = IsolationForest(contamination=0.01, n_estimators=100, max_samples='auto')
     predictions = model.fit_predict(data)
+    print(predictions)
     anomalies = [pkt for i, pkt in enumerate(packets) if predictions[i] == -1]
     logging.info("Anomaly detection completed.")
     return anomalies
@@ -219,19 +168,6 @@ def classify_threat(pkt):
     """
     logging.info("Classifying the threat based on packet analysis...")
     
-    ip_src = pkt[scapy.IP].src
-    
-    # Check if the source IP is whitelisted
-    if is_ip_whitelisted(ip_src):
-        logging.info(f"IP {ip_src} is whitelisted. Skipping classification.")
-        return None, None, "Packet from trusted source, no threat analysis performed."
-
-    # Check for rate limiting
-    if is_rate_limited(ip_src):
-        logging.info(f"Rate limiting triggered for IP {ip_src}. Further analysis deferred.")
-        return None, None, "Rate limited, packet analysis deferred."
-
-
     # Check for the TCP flags in the packet
     flags = pkt.sprintf("%TCP.flags%") if pkt.haslayer(scapy.TCP) else None
     threat_type = None
@@ -314,6 +250,8 @@ def classify_threat(pkt):
         return "Error", "Error in Classification", str(e)
 
 
+
+
 def insert_threat_and_block(ip, threat_type, crime, description):
     logging.info("Inserting threat data for IP %s into database...", ip)
     conn = connect_to_db()
@@ -338,8 +276,10 @@ def block_ip(ip):
     os_type = platform.system()
     try:
         if os_type == "Linux":
+            # Block the IP using iptables
             subprocess.run(["sudo", "iptables", "-A", "INPUT", "-s", ip, "-j", "DROP"], check=True)
             logging.info("IP %s successfully blocked with Linux IPtables.", ip)
+            # Save the rules to a file
             save_iptables_rules()
         elif os_type == "Windows":
             subprocess.run(["netsh", "advfirewall", "firewall", "add", "rule", "name=BlockIP", "dir=in", "action=block", "remoteip=" + ip], check=True)
@@ -348,56 +288,44 @@ def block_ip(ip):
             logging.warning("Unsupported OS for automatic blocking: %s", os_type)
     except subprocess.CalledProcessError as e:
         logging.error("Error blocking IP %s: %s", ip, e)
-
 def save_iptables_rules():
     rules_file = "/etc/iptables/rules.v4"
     try:
         os.makedirs(os.path.dirname(rules_file), exist_ok=True)
-        subprocess.run(["sudo", "iptables-save", ">", rules_file], check=True)
-        logging.info("IPtables rules saved to %s", rules_file)
-    except subprocess.CalledProcessError as e:
-        logging.error("Error saving iptables rules: %s", e)
+        subprocess.run(["sudo", "iptables-save"], stdout=open(rules_file, "w"), check=True)
+        logging.info("iptables rules saved successfully to %s.", rules_file)
+    except Exception as e:
+        logging.error("Failed to save iptables rules: %s", str(e))
 
 
-# Handling the signal to cleanly terminate processes when receiving SIGTERM
-def signal_handler(signum, frame):
-    print("Signal received. Cleaning up and terminating.")
-    signal_all_user()
-
-
-# Execute the scan periodically or based on external events
-if __name__ == "__main__":
-    check_pid_file()
-    # Register the signal handler
-    signal.signal(signal.SIGTERM, signal_handler)
-
-
-# Create threads for both tasks
+def main():
+    logging.info("Starting network monitoring script.")
     
-    # tracker_thread = threading.Thread(target=real_time_network_tracker, daemon=True)
-    def run():
-            real_time_network_tracker()
-            scan_subnet()
-
-
-    
-
+    # real_time_network_tracker started in a separate thread
     try:
-        while True:
-            # Start both threads
-            run()
-            
-            print("Both tasks are running concurrently. Press Ctrl+C to stop.")
+        threading.Thread(target=real_time_network_tracker, daemon=True).start()
+        logging.info("Real-time network tracker started successfully.")
+    except Exception as e:
+        logging.error("Failed to start real-time network tracker: %s", str(e))
 
-            
-                # Keep the main thread alive while the others run
-            time.sleep(2)
+    while True:
+        check_pid_file()
 
-    except KeyboardInterrupt:
-        print("\nStopping application cleanly...")
-        signal_all_user()
-        print("Application stopped.")
+        parser = argparse.ArgumentParser(description="Network Scanner Script")
+        parser.add_argument("action", type=str, help="Action to perform (e.g., 'scan')")
+        parser.add_argument("--count", type=int, default=100, help="The number of hosts to scan")
 
+        args = parser.parse_args()
+        if args.action.lower() == 'scan':
+            scan_subnet(count=args.count)
+        else:
+            logging.error("Invalid action specified: %s", args.action)
+            sys.exit(1)
 
+        time.sleep(1) 
 
+    log_queue.put(None)  
+    listener_thread.join()
 
+if __name__ == "__main__":
+    main()

@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS generated_reports (
         REFERENCES network_logs (id)
         ON DELETE CASCADE,
     CONSTRAINT fk_website_logs_entry FOREIGN KEY (website_entry_id)
-        REFERENCES website_logs (id)
+        REFERENCES websites_logs (id)
         ON DELETE CASCADE
 );
 
@@ -66,10 +66,14 @@ CREATE TABLE IF NOT EXISTS network_logs (
 CREATE TABLE IF NOT EXISTS website_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     url VARCHAR(255) NOT NULL,
-    status ENUM('UP', 'DOWN', 'SUSPICIOUS') NOT NULL,
-    response_time DECIMAL(10, 3),
-    issue TEXT,
-    ip_address VARCHAR(45),
-    is_blocked BOOLEAN DEFAULT 1,
+    status INT NOT NULL,
+    response_time FLOAT DEFAULT NULL,
+    issue TEXT DEFAULT NULL,
+    ip_address VARCHAR(45) NOT NULL,
+    session_id TEXT DEFAULT NULL,
+    is_blocked BOOLEAN DEFAULT FALSE,
+    user_agent VARCHAR(255) NOT NULL,
+    headers JSON NOT NULL,
     checked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+

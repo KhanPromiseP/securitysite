@@ -59,7 +59,7 @@
 /* General Styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: rgba(59, 47, 59, 0.6);
+    /* background-color: rgba(59, 47, 59, 0.6); */
     padding-top: 70px;
 }
 
@@ -75,7 +75,7 @@ body {
 
 .main-content {
     margin-left: 250px;
-    background-color: rgba(59, 47, 59, 0.6);
+    /* background-color: rgba(59, 47, 59, 0.6); */
     padding: 2rem;
 }
 

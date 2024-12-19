@@ -1,131 +1,197 @@
-import requests
-import mysql.connector
+import asyncio
+import aiohttp
 import logging
-import datetime
+import json
+import ssl
 import time
-import numpy as np
-from sklearn.ensemble import IsolationForest
+import datetime
 from collections import defaultdict
-from contextlib import closing
-import platform
-import subprocess
-import socket
+import aiomysql
 
-logging.basicConfig(filename='../logs/website_monitor.log', filemode='a', level=logging.DEBUG, 
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+# Setup Logging
+logging.basicConfig(
+    filename="../logs/user_activity_monitor.json",
+    filemode="a",
+    level=logging.DEBUG,
+    format='{"timestamp": "%(asctime)s", "level": "%(levelname)s", "message": %(message)s}',
+)
 
+# Database Configuration
 DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',
-    'database': 'security_app'
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "db": "security_app",
 }
 
-WEBSITES = ['https://github.com']
-suspicious_ips = set()
+# Global Variables
+SUSPICIOUS_IPS = set()
+WHITELISTED_IPS = {"127.0.0.1"}
+BLOCKED_IPS = set()
+RATE_LIMIT_THRESHOLD = 100
+RATE_LIMIT_WINDOW = 60
+USER_SESSIONS = defaultdict(list)
 
-def connect_to_db():
-    logging.debug("Attempting to establish database connection...")
-    try:
-        conn = mysql.connector.connect(**DB_CONFIG)
-        logging.info("Database connection established successfully.")
-        return conn
-    except mysql.connector.Error as err:
-        logging.error("Database connection error: %s", err)
-        return None
+# Rate Limit Tracking
+RATE_LIMIT = defaultdict(lambda: {"timestamp": time.time(), "count": 0})
 
-def log_event(conn, url, status, response_time, issue, ip_address, is_blocked):
-    logging.debug(f"Logging event - URL: {url}, Status: {status}, Response Time: {response_time}, Issue: {issue}, IP: {ip_address}, Blocked: {is_blocked}")
-    try:
-        with closing(conn.cursor()) as cursor:
-            cursor.execute(
-                "INSERT INTO website_logs (url, status, response_time, issue, ip_address, is_blocked, checked_at) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                (url, status, response_time, issue, ip_address, is_blocked, datetime.datetime.now())
-            )
-            conn.commit()
-        logging.info("Event logged successfully for URL: %s", url)
-    except mysql.connector.Error as err:
-        logging.error("Failed to log event for URL %s: %s", url, err)
+# Suspicious Patterns
+SQL_KEYWORDS = ["UNION", "SELECT", "DROP", "INSERT", "--", "#"]
+XSS_PAYLOADS = ["<script>", "</script>", "onerror=", "onload="]
+MALICIOUS_PATTERNS = SQL_KEYWORDS + XSS_PAYLOADS
 
-def monitor_website(url):
-    logging.info(f"Starting monitoring for URL: {url}")
-    for attempt in range(3):  
-        logging.debug(f"Attempt {attempt + 1} for monitoring URL: {url}")
-        try:
-            headers = {"User-Agent": "Mozilla/5.0"}
-            start_time = time.time()
-            response = requests.get(url, timeout=10, headers=headers)
-            response_time = round(time.time() - start_time, 3)
-            ip_address = socket.gethostbyname(requests.utils.urlparse(url).netloc)
-            logging.info(f"Website {url} is UP. Response Time: {response_time} seconds. IP Address: {ip_address}")
-            return ("UP", response_time, None, ip_address)
-        except requests.exceptions.RequestException as e:
-            logging.warning(f"Attempt {attempt + 1} failed for URL {url}. Error: {e}")
-            time.sleep(2 ** attempt)  
-    logging.error(f"Website {url} is DOWN after 3 attempts.")
-    return ("DOWN", None, "Request failed after retries", None)
+# Max failed login attempts before blocking
+MAX_FAILED_ATTEMPTS = 5
+FAILED_ATTEMPT_WINDOW = 300  # 5 minutes
 
-def detect_anomalies(response_times):
-    logging.debug("Starting anomaly detection on response times: %s", response_times)
-    if len(response_times) < 2:
-        logging.warning("Insufficient data points for anomaly detection.")
-        return []
-    model = IsolationForest(contamination=0.05)
-    predictions = model.fit_predict(np.array(response_times).reshape(-1, 1))
-    anomalies = [time for i, time in enumerate(response_times) if predictions[i] == -1]
-    logging.info(f"Anomalies detected: {anomalies}")
-    return anomalies
 
-def block_ip(ip):
-    logging.info(f"Attempting to block IP: {ip}")
-    os_type = platform.system()
-    try:
-        if os_type == "Linux":
-            subprocess.run(["sudo", "iptables", "-A", "INPUT", "-s", ip, "-j", "DROP"], check=True)
-            logging.info("Blocked IP %s using iptables on Linux", ip)
-        elif os_type == "Windows":
-            subprocess.run(["netsh", "advfirewall", "firewall", "add", "rule", "name=BlockIP", "dir=in", "action=block", "remoteip=" + ip], check=True)
-            logging.info("Blocked IP %s using Windows Firewall", ip)
-        else:
-            logging.warning("Unsupported OS for automatic blocking: %s", os_type)
-    except subprocess.CalledProcessError as e:
-        logging.error("Failed to block IP %s: %s", ip, e)
+def get_user_ip(headers, response):
+    """Extract the user's IP address."""
+    return headers.get("X-Forwarded-For") or response.url.host
 
-def scheduled_monitoring():
-    logging.debug("Starting scheduled monitoring session...")
-    conn = connect_to_db()
-    if conn is None:
-        logging.critical("Database connection failed. Scheduled monitoring will not proceed.")
+
+def is_rate_limited(ip):
+    """Check if an IP exceeds the rate limit."""
+    current_time = time.time()
+    window = RATE_LIMIT[ip]
+
+    if current_time - window["timestamp"] > RATE_LIMIT_WINDOW:
+        window["timestamp"] = current_time
+        window["count"] = 0
+
+    window["count"] += 1
+    return window["count"] > RATE_LIMIT_THRESHOLD
+
+
+async def block_ip(ip, reason):
+    """Block an IP address unless whitelisted."""
+    if ip in WHITELISTED_IPS:
+        logging.info(json.dumps({"action": "whitelist", "ip": ip}))
         return
 
-    response_times_by_url = defaultdict(list)
+    if ip not in BLOCKED_IPS:
+        BLOCKED_IPS.add(ip)
+        logging.warning(json.dumps({"action": "block", "ip": ip, "reason": reason}))
+    else:
+        logging.info(json.dumps({"action": "already_blocked", "ip": ip}))
 
-    for url in WEBSITES:
-        logging.debug(f"Processing URL: {url}")
-        status, response_time, issue, ip_address = monitor_website(url)
-        
-        if response_time:
-            response_times_by_url[url].append(response_time)
 
-        anomalies = detect_anomalies(response_times_by_url[url])
-        
-        if anomalies:
-            logging.warning(f"Anomalies detected for URL {url}: {anomalies}")
-            issue = "Anomalous response time detected"
-            suspicious_ips.add(ip_address)
-            log_event(conn, url, status, response_time, issue, ip_address, 1)
-            block_ip(ip_address)
-        else:
-            log_event(conn, url, status, response_time, issue, ip_address, 0)
+async def log_event(conn, log_data):
+    """Log user activity to the database."""
+    query = """
+    INSERT INTO user_activity_logs (action, ip_address, user_agent, session_id, is_blocked, timestamp)
+    VALUES (%s, %s, %s, %s, %s, %s)
+    """
+    try:
+        async with conn.cursor() as cursor:
+            await cursor.execute(query, log_data)
+            await conn.commit()
+    except aiomysql.MySQLError as err:
+        logging.error(json.dumps({"action": "db_error", "error": str(err)}))
 
-    if conn:
-        logging.debug("Closing database connection.")
-        conn.close()
-    logging.info("Scheduled monitoring session completed.")
+
+async def detect_threat(ip, body, headers, session_id):
+    """Detect suspicious activity."""
+    for pattern in MALICIOUS_PATTERNS:
+        if pattern.lower() in body.lower() or pattern.lower() in str(headers).lower():
+            logging.warning(json.dumps({"action": "threat_detected", "ip": ip, "pattern": pattern}))
+            SUSPICIOUS_IPS.add(ip)
+            await block_ip(ip, "Malicious pattern detected")
+            return f"Threat detected: {pattern}"
+
+    if is_rate_limited(ip):
+        logging.warning(json.dumps({"action": "rate_limit_exceeded", "ip": ip}))
+        SUSPICIOUS_IPS.add(ip)
+        await block_ip(ip, "Rate limit exceeded")
+        return "Rate limit exceeded"
+
+    return None
+
+
+async def handle_login_attempt(ip, user_id, success=False):
+    """Handle login attempts and block IP after multiple failed attempts."""
+    current_time = time.time()
+    USER_SESSIONS[ip].append({"user_id": user_id, "time": current_time, "success": success})
+
+    # Keep only recent login attempts within the window
+    USER_SESSIONS[ip] = [entry for entry in USER_SESSIONS[ip] if current_time - entry["time"] < FAILED_ATTEMPT_WINDOW]
+
+    failed_attempts = sum(1 for entry in USER_SESSIONS[ip] if not entry["success"])
+
+    if failed_attempts >= MAX_FAILED_ATTEMPTS:
+        logging.warning(json.dumps({"action": "block_due_to_failed_login", "ip": ip, "failed_attempts": failed_attempts}))
+        await block_ip(ip, "Too many failed login attempts")
+
+
+async def monitor_user_activity(url, session_id, conn):
+    """Monitor user activity."""
+    logging.info(json.dumps({"action": "monitor_start", "url": url}))
+    timeout = aiohttp.ClientTimeout(total=30)
+    ssl_context = ssl.create_default_context()
+    ssl_context.check_hostname = False
+    ssl_context.verify_mode = ssl.CERT_NONE
+
+    async with aiohttp.ClientSession(timeout=timeout) as session:
+        headers = {"User-Agent": "Mozilla/5.0"}
+        try:
+            start_time = time.time()
+            async with session.get(url, headers=headers, ssl=ssl_context) as response:
+                body = await response.text()
+                ip = get_user_ip(headers, response)
+                response_time = time.time() - start_time
+
+                # Monitor login attempts (if applicable, like login.php)
+                if "login.php" in url:  # Adjust URL condition as needed
+                    user_id = headers.get("User-Agent", "Unknown")  # Replace with actual user identifier if available
+                    success = response.status == 200
+                    await handle_login_attempt(ip, user_id, success)
+
+                issue = await detect_threat(ip, body, headers, session_id)
+                log_data = (
+                    "Page Access",
+                    ip,
+                    headers.get("User-Agent", ""),
+                    session_id,
+                    ip in BLOCKED_IPS,
+                    datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                )
+                await log_event(conn, log_data)
+
+                return {
+                    "url": url,
+                    "status": response.status,
+                    "response_time": response_time,
+                    "ip_address": ip,
+                    "issue": issue,
+                }
+        except Exception as e:
+            logging.error(json.dumps({"error": "request_error", "url": url, "details": str(e)}))
+            return {
+                "url": url,
+                "status": "Failed",
+                "response_time": 0,
+                "ip_address": "N/A",
+                "issue": str(e),
+            }
+
+
+async def monitor_background():
+    """Run monitoring tasks in the background."""
+    conn = await aiomysql.connect(**DB_CONFIG)
+    tasks = [
+        monitor_user_activity("http://localhost/personal_website/index.php", "session1", conn),
+        # Add more URLs to monitor here
+    ]
+    results = await asyncio.gather(*tasks)
+
+    for result in results:
+        logging.info(json.dumps({"action": "monitor_result", "result": result}))
+
+
+async def main():
+    """Main entry point."""
+    await monitor_background()
+
 
 if __name__ == "__main__":
-    while True:
-        logging.info("WebsiteMonitor script initiated.")
-        scheduled_monitoring()
-        logging.info("WebsiteMonitor script finished.")
-    time.sleep(5) 
+    asyncio.run(main())

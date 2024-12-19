@@ -1,4 +1,12 @@
-<?php include '../includes/header.php'; ?>
+<?php 
+include '../includes/header.php'; 
+
+
+session_start();
+include '../src/config/middleware.php';
+SimpleMiddleware::requireAdmin();
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +94,10 @@
                                             <th>Response Time</th>
                                             <th>Issue</th>
                                             <th>IP Address</th>
+                                            <th>session_id</th>
                                             <th>Blocked</th>
+                                            <th>user_agent</th>
+                                            <th>headers</th>                         
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -124,7 +135,10 @@
                                                                 <td>${log.response_time}</td>
                                                                 <td>${log.issue}</td>
                                                                 <td>${log.ip_address}</td>
+                                                                <td>${log.session_id}</td>
                                                                 <td>${blockedText}</td>
+                                                                <td>${log.user_agent}</td>
+                                                                <td>${log.ip_headers}</td>
                                                                 <td>${actionButton}</td>
                                                             </tr>
                                                         `;

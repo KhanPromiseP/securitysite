@@ -17,7 +17,7 @@ session_start();
         <div class="alert alert-danger text-center" role="alert" aria-live="assertive">
             <h1 class="display-4">Access Denied</h1>
             <p>You do not have permission to view this page. Please contact your administrator for access.</p>
-            <a href="login.php" class="btn btn-primary mt-3" role="button" aria-label="Return to Login Page">Return to Login Page</a>
+            <a href="../public/index.php" class="btn btn-primary mt-3" role="button" aria-label="Return to Login Page">Return to Dashboard</a>
         </div>
     </div>
 </body>

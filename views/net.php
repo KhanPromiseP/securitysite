@@ -1,4 +1,10 @@
-<?php include '../includes/header.php'; ?>
+<?php 
+include '../includes/header.php'; 
+
+// session_start();
+// include '../src/config/middleware.php';
+// SimpleMiddleware::requireAdmin();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,74 +112,91 @@
 
                                 <script>
                                     $(document).ready(function () {
-                                    function fetchNetworkLogs() {
-                                        $.ajax({
-                                            url: '../logic/ThreatModel.php',
-                                            type: 'POST',
-                                            contentType: 'application/json',
-                                            data: JSON.stringify({ action: 'getAllNetworkThreats' }),
-                                            success: function (response) {
-                                                const logs = JSON.parse(response);
-                                                const tableBody = $('#network-logs-table tbody');
-                                                tableBody.empty();
+                        function fetchNetworkLogs() {
+                            $.ajax({
+                                url: '../logic/ThreatModel.php',
+                                type: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify({ action: 'getAllNetworkThreats' }),
+                                success: function (response) {
+                                    const logs = JSON.parse(response);
+                                    const tableBody = $('#network-logs-table tbody');
+                                    tableBody.empty();
 
-                                                logs.forEach(function (log) {
-                                                    const isBlocked = log.is_blocked;
-                                                    const actionButton = isBlocked
-                                                        ? `<button class="toggle-btn unblock" data-ip="${log.ip_address}">Unblock</button>`
-                                                        : `<button class="toggle-btn block" data-ip="${log.ip_address}">Block</button>`;
+                                    logs.forEach(function (log) {
+                                        const isBlocked = log.is_blocked;
+                                        const actionButton = isBlocked
+                                            ? `<button class="unblock-btn" data-ip="${log.ip_address}">Unblock</button>`
+                                            : `<button class="block-btn" data-ip="${log.ip_address}">Block</button>`;
 
-                                                    const row = `
-                                                        <tr>
-                                                            <td>${log.ip_address}</td>
-                                                            <td>${log.threat_type}</td>
-                                                            <td>${log.user_crime}</td>
-                                                            <td>${log.detected_at}</td>
-                                                            <td>${isBlocked ? 'Yes' : 'No'}</td>
-                                                            <td>${actionButton}</td>
-                                                        </tr>
-                                                    `;
-                                                    tableBody.append(row);
-                                                });
-                                            },
-                                            error: function (xhr, status, error) {
-                                                console.error('Error fetching network logs:', xhr.responseText);
-                                            }
+                                        const row = `
+                                            <tr>
+                                                <td>${log.ip_address}</td>
+                                                <td>${log.threat_type}</td>
+                                                <td>${log.user_crime}</td>
+                                                <td>${log.detected_at}</td>
+                                                <td>${isBlocked ? 'Yes' : 'No'}</td>
+                                                <td>${actionButton}</td>
+                                            </tr>
+                                        `;
+                                        tableBody.append(row);
+                                    });
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error('Error fetching network logs:', xhr.responseText);
+                                }
+                            });
+                        }
+
+                       
+                                        // Block button action
+                                        $(document).on('click', '.block-btn', function () {
+                                            const ipAddress = $(this).data('ip');
+                                            $.ajax({
+                                                url: '../logic/NetworkController.php', // Correct backend URL
+                                                type: 'POST',
+                                                contentType: 'application/json',
+                                                data: JSON.stringify({
+                                                    action: 'blockIPAddress', // Matching the backend 'action' name
+                                                    ipAddress: ipAddress
+                                                }),
+                                                success: function (response) {
+                                                    const jsonResponse = JSON.parse(response); // Ensure proper JSON parsing
+                                                    alert(jsonResponse.message);
+                                                    fetchNetworkLogs(); // Reload the logs after successful block
+                                                },
+                                                error: function (xhr, status, error) {
+                                                    alert('Error blocking IP: ' + error);
+                                                }
+                                            });
                                         });
-                                    }
 
-                                    setInterval(fetchNetworkLogs, 5000);
+                                        // Unblock button action
+                                        $(document).on('click', '.unblock-btn', function () {
+                                            const ipAddress = $(this).data('ip');
+                                            $.ajax({
+                                                url: '../logic/NetworkController.php', // Correct backend URL
+                                                type: 'POST',
+                                                contentType: 'application/json',
+                                                data: JSON.stringify({
+                                                    action: 'unblockIPAddress', // Matching the backend 'action' name
+                                                    ipAddress: ipAddress
+                                                }),
+                                                success: function (response) {
+                                                    const jsonResponse = JSON.parse(response); // Ensure proper JSON parsing
+                                                    alert(jsonResponse.message);
+                                                    fetchNetworkLogs(); // Reload the logs after successful unblock
+                                                },
+                                                error: function (xhr, status, error) {
+                                                    alert('Error unblocking IP: ' + error);
+                                                }
+                                            });
+                                        });
 
-                                    $(document).on('click', '.toggle-btn', function () {
-                                    const ipAddress = $(this).data('ip');
-                                    const isUnblockAction = $(this).hasClass('unblock');
-                                    const action = isUnblockAction ? 'unblockIPAddress' : 'blockIPAddress';
-
-                                    console.log('IP:', ipAddress, 'Action:', action); 
-
-                                    $.ajax({
-                                        url: '../logic/NetworkController.php',
-                                        type: 'POST',
-                                        contentType: 'application/json',
-                                        data: JSON.stringify({
-                                            action: action,
-                                            ipAddress: ipAddress
-                                        }),
-                                        success: function (response) {
-                                            const result = JSON.parse(response);
-                                            console.log(result); 
-                                            // alert(result.status);
-                                            fetchNetworkLogs();
-                                        },
-                                        error: function (xhr, status, error) {
-                                            console.error('Error:', xhr.responseText);
-                                            alert('Failed to update the IP status. Please try again.');
-                                        }
-                                    });
-                                    });
-
-                                    fetchNetworkLogs();
-                                    });
+                        // Initial fetch of network logs
+                        fetchNetworkLogs();
+                        setInterval(fetchNetworkLogs, 5000); // Auto-refresh every 5 seconds
+                    });
 
                                 </script>
 

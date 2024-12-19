@@ -63,6 +63,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="text-center mt-3">
                 <p>Already have an account? <a href="login.php">Login here</a></p>
             </div>
+
+
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var toggleIcon = document.getElementById("togglePassword");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.textContent = "🙈"; 
+            } else {
+                passwordField.type = "password";
+                toggleIcon.textContent = "👁️"; 
+            }
+        }
+    </script>
         </form>
     </div>
 </body>

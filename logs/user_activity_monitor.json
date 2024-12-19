@@ -1,0 +1,40 @@
+{"timestamp": "2024-12-06 06:56:07,354", "level": "DEBUG", "message": Using selector: EpollSelector}
+{"timestamp": "2024-12-06 06:56:07,357", "level": "INFO", "message": {"action": "monitor_start", "url": "http://localhost/securitysite/public/index.php"}}
+{"timestamp": "2024-12-06 06:56:07,370", "level": "WARNING", "message": {"action": "threat_detected", "ip": "localhost", "pattern": "<script>"}}
+{"timestamp": "2024-12-06 06:56:07,370", "level": "WARNING", "message": {"action": "block", "ip": "localhost"}}
+{"timestamp": "2024-12-06 06:56:07,375", "level": "INFO", "message": {"action": "monitor_result", "result": {"url": "http://localhost/securitysite/public/index.php", "status": 200, "response_time": 0.0030722618103027344, "ip_address": "localhost", "issue": "Threat detected: <script>"}}}
+{"timestamp": "2024-12-06 07:03:32,666", "level": "DEBUG", "message": Using selector: EpollSelector}
+{"timestamp": "2024-12-06 07:03:32,670", "level": "INFO", "message": {"action": "monitor_start", "url": "http://localhost/securitysite/src/config/login.php"}}
+{"timestamp": "2024-12-06 07:03:32,685", "level": "WARNING", "message": {"action": "threat_detected", "ip": "localhost", "pattern": "<script>"}}
+{"timestamp": "2024-12-06 07:03:32,685", "level": "WARNING", "message": {"action": "block", "ip": "localhost", "reason": "Malicious pattern detected"}}
+{"timestamp": "2024-12-06 07:03:32,689", "level": "INFO", "message": {"action": "monitor_result", "result": {"url": "http://localhost/securitysite/src/config/login.php", "status": 200, "response_time": 0.0031948089599609375, "ip_address": "localhost", "issue": "Threat detected: <script>"}}}
+{"timestamp": "2024-12-06 07:03:41,857", "level": "DEBUG", "message": Using selector: EpollSelector}
+{"timestamp": "2024-12-06 07:03:41,861", "level": "INFO", "message": {"action": "monitor_start", "url": "http://localhost/securitysite/src/config/login.php"}}
+{"timestamp": "2024-12-06 07:03:41,875", "level": "WARNING", "message": {"action": "threat_detected", "ip": "localhost", "pattern": "<script>"}}
+{"timestamp": "2024-12-06 07:03:41,875", "level": "WARNING", "message": {"action": "block", "ip": "localhost", "reason": "Malicious pattern detected"}}
+{"timestamp": "2024-12-06 07:03:41,884", "level": "INFO", "message": {"action": "monitor_result", "result": {"url": "http://localhost/securitysite/src/config/login.php", "status": 200, "response_time": 0.003223419189453125, "ip_address": "localhost", "issue": "Threat detected: <script>"}}}
+{"timestamp": "2024-12-10 11:03:39,540", "level": "DEBUG", "message": Using selector: EpollSelector}
+{"timestamp": "2024-12-10 11:03:39,552", "level": "INFO", "message": {"action": "monitor_start", "url": "http://localhost/personal_website/index.php"}}
+{"timestamp": "2024-12-10 11:03:39,606", "level": "WARNING", "message": {"action": "threat_detected", "ip": "localhost", "pattern": "--"}}
+{"timestamp": "2024-12-10 11:03:39,607", "level": "WARNING", "message": {"action": "block", "ip": "localhost", "reason": "Malicious pattern detected"}}
+{"timestamp": "2024-12-10 11:03:39,614", "level": "INFO", "message": {"action": "monitor_result", "result": {"url": "http://localhost/personal_website/index.php", "status": 200, "response_time": 0.013857603073120117, "ip_address": "localhost", "issue": "Threat detected: --"}}}
+{"timestamp": "2024-12-10 11:04:04,375", "level": "DEBUG", "message": Using selector: EpollSelector}
+{"timestamp": "2024-12-10 11:04:04,378", "level": "INFO", "message": {"action": "monitor_start", "url": "http://localhost/personal_website/index.php"}}
+{"timestamp": "2024-12-10 11:04:04,391", "level": "WARNING", "message": {"action": "threat_detected", "ip": "localhost", "pattern": "--"}}
+{"timestamp": "2024-12-10 11:04:04,391", "level": "WARNING", "message": {"action": "block", "ip": "localhost", "reason": "Malicious pattern detected"}}
+{"timestamp": "2024-12-10 11:04:04,397", "level": "INFO", "message": {"action": "monitor_result", "result": {"url": "http://localhost/personal_website/index.php", "status": 200, "response_time": 0.004076242446899414, "ip_address": "localhost", "issue": "Threat detected: --"}}}
+{"timestamp": "2024-12-10 11:05:25,640", "level": "DEBUG", "message": Using selector: EpollSelector}
+{"timestamp": "2024-12-10 11:05:25,643", "level": "INFO", "message": {"action": "monitor_start", "url": "http://localhost/personal_website/index.php"}}
+{"timestamp": "2024-12-10 11:05:25,657", "level": "WARNING", "message": {"action": "threat_detected", "ip": "localhost", "pattern": "--"}}
+{"timestamp": "2024-12-10 11:05:25,657", "level": "WARNING", "message": {"action": "block", "ip": "localhost", "reason": "Malicious pattern detected"}}
+{"timestamp": "2024-12-10 11:05:25,660", "level": "INFO", "message": {"action": "monitor_result", "result": {"url": "http://localhost/personal_website/index.php", "status": 200, "response_time": 0.004029273986816406, "ip_address": "localhost", "issue": "Threat detected: --"}}}
+{"timestamp": "2024-12-10 11:06:10,358", "level": "DEBUG", "message": Using selector: EpollSelector}
+{"timestamp": "2024-12-10 11:06:10,362", "level": "INFO", "message": {"action": "monitor_start", "url": "http://localhost/personal_website/index.php"}}
+{"timestamp": "2024-12-10 11:06:10,375", "level": "WARNING", "message": {"action": "threat_detected", "ip": "localhost", "pattern": "--"}}
+{"timestamp": "2024-12-10 11:06:10,375", "level": "WARNING", "message": {"action": "block", "ip": "localhost", "reason": "Malicious pattern detected"}}
+{"timestamp": "2024-12-10 11:06:10,379", "level": "INFO", "message": {"action": "monitor_result", "result": {"url": "http://localhost/personal_website/index.php", "status": 200, "response_time": 0.004151105880737305, "ip_address": "localhost", "issue": "Threat detected: --"}}}
+{"timestamp": "2024-12-10 11:06:31,409", "level": "DEBUG", "message": Using selector: EpollSelector}
+{"timestamp": "2024-12-10 11:06:31,413", "level": "INFO", "message": {"action": "monitor_start", "url": "http://localhost/personal_website/index.php"}}
+{"timestamp": "2024-12-10 11:06:31,426", "level": "WARNING", "message": {"action": "threat_detected", "ip": "localhost", "pattern": "--"}}
+{"timestamp": "2024-12-10 11:06:31,426", "level": "WARNING", "message": {"action": "block", "ip": "localhost", "reason": "Malicious pattern detected"}}
+{"timestamp": "2024-12-10 11:06:31,430", "level": "INFO", "message": {"action": "monitor_result", "result": {"url": "http://localhost/personal_website/index.php", "status": 200, "response_time": 0.0038738250732421875, "ip_address": "localhost", "issue": "Threat detected: --"}}}

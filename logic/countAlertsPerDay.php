@@ -1,6 +1,4 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST");
 header("Content-Type: application/json");
 
 include '../src/config/Database.php'; 
@@ -23,7 +21,7 @@ class AlertCounter
 
         $queries = [
             'network_logs' => "SELECT COUNT(*) AS alert_count FROM network_logs WHERE DATE(detected_at) BETWEEN :start_date AND :end_date",
-            'website_logs' => "SELECT COUNT(*) AS alert_count FROM website_logs WHERE DATE(checked_at) BETWEEN :start_date AND :end_date",
+            'websites_logs' => "SELECT COUNT(*) AS alert_count FROM websites_logs WHERE DATE(checked_at) BETWEEN :start_date AND :end_date",
         ];
         
         $totalAlerts = 0;

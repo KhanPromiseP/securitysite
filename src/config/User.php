@@ -41,7 +41,7 @@ class User {
             session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['role_id'] = $user['role_id'];
-            $_SESSION['username']=$username;
+            $_SESSION['username']= $username;
             return true;
         }
         return false;
@@ -55,7 +55,7 @@ class User {
     }
 
     public function getAllUsers() {
-        $query = "SELECT users.id, users.username, users.email, roles.role_name 
+        $query = "SELECT users.id, users.username, users.email, users.password_hash, roles.role_name 
                   FROM $this->table
                   JOIN roles ON users.role_id = roles.id";
         $stmt = $this->conn->prepare($query);
@@ -70,14 +70,45 @@ class User {
         return $stmt->execute();
     }
     
-    public function updateUser($id, $username, $email, $role_id) {
-        $query = "UPDATE $this->table SET username = :username, email = :email, role_id = :role_id WHERE id = :id";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':id', $id);
+    public function updateUser($id, $username, $email, $password, $role) {
+        if (!empty($password)) {
+            // Hash password if provided
+            $password = password_hash($password, PASSWORD_DEFAULT);
+        } else {
+            // If no new password is entered, keep the existing password hash
+            $password = $this->getUserPassword($id); // Retrieve the existing password hash
+        }
+    
+        $query = "UPDATE users SET username = :username, email = :email, password = :password, role_id = :role_id WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+    
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':role_id', $role_id);
-        return $stmt->execute();
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':role_id', $role);
+        $stmt->bindParam(':id', $id);
+    
+        if ($stmt->execute()) {
+            return true;
+        }
+    
+        return false;
     }
+    
+    public function getUserPassword($id) {
+        $query = "SELECT password FROM users WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        if (!$stmt->execute()) {
+            echo "Error: " . implode(", ", $stmt->errorInfo());
+        }
+
+        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['password'];
+    }
+    
 }
 ?>

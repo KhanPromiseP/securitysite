@@ -11,7 +11,7 @@ class WebThreatModel {
 
     public function getAllWebsiteThreats() {
         try {
-            $query = "SELECT * FROM website_logs ORDER BY checked_at DESC";
+            $query = "SELECT * FROM websites_logs ORDER BY checked_at DESC";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -27,7 +27,7 @@ class WebThreatModel {
             $query = "SELECT 
                         DATE_FORMAT(checked_at, '%Y-%m-%d %H:%i:%s') AS checked_at,
                         COUNT(*) AS threat_count 
-                      FROM website_logs 
+                      FROM websites_logs 
                       GROUP BY checked_at 
                       ORDER BY checked_at DESC";
             $stmt = $this->conn->prepare($query);
@@ -43,7 +43,7 @@ class WebThreatModel {
 
     public function getBlockedVsActive() {
         try {
-            $query = "SELECT COUNT(*) AS total, SUM(is_blocked = 1) AS blocked FROM website_logs";
+            $query = "SELECT COUNT(*) AS total, SUM(is_blocked = 1) AS blocked FROM websites_logs";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -57,7 +57,7 @@ class WebThreatModel {
 
     public function getThreatPercentage() {
         try {
-            $query = "SELECT status, COUNT(*) AS threat_count FROM website_logs GROUP BY status";
+            $query = "SELECT status, COUNT(*) AS threat_count FROM websites_logs GROUP BY status";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -77,14 +77,14 @@ class WebThreatModel {
 
     public function blockIP($ipAddress) {
         try {
-            $checkQuery = "SELECT is_blocked FROM website_logs WHERE ip_address = :ip_address";
+            $checkQuery = "SELECT is_blocked FROM websites_logs WHERE ip_address = :ip_address";
             $stmt = $this->conn->prepare($checkQuery);
             $stmt->bindParam(':ip_address', $ipAddress);
             $stmt->execute();
             $log = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($log && $log['is_blocked'] == 0) {
-                $query = "UPDATE website_logs SET is_blocked = 1, blocked_at = NOW() WHERE ip_address = :ip_address";
+                $query = "UPDATE websites_logs SET is_blocked = 1, blocked_at = NOW() WHERE ip_address = :ip_address";
                 $stmt = $this->conn->prepare($query);
                 $stmt->bindParam(':ip_address', $ipAddress);
 
@@ -106,14 +106,14 @@ class WebThreatModel {
 
     public function unblockIP($ipAddress) {
         try {
-            $checkQuery = "SELECT is_blocked FROM website_logs WHERE ip_address = :ip_address";
+            $checkQuery = "SELECT is_blocked FROM websites_logs WHERE ip_address = :ip_address";
             $stmt = $this->conn->prepare($checkQuery);
             $stmt->bindParam(':ip_address', $ipAddress);
             $stmt->execute();
             $log = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($log && $log['is_blocked'] == 1) {
-                $query = "UPDATE website_logs SET is_blocked = 0, unblocked_at = NOW() WHERE ip_address = :ip_address";
+                $query = "UPDATE websites_logs SET is_blocked = 0, unblocked_at = NOW() WHERE ip_address = :ip_address";
                 $stmt = $this->conn->prepare($query);
                 $stmt->bindParam(':ip_address', $ipAddress);
 

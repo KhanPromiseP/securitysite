@@ -10,7 +10,7 @@ class SimpleMiddleware {
 
     public static function requireAdmin() {
         session_start();
-        if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+        if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] !== '1') {
             header('Location: ../views/access_denied.php');
             exit();
         }

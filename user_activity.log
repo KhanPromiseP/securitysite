@@ -1,0 +1,67 @@
+2024-12-09 00:26:54,656 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-12-09 00:26:54,657 - INFO - [33mPress CTRL+C to quit[0m
+2024-12-09 00:28:39,235 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/monitor - Data: {}
+2024-12-09 00:28:39,236 - INFO - Monitoring request from IP 127.0.0.1 to URL: http://localhost/securitysite/
+2024-12-09 00:28:39,260 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:39] "GET /monitor HTTP/1.1" 200 -
+2024-12-09 00:28:39,287 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/blank.gif - Data: {}
+2024-12-09 00:28:39,290 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:39] "[33mGET /icons/blank.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:39,293 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/back.gif - Data: {}
+2024-12-09 00:28:39,297 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:39] "[33mGET /icons/back.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:39,314 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/unknown.gif - Data: {}
+2024-12-09 00:28:39,316 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:39] "[33mGET /icons/unknown.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:39,318 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/folder.gif - Data: {}
+2024-12-09 00:28:39,321 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:39] "[33mGET /icons/folder.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:39,332 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/text.gif - Data: {}
+2024-12-09 00:28:39,334 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/p.gif - Data: {}
+2024-12-09 00:28:39,335 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:39] "[33mGET /icons/text.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:39,337 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:39] "[33mGET /icons/p.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:43,466 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/public/ - Data: {}
+2024-12-09 00:28:43,467 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:43] "[33mGET /public/ HTTP/1.1[0m" 404 -
+2024-12-09 00:28:58,244 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/monitor?C=M;O=A - Data: {'C': 'M;O=A'}
+2024-12-09 00:28:58,247 - INFO - Monitoring request from IP 127.0.0.1 to URL: http://localhost/securitysite/
+2024-12-09 00:28:58,260 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:58] "GET /monitor?C=M;O=A HTTP/1.1" 200 -
+2024-12-09 00:28:58,282 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/blank.gif - Data: {}
+2024-12-09 00:28:58,283 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/back.gif - Data: {}
+2024-12-09 00:28:58,284 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:58] "[33mGET /icons/blank.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:58,286 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:58] "[33mGET /icons/back.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:58,298 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/unknown.gif - Data: {}
+2024-12-09 00:28:58,299 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:58] "[33mGET /icons/unknown.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:58,302 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/folder.gif - Data: {}
+2024-12-09 00:28:58,305 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:58] "[33mGET /icons/folder.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:58,311 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/text.gif - Data: {}
+2024-12-09 00:28:58,313 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:58] "[33mGET /icons/text.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:58,315 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/p.gif - Data: {}
+2024-12-09 00:28:58,319 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:58] "[33mGET /icons/p.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:59,692 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/monitor?C=D;O=A - Data: {'C': 'D;O=A'}
+2024-12-09 00:28:59,693 - INFO - Monitoring request from IP 127.0.0.1 to URL: http://localhost/securitysite/
+2024-12-09 00:28:59,705 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:59] "GET /monitor?C=D;O=A HTTP/1.1" 200 -
+2024-12-09 00:28:59,728 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/blank.gif - Data: {}
+2024-12-09 00:28:59,730 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/back.gif - Data: {}
+2024-12-09 00:28:59,732 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:59] "[33mGET /icons/blank.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:59,733 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:59] "[33mGET /icons/back.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:59,749 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/unknown.gif - Data: {}
+2024-12-09 00:28:59,751 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/folder.gif - Data: {}
+2024-12-09 00:28:59,753 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/p.gif - Data: {}
+2024-12-09 00:28:59,755 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/text.gif - Data: {}
+2024-12-09 00:28:59,756 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:59] "[33mGET /icons/unknown.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:59,758 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:59] "[33mGET /icons/folder.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:59,759 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:59] "[33mGET /icons/p.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:28:59,762 - INFO - 127.0.0.1 - - [09/Dec/2024 00:28:59] "[33mGET /icons/text.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:29:01,602 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/monitor?C=N;O=D - Data: {'C': 'N;O=D'}
+2024-12-09 00:29:01,602 - INFO - Monitoring request from IP 127.0.0.1 to URL: http://localhost/securitysite/
+2024-12-09 00:29:01,616 - INFO - 127.0.0.1 - - [09/Dec/2024 00:29:01] "GET /monitor?C=N;O=D HTTP/1.1" 200 -
+2024-12-09 00:29:01,640 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/blank.gif - Data: {}
+2024-12-09 00:29:01,641 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/back.gif - Data: {}
+2024-12-09 00:29:01,642 - INFO - 127.0.0.1 - - [09/Dec/2024 00:29:01] "[33mGET /icons/blank.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:29:01,643 - INFO - 127.0.0.1 - - [09/Dec/2024 00:29:01] "[33mGET /icons/back.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:29:01,661 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/unknown.gif - Data: {}
+2024-12-09 00:29:01,663 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/text.gif - Data: {}
+2024-12-09 00:29:01,664 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/p.gif - Data: {}
+2024-12-09 00:29:01,665 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/icons/folder.gif - Data: {}
+2024-12-09 00:29:01,667 - INFO - 127.0.0.1 - - [09/Dec/2024 00:29:01] "[33mGET /icons/unknown.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:29:01,668 - INFO - 127.0.0.1 - - [09/Dec/2024 00:29:01] "[33mGET /icons/text.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:29:01,670 - INFO - 127.0.0.1 - - [09/Dec/2024 00:29:01] "[33mGET /icons/p.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:29:01,671 - INFO - 127.0.0.1 - - [09/Dec/2024 00:29:01] "[33mGET /icons/folder.gif HTTP/1.1[0m" 404 -
+2024-12-09 00:29:04,180 - INFO - Request from IP 127.0.0.1 - Method: GET - URL: http://127.0.0.1:5000/test.py - Data: {}
+2024-12-09 00:29:04,182 - INFO - 127.0.0.1 - - [09/Dec/2024 00:29:04] "[33mGET /test.py HTTP/1.1[0m" 404 -
