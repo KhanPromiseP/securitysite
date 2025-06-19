@@ -1,7 +1,18 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include '../src/config/middleware.php';
+
 SimpleMiddleware::requireLogin();
+
+
+        // if (!isset($_SESSION['user_id'])) {
+        //     header('Location: ../views/login.php');
+           
+        // }
+
 ?>
 
 <!DOCTYPE html>
