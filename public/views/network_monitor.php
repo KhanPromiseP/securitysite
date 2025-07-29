@@ -1,7 +1,19 @@
 <?php
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id'])) {
+        header('Location: ./login.php');
+        
+    }
+
+
 include __DIR__ . '/../../includes/header.php';
 include __DIR__ . '/../../includes/sidebar.php';
+include __DIR__ . '/../../includes/navbar.php';
+
 
 $apiEndpoint = '../logic/monitor_data.php'; 
 
@@ -15,7 +27,7 @@ $apiEndpoint = '../logic/monitor_data.php';
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #1a1a2e; 
+      background-color:rgb(187, 187, 209); 
       color: #e0e0e0;
       padding: 20px;
       margin: 0;
@@ -27,17 +39,17 @@ $apiEndpoint = '../logic/monitor_data.php';
       flex-grow: 1; 
       margin-left: 260px; 
       max-width: calc(100% - 280px); 
-      background: #2b2b40; 
+      background:rgb(247, 247, 252); 
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+      box-shadow: 0 5px 25px rgba(211, 190, 190, 0.6);
       border: 1px solid #4a4a60;
     }
 
     h1, h2 {
-      color: #00e676; 
+      color:rgb(16, 17, 17); 
       margin-top: 0;
-      border-bottom: 2px solid #3c3c5a;
+      border-bottom: 2px solidrgb(125, 125, 179);
       padding-bottom: 10px;
       margin-bottom: 20px;
     }
@@ -50,11 +62,11 @@ $apiEndpoint = '../logic/monitor_data.php';
     }
 
     .stats-card, .alert-card, .log-card {
-        background: #1f1f3a; 
+        background:rgb(59, 59, 61); 
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-        border: 1px solid #3c3c5a;
+        box-shadow: 0 2px 10px rgba(180, 160, 160, 0.4);
+        border: 1px solidrgb(174, 174, 202);
     }
 
     .stats-card p {
@@ -66,7 +78,7 @@ $apiEndpoint = '../logic/monitor_data.php';
     }
 
     .stats-card p strong {
-        color: #99eeff; /* Light blue for labels */
+        color: #99eeff; 
     }
     .stats-card p span {
         font-weight: bold;
@@ -97,28 +109,28 @@ $apiEndpoint = '../logic/monitor_data.php';
     }
 
     .alert-critical {
-        background-color: #ff4d4d; /* Red */
+        background-color #ff4d4d; /* Red */
         color: #fff;
     }
-    .alert-critical::before { content: '🚨'; }
+    .alert-critical::before { content: ''; }
 
     .alert-high {
         background-color: #ff9933; /* Orange */
         color: #fff;
     }
-    .alert-high::before { content: '⚠️'; }
+    .alert-high::before { content: ''; }
 
     .alert-warning {
         background-color: #ffcc00; /* Yellow */
         color: #333;
     }
-    .alert-warning::before { content: '❗'; }
+    .alert-warning::before { content: ''; }
 
     .alert-info {
         background-color: #3399ff; /* Blue */
         color: #fff;
     }
-    .alert-info::before { content: 'ℹ️'; }
+    .alert-info::before { content: 'ℹ'; }
 
     /* Log Output Styling */
     .log-card {
@@ -130,7 +142,7 @@ $apiEndpoint = '../logic/monitor_data.php';
         overflow-y: auto;
         background: #000;
         border-radius: 5px;
-        border: 1px solid #3c3c5a;
+        border: 1px solidrgb(124, 124, 145);
     }
     .log-table {
       width: 100%;
@@ -141,11 +153,11 @@ $apiEndpoint = '../logic/monitor_data.php';
     .log-table th, .log-table td {
       padding: 8px 12px;
       text-align: left;
-      border-bottom: 1px solid #3c3c5a;
+      border-bottom: 1px solidrgb(136, 136, 158);
     }
     .log-table th {
-      background-color: #005050; /* Darker green for headers */
-      color: #e0e0e0;
+      background-color:rgb(241, 250, 250); /* Darker green for headers */
+      color:rgb(36, 29, 29);
       position: sticky;
       top: 0;
       z-index: 1;
@@ -155,8 +167,8 @@ $apiEndpoint = '../logic/monitor_data.php';
     .log-level-medium { color: #ffff66; }
     .log-level-low, .log-level-info { color: #99ccff; }
     .highlight {
-        background-color: #550000;
-        color: #ffdddd;
+        background-color:rgb(248, 244, 244);
+        color:rgb(22, 21, 21);
         padding: 2px 4px;
         border-radius: 3px;
     }
@@ -168,7 +180,7 @@ $apiEndpoint = '../logic/monitor_data.php';
         border-radius: 8px;
         font-weight: bold;
         margin-top: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 5px rgba(112, 109, 109, 0.3);
     }
     .health-good { background-color: #28a745; color: white; }
     .health-warning { background-color: #ffc107; color: black; }
@@ -177,29 +189,29 @@ $apiEndpoint = '../logic/monitor_data.php';
     /* Tables for processes and network */
     .data-table-container {
         margin-top: 20px;
-        background: #1f1f3a;
+        background:rgb(227, 227, 235);
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+        box-shadow: 0 2px 10px rgba(168, 156, 156, 0.4);
         border: 1px solid #3c3c5a;
     }
     .data-table {
         width: 100%;
         border-collapse: collapse;
-        color: #e0e0e0;
+        color:rgb(10, 10, 10);
         font-size: 0.9em;
     }
     .data-table th, .data-table td {
         padding: 10px;
         text-align: left;
-        border-bottom: 1px solid #3c3c5a;
+        border-bottom: 1px solidrgb(71, 71, 184);
     }
     .data-table th {
         background-color: #005050;
-        color: #e0e0e0;
+        color:rgb(245, 252, 251);
     }
     .data-table tr:hover {
-        background-color: #3a3a50;
+        background-color:rgb(221, 221, 235);
     }
 
     /* Responsive adjustments */
@@ -217,10 +229,10 @@ $apiEndpoint = '../logic/monitor_data.php';
 </head>
 <body>
   <div class="container">
-    <h1>📡 Advanced Security System Monitor</h1>
+    <h1>Advanced Security System Monitor</h1>
 
     <div class="stats-card">
-        <h2>📊 System Overview <span id="system-health-indicator" class="system-health-status">Loading...</span></h2>
+        <h2>System Overview <span id="system-health-indicator" class="system-health-status">Loading...</span></h2>
         <p><strong>CPU Load (1-min):</strong> <span id="cpu-load-1min">Loading...</span></p>
         <p><strong>CPU % (estimated):</strong> <span id="cpu-percent">Loading...</span></p>
         <p><strong>Memory Used:</strong> <span id="memory-used">Loading...</span></p>
@@ -231,14 +243,14 @@ $apiEndpoint = '../logic/monitor_data.php';
     </div>
 
     <div class="alert-card">
-        <h2>🚨 Active Alerts</h2>
+        <h2>Active Alerts</h2>
         <div id="alerts-container">
             <div class="alert alert-info">Fetching alerts...</div>
         </div>
     </div>
 
     <div class="data-table-container">
-        <h2>📈 Top Processes by CPU/Memory</h2>
+        <h2>Top Processes by CPU/Memory</h2>
         <div style="max-height: 250px; overflow-y: auto;">
             <table class="data-table">
                 <thead>
@@ -258,7 +270,7 @@ $apiEndpoint = '../logic/monitor_data.php';
     </div>
 
     <div class="data-table-container">
-        <h2>🌐 Network Connections (Top 10)</h2>
+        <h2>Network Connections (Top 10)</h2>
         <div style="max-height: 250px; overflow-y: auto;">
             <table class="data-table">
                 <thead>
@@ -277,7 +289,7 @@ $apiEndpoint = '../logic/monitor_data.php';
     </div>
 
     <div class="log-card">
-      <h2>📝 Security Log Monitor (Latest 50 Critical/High)</h2>
+      <h2>Security Log Monitor (Latest 50 Critical/High)</h2>
       <div class="log-table-container">
         <table class="log-table">
             <thead>

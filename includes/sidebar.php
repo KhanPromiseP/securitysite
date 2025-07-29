@@ -20,6 +20,9 @@
             <a href="../views/active_devices_display.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'active_devices_display.php' ? 'active' : '' ?>">Users Online</a>
         </li>
         <li class="nav-item">
+            <a href="../views/net_weekly_use_display.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'net_weekly_use_display.php' ? 'active' : '' ?>">Network usage</a>
+        </li>
+        <li class="nav-item">
             <a href="../views/network_monitor.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'network_monitor.php' ? 'active' : '' ?>">Logs/System</a>
         </li>
         <li class="nav-item">

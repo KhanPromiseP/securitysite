@@ -1,13 +1,17 @@
 <?php 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// include '../../src/config/middleware.php';
-// SimpleMiddleware::requireAdmin();
 
 include __DIR__ . '/../../includes/header.php';
 include __DIR__ . '/../../includes/sidebar.php';
-// include __DIR__ . '/../../includes/header.php';
+include __DIR__ . '/../../includes/navbar.php';
 
-
+if (!isset($_SESSION['user_id'])) {
+        header('Location: ./login.php');
+        
+    }
 
 ?>
 
@@ -55,13 +59,54 @@ include __DIR__ . '/../../includes/sidebar.php';
         tr:hover {
             background-color: #f1f1f1;
         }
-        .device-count {
+
+        .connect-btn, .disconnect-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .connect-btn {
+            background-color: green;
+            color: white;
+        }
+
+        .disconnect-btn {
+            background-color: red;
+            color: white;
+        }
+
+        .counters-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; 
+            margin-top: 20px;
+            flex-wrap: wrap; 
+        }
+
+        .device-count, .disconnected-count {
             font-size: 1.2em;
             font-weight: bold;
-            color: #333;
-            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 4px;
             text-align: center;
         }
+
+        .device-count {
+            color: #333;
+            background-color: #e9f7ef; 
+            border: 1px solid #28a745;
+        }
+
+        .disconnected-count {
+            color: #d9534f;
+            background-color: #f9f9f9;
+            border: 1px solid #d9534f;
+        }
+
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -77,7 +122,10 @@ include __DIR__ . '/../../includes/sidebar.php';
                             <div class="table-responsive">
                                 <h1>Real-Time Active Devices</h1>
 
-                                <div class="device-count" id="device-count">0</div>
+                                <div class="counters-container">
+                                    <div class="device-count" id="device-count">Active Devices: 0</div>
+                                    <div class="disconnected-count" id="disconnected-count">Disconnected Devices: 0</div>
+                                </div>
 
                                 <div class="table-container">
                                     <table id="device-table">
@@ -87,9 +135,11 @@ include __DIR__ . '/../../includes/sidebar.php';
                                                 <th>MAC Address</th>
                                                 <th>Hostname</th>
                                                 <th>Last Seen</th>
-                                                <th>Data_usage_mb</th>
+                                                <th>Data Usage (MB)</th>
+                                                <th>Status</th> <!-- New toggle column -->
                                             </tr>
                                         </thead>
+
                                         <tbody>
                                             <tr>
                                                 <td colspan="4">Loading active devices...</td>
@@ -98,23 +148,35 @@ include __DIR__ . '/../../includes/sidebar.php';
                                     </table>
                                 </div>
 
-                                <script>
+                               <script>
                                     function fetchActiveDevices() {
                                         $.ajax({
-                                            url: '../logic/active_devices.php', 
-                                            type: 'GET', 
-                                            dataType: 'json', 
+                                            url: '../logic/active_devices.php',
+                                            type: 'GET',
+                                            dataType: 'json',
                                             success: function(data) {
                                                 let deviceTableBody = $('#device-table tbody');
-                                                deviceTableBody.empty(); 
+                                                deviceTableBody.empty();
 
                                                 data.forEach(function(device) {
-                                                    let row = $('<tr></tr>');
-                                                    row.append(`<td>${device.ip_address}</td>`);
-                                                    row.append(`<td>${device.mac_address}</td>`);
-                                                    row.append(`<td>${device.hostname}</td>`);
-                                                    row.append(`<td>${device.timestamp}</td>`);
-                                                    row.append(`<td>${device.data_usage_mb}</td>`);
+                                                    const isConnected = device.status === 'connected';
+                                                    const toggleLabel = isConnected ? 'Disconnect' : 'Connect';
+                                                    const buttonClass = isConnected ? 'disconnect-btn' : 'connect-btn';
+
+                                                    const row = `
+                                                        <tr>
+                                                            <td>${device.ip_address}</td>
+                                                            <td>${device.mac_address}</td>
+                                                            <td>${device.hostname}</td>
+                                                            <td>${device.timestamp}</td>
+                                                            <td>${device.data_usage_mb}</td>
+                                                            <td>
+                                                                <button class="${buttonClass}" data-ip="${device.ip_address}">
+                                                                    ${toggleLabel}
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    `;
                                                     deviceTableBody.append(row);
                                                 });
                                             },
@@ -126,29 +188,60 @@ include __DIR__ . '/../../includes/sidebar.php';
 
                                     function fetchActiveDeviceCount() {
                                         $.ajax({
-                                            url: '../logic/active_devices_count.php', 
+                                            url: '../logic/active_devices_count.php',
                                             type: 'GET',
                                             dataType: 'json',
                                             success: function(data) {
                                                 $('#device-count').text(`Active Devices Count: ${data.active_device_count}`);
+                                                $('#disconnected-count').text(`Disconnected Devices: ${data.disconnected_count}`);
+                                            
+                                       if (data.disconnected_count > 0) {
+                                            $('#disconnected-count').addClass('has-disconnected');
+                                        } else {
+                                            $('#disconnected-count').removeClass('has-disconnected');
+                                        }
+                                        
+                                        $('#update-time').text(new Date().toLocaleTimeString());
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.error('Error fetching device counts:', error);
+                                        console.log('Response:', xhr.responseText);
+                                    }
+        });
+                                    }
+
+                                    // Handle toggle button click
+                                    $(document).on('click', '.connect-btn, .disconnect-btn', function () {
+                                        const ip = $(this).data('ip');
+                                        const action = $(this).hasClass('disconnect-btn') ? 'disconnect' : 'connect';
+
+                                        $.ajax({
+                                            url: '../logic/toggle_connection.php',
+                                            method: 'POST',
+                                            contentType: 'application/json',
+                                            data: JSON.stringify({ ip: ip, action: action }),
+                                            success: function (response) {
+                                                alert(response.message || 'Status toggled.');
+                                                fetchActiveDevices(); // refresh only device list
                                             },
-                                            error: function(xhr, status, error) {
-                                                console.error('Error fetching active device count:', error);
+                                            error: function (xhr) {
+                                                alert('Error toggling status: ' + xhr.responseText);
                                             }
                                         });
-                                    }
+                                    });
 
                                     function updateRealTime() {
                                         fetchActiveDevices();
                                         fetchActiveDeviceCount();
                                     }
 
-                                    setInterval(updateRealTime, 1000);
+                                    setInterval(updateRealTime, 5000);
 
-                                    $(document).ready(function() {
+                                    $(document).ready(function () {
                                         updateRealTime();
                                     });
                                 </script>
+
                             </div>
                         </div>
                     </div>

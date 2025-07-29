@@ -1,8 +1,24 @@
 <?php
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id'])) {
+        header('Location: ./login.php');
+        
+    }
+
+
+
 include __DIR__ . '/../../src/config/Database.php';
 include __DIR__ . '/../../src/config/User.php'; 
 include __DIR__ . '/../../includes/header.php';
 include __DIR__ . '/../../includes/sidebar.php';
+include __DIR__ . '/../../includes/navbar.php';
+
+$totalUsers = count($users);
+$totalUsers = count($users);
 
 $database = new Database();
 $db = $database->getConnection();
@@ -124,6 +140,8 @@ if (isset($_GET['edit_id'])) {
                                 </div>
                             </div>
 
+
+
                             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
                             <script>
                                 function clearForm() {
@@ -147,6 +165,20 @@ if (isset($_GET['edit_id'])) {
                                     new bootstrap.Modal(document.getElementById('userModal')).show();
                                 }
 
+                                 function updateUserCount() {
+                                
+                                    location.reload();
+                                }
+
+
+                                function confirmDelete(userId) {
+                                    const confirmDelete = confirm("Are you sure you want to delete this user?");
+                                    if (confirmDelete) {
+                                        window.location.href = "user_management.php?action=delete&id=" + userId;
+                                        
+                                    }
+                                }
+
                                 function confirmDelete(userId) {
                                     const confirmDelete = confirm("Are you sure you want to delete this user?");
                                     if (confirmDelete) {
@@ -160,6 +192,9 @@ if (isset($_GET['edit_id'])) {
                                     passwordField.type = type;
                                     e.target.textContent = type === "password" ? "Show" : "Hide";
                                 });
+
+                                
+                               
                             </script>
                         </div>
                     </div>

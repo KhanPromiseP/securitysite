@@ -65,6 +65,63 @@ CREATE TABLE IF NOT EXISTS generated_reports (
 );
 
 
+-- Persistent user history table
+CREATE TABLE user_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    mac_address VARCHAR(17) NOT NULL,
+    ip_address VARCHAR(15),
+    hostname VARCHAR(255),
+    first_seen DATETIME NOT NULL,
+    last_seen DATETIME NOT NULL,
+    total_data_mb FLOAT DEFAULT 0,
+    current_week_data_mb FLOAT DEFAULT 0,
+    data_limit_mb FLOAT DEFAULT 0,       -- Added for data limits
+    is_active BOOLEAN DEFAULT FALSE,
+    is_throttled BOOLEAN DEFAULT FALSE,  -- Added for throttling status
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX (mac_address),
+    INDEX (is_active),
+    INDEX (is_throttled)
+);
+
+CREATE TABLE user_limits_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    mac_address VARCHAR(17) NOT NULL,
+    data_limit_mb FLOAT NOT NULL,
+    action VARCHAR(50) NOT NULL COMMENT 'SET_LIMIT,REMOVE_LIMIT,THROTTLE,UNTHROTTLE',
+    performed_by VARCHAR(255) NOT NULL,
+    performed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    INDEX (mac_address),
+    INDEX (performed_at)
+);
+
+CREATE TABLE network_limit_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    mac_address VARCHAR(17) NOT NULL COMMENT 'Device MAC address',
+    action VARCHAR(50) NOT NULL COMMENT 'Action type: SET_LIMIT, REMOVE_LIMIT, THROTTLE, UNTHROTTLE',
+    old_value FLOAT DEFAULT NULL COMMENT 'Previous limit value (in MB)',
+    new_value FLOAT DEFAULT NULL COMMENT 'New limit value (in MB)',
+    performed_by VARCHAR(255) DEFAULT NULL COMMENT 'User/admin who performed action',
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'When action occurred',
+    notes TEXT DEFAULT NULL COMMENT 'Additional context or reason',
+    
+    INDEX idx_mac (mac_address),
+    INDEX idx_action (action),
+    INDEX idx_timestamp (timestamp)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Logs of network limit changes';
+
+
+
+-- Weekly reset log
+CREATE TABLE weekly_resets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reset_time DATETIME NOT NULL,
+    users_affected INT NOT NULL
+);
+
+
+
+
 
 -- somechanges
 ALTER TABLE network_logs

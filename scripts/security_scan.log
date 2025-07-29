@@ -1,0 +1,15 @@
+2025-07-06 00:51:38,079 - AdvancedSecurityScanner - ERROR - Fatal error: 'AdvancedSecurityScanner' object has no attribute 'config'
+2025-07-06 02:05:44,471 - AdvancedSecurityScanner - INFO - Database connection established
+2025-07-06 02:05:44,473 - AdvancedSecurityScanner - ERROR - Scan failed: (1265, "Data truncated for column 'status' at row 1")
+2025-07-06 02:05:44,474 - AdvancedSecurityScanner - ERROR - Fatal error: (1265, "Data truncated for column 'status' at row 1")
+2025-07-06 02:09:44,134 - AdvancedSecurityScanner - INFO - Database connection established with new schema
+2025-07-06 02:09:44,137 - AdvancedSecurityScanner - INFO - Starting comprehensive scan of https://github.com
+2025-07-06 02:09:44,345 - AdvancedSecurityScanner - WARNING - MEDIUM - DNSSEC Not Implemented
+2025-07-06 02:09:44,695 - AdvancedSecurityScanner - WARNING - MEDIUM - Missing SPF Record
+2025-07-06 02:09:44,958 - AdvancedSecurityScanner - WARNING - MEDIUM - Missing DKIM Record
+2025-07-06 02:09:47,506 - AdvancedSecurityScanner - WARNING - MEDIUM - Missing Security Header: Permissions-Policy | Controls browser features and APIs
+2025-07-06 02:09:47,514 - AdvancedSecurityScanner - WARNING - LOW - Deprecated Header in Use: X-XSS-Protection | Deprecated in favor of Content-Security-Policy
+2025-07-06 02:10:05,243 - AdvancedSecurityScanner - WARNING - MEDIUM - Potential XSS Vulnerability | Input reflection detected in form at https://github.com/signup
+2025-07-06 02:10:08,518 - AdvancedSecurityScanner - WARNING - MEDIUM - Potential XSS Vulnerability | Input reflection detected in form at https://github.com/signup
+2025-07-06 02:10:20,476 - AdvancedSecurityScanner - WARNING - INFO - Exposed Robots File | Accessible at: https://github.com/robots.txt
+2025-07-06 02:10:22,053 - AdvancedSecurityScanner - INFO - Scan completed successfully

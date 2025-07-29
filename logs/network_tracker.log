@@ -1,0 +1,4 @@
+2025-07-29 10:21:37 [INFO] [MainThread] Logging configured successfully.
+2025-07-29 10:21:37 [INFO] [MainThread] Setting up nftables rules...
+2025-07-29 10:21:37 [INFO] [MainThread] nftables setup complete.
+2025-07-29 10:21:37 [INFO] [MainThread] Network tracking module initialized successfully and is ready to use.

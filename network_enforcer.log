@@ -1,0 +1,33 @@
+2025-07-28 14:03:56 [INFO] [count_OnlineUsers:setup_iptables] Set iptables to use iptables-legacy
+2025-07-28 14:03:56 [INFO] [count_OnlineUsers:setup_iptables] Created BLOCK_MACS chain
+2025-07-28 14:03:56 [INFO] [count_OnlineUsers:setup_iptables] Added BLOCK_MACS to FORWARD chain
+2025-07-28 14:03:56 [INFO] [count_OnlineUsers:setup_iptables] iptables configured successfully
+2025-07-28 14:03:56 [DEBUG] [count_OnlineUsers:get_network_details] Detected network: 192.168.167.122/24
+2025-07-28 14:03:56 [DEBUG] [count_OnlineUsers:get_interface_details] Interface: wlan0, MAC: 00:28:f8:19:0c:35
+2025-07-28 14:04:25 [DEBUG] [count_OnlineUsers:scan_network] Scanned devices: [('192.168.167.128', '0a:a7:77:db:44:f9', '_gateway')]
+2025-07-28 14:04:25 [DEBUG] [count_OnlineUsers:real_time_network_tracker] Current IPs: ['192.168.167.128']
+2025-07-28 14:04:25 [ERROR] [count_OnlineUsers:real_time_network_tracker] Tracker error: 'NoneType' object has no attribute 'decode'
+2025-07-28 14:04:58 [DEBUG] [count_OnlineUsers:scan_network] Scanned devices: [('192.168.167.128', '0a:a7:77:db:44:f9', '_gateway')]
+2025-07-28 14:04:58 [DEBUG] [count_OnlineUsers:real_time_network_tracker] Current IPs: ['192.168.167.128']
+2025-07-28 14:04:58 [ERROR] [count_OnlineUsers:real_time_network_tracker] Tracker error: 'NoneType' object has no attribute 'decode'
+2025-07-28 14:05:31 [DEBUG] [count_OnlineUsers:scan_network] Scanned devices: [('192.168.167.128', '0a:a7:77:db:44:f9', '_gateway')]
+2025-07-28 14:05:31 [DEBUG] [count_OnlineUsers:real_time_network_tracker] Current IPs: ['192.168.167.128']
+2025-07-28 14:05:31 [ERROR] [count_OnlineUsers:real_time_network_tracker] Tracker error: 'NoneType' object has no attribute 'decode'
+2025-07-28 14:06:04 [DEBUG] [count_OnlineUsers:scan_network] Scanned devices: [('192.168.167.128', '0a:a7:77:db:44:f9', '_gateway')]
+2025-07-28 14:06:04 [DEBUG] [count_OnlineUsers:real_time_network_tracker] Current IPs: ['192.168.167.128']
+2025-07-28 14:06:04 [ERROR] [count_OnlineUsers:real_time_network_tracker] Tracker error: 'NoneType' object has no attribute 'decode'
+2025-07-28 14:06:37 [DEBUG] [count_OnlineUsers:scan_network] Scanned devices: [('192.168.167.128', '0a:a7:77:db:44:f9', '_gateway')]
+2025-07-28 14:06:37 [DEBUG] [count_OnlineUsers:real_time_network_tracker] Current IPs: ['192.168.167.128']
+2025-07-28 14:06:37 [ERROR] [count_OnlineUsers:real_time_network_tracker] Tracker error: 'NoneType' object has no attribute 'decode'
+2025-07-28 14:07:10 [DEBUG] [count_OnlineUsers:scan_network] Scanned devices: [('192.168.167.128', '0a:a7:77:db:44:f9', '_gateway')]
+2025-07-28 14:07:10 [DEBUG] [count_OnlineUsers:real_time_network_tracker] Current IPs: ['192.168.167.128']
+2025-07-28 14:07:10 [ERROR] [count_OnlineUsers:real_time_network_tracker] Tracker error: 'NoneType' object has no attribute 'decode'
+2025-07-28 14:07:43 [DEBUG] [count_OnlineUsers:scan_network] Scanned devices: [('192.168.167.128', '0a:a7:77:db:44:f9', '_gateway')]
+2025-07-28 14:07:43 [DEBUG] [count_OnlineUsers:real_time_network_tracker] Current IPs: ['192.168.167.128']
+2025-07-28 14:07:43 [ERROR] [count_OnlineUsers:real_time_network_tracker] Tracker error: 'NoneType' object has no attribute 'decode'
+2025-07-28 14:08:16 [DEBUG] [count_OnlineUsers:scan_network] Scanned devices: [('192.168.167.128', '0a:a7:77:db:44:f9', '_gateway')]
+2025-07-28 14:08:16 [DEBUG] [count_OnlineUsers:real_time_network_tracker] Current IPs: ['192.168.167.128']
+2025-07-28 14:08:16 [ERROR] [count_OnlineUsers:real_time_network_tracker] Tracker error: 'NoneType' object has no attribute 'decode'
+2025-07-28 14:08:49 [DEBUG] [count_OnlineUsers:scan_network] Scanned devices: [('192.168.167.128', '0a:a7:77:db:44:f9', '_gateway')]
+2025-07-28 14:08:49 [DEBUG] [count_OnlineUsers:real_time_network_tracker] Current IPs: ['192.168.167.128']
+2025-07-28 14:08:49 [ERROR] [count_OnlineUsers:real_time_network_tracker] Tracker error: 'NoneType' object has no attribute 'decode'

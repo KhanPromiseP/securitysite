@@ -1,6 +1,19 @@
 <?php 
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id'])) {
+        header('Location: ./login.php');
+        
+    }
+
+
 include __DIR__ . '/../../includes/header.php';
 include __DIR__ . '/../../includes/sidebar.php';
+include __DIR__ . '/../../includes/navbar.php';
+
 
 
 
@@ -83,10 +96,10 @@ include __DIR__ . '/../../includes/sidebar.php';
 </head>
 
 <body>
-    <?php include '../includes/navbar.php'; ?>
+    <?php include '../../includes/navbar.php'; ?>
 
     <div class="d-flex">
-        <?php include '../includes/sidebar.php'; ?>
+        <?php include '../../includes/sidebar.php'; ?>
         <div class="row flex-fill main-content" style="height:90vh">
             <div class="row mt-2">
                 <div class="col-md-12">

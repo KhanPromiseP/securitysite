@@ -2,7 +2,6 @@
 require_once '../../src/config/Database.php';
 header('Content-Type: application/json');
 
-
 $database = new Database();
 $dbConnection = $database->getConnection();
 
@@ -20,8 +19,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         'mac_address' => $row['mac_address'],
         'hostname' => $row['hostname'],
         'timestamp' => $row['timestamp'],
-        'timestamp' => $row['timestamp'],
-        'data_usage_mb' => $row['data_usage_mb']
+        'data_usage_mb' => $row['data_usage_mb'],
+        'status' => $row['status'] ?? 'connected' // Default if null
     ];
 }
 

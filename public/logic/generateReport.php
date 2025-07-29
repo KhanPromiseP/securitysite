@@ -118,7 +118,7 @@ class ReportGenerator
     }
 }
 
-require_once '../src/config/Database.php';
+require_once '../../src/config/Database.php';
 $database = new Database();
 $conn = $database->getConnection();
 

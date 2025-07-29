@@ -9,12 +9,19 @@ if (!$dbConnection) {
     die(json_encode(['error' => 'Failed to connect to the database']));
 }
 
-$sql = "SELECT COUNT(*) as count FROM active_users_log";
+// Count all devices
+$sql = "SELECT 
+            (SELECT COUNT(*) FROM active_users_log) as total_count,
+            (SELECT COUNT(*) FROM active_users_log WHERE status = 'disconnected') as disconnected_count";
 $stmt = $dbConnection->prepare($sql);
 
 if ($stmt->execute()) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    echo json_encode(['active_device_count' => $result['count']]);
+    $active_count = $result['total_count'] - $result['disconnected_count'];
+    echo json_encode([
+        'active_device_count' => $active_count,
+        'disconnected_count' => $result['disconnected_count']
+    ]);
 } else {
     echo json_encode(['error' => 'Failed to execute the query']);
 }

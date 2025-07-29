@@ -15,13 +15,13 @@ class AlertDisplay
     {
         $counts = [
             'network_logs' => 0,
-            'websites_logs' => 0,
+            'website_logs' => 0,
            
         ];
 
         $queries = [
             'network_logs' => "SELECT COUNT(*) as count FROM network_logs",
-            'website_logs' => "SELECT COUNT(*) as count FROM websites_logs",
+            'website_logs' => "SELECT COUNT(*) as count FROM website_logs",
         
         ];
 

@@ -17,14 +17,15 @@ import threading
 import queue
 import time
 import json
-
-from collections import defaultdict
+import atexit
 import signal
+import os
+from functools import lru_cache
+from collections import defaultdict
 from count_OnlineUsers import real_time_network_tracker, signal_all_user
-
+from network_limiter import NetworkLimiter
 from logging.handlers import RotatingFileHandler
-
-
+from config import running
 
 DB_CONFIG = {
     'host': 'localhost',
@@ -33,22 +34,29 @@ DB_CONFIG = {
     'database': 'securityapp'
 }
 
-log_queue = queue.Queue()
+# LOGGING SYSTEM CONFIGURATION
+log_dir = '/opt/lampp/htdocs/securitysite/logs'
+os.makedirs(log_dir, exist_ok=True)
+
+log_queue = queue.Queue(-1)
 queue_handler = logging.handlers.QueueHandler(log_queue)
 logger = logging.getLogger()
-logger.addHandler(queue_handler)
 logger.setLevel(logging.DEBUG)
+for handler in logger.handlers[:]:
+    logger.removeHandler(handler)
+logger.addHandler(queue_handler)
 
-file_handler = logging.FileHandler('../logs/networkmonitor.log', 'a') 
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+file_handler = logging.FileHandler(
+    filename=os.path.join(log_dir, 'networkmonitor.log'),
+    mode='a',
+    encoding='utf-8'
+)
+formatter = logging.Formatter(
+    '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
 file_handler.setFormatter(formatter)
-
-PID_FILE = '../network_scan_pid.txt'
-
-def check_pid_file():
-    if not os.path.exists(PID_FILE):
-        print("PID file not found. Exiting script.")
-        sys.exit(0)
+file_handler.setLevel(logging.INFO)
 
 def log_listener():
     while True:
@@ -57,11 +65,35 @@ def log_listener():
             if record is None:
                 break
             file_handler.handle(record)
+            log_queue.task_done()
         except Exception as e:
-            print(f"Logging error: {e}", file=sys.stderr)
+            print(f"CRITICAL LOGGING ERROR: {e}", file=sys.stderr)
 
 listener_thread = threading.Thread(target=log_listener, daemon=True)
 listener_thread.start()
+
+def shutdown_logging():
+    log_queue.put(None)
+    listener_thread.join(timeout=5)
+    file_handler.close()
+    logging.shutdown()
+
+atexit.register(shutdown_logging)
+
+PID_FILE = '/opt/lampp/htdocs/securitysite/network_scan_pid.txt'
+
+def check_pid_file():
+    """Ensure only one instance of the script is running."""
+    pid = str(os.getpid())
+    if os.path.exists(PID_FILE):
+        with open(PID_FILE, 'r') as f:
+            old_pid = f.read().strip()
+        if os.path.exists(f"/proc/{old_pid}"):
+            print(f"⚠️ Another instance is already running (PID: {old_pid})")
+            sys.exit(1)
+    with open(PID_FILE, 'w') as f:
+        f.write(pid)
+    logging.info(f"Created PID file with PID: {pid}")
 
 def connect_to_db():
     try:
@@ -72,6 +104,16 @@ def connect_to_db():
     except mysql.connector.Error as err:
         logging.error("Database connection error: %s", err)
         return None
+
+@lru_cache(maxsize=1000)
+def scapy_blocker(ip):
+    def drop_packet(pkt):
+        if pkt.haslayer(scapy.IP) and pkt[scapy.IP].src == ip:
+            return False
+    try:
+        scapy.sniff(prn=drop_packet, store=False, quiet=True, stop_filter=lambda p: not running, timeout=1)
+    except Exception as e:
+        logging.error(f"Scapy sniff error in scapy_blocker: {e}")
 
 def check_if_ip_blocked(ip):
     conn = connect_to_db()
@@ -111,11 +153,8 @@ def get_network_details():
     return None
 
 def get_local_ip():
-    """Retrieve the local machine's primary IP address (to avoid accidental blocking)."""
     try:
-        # Creating a socket to connect to a public address
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-            # Using Google's public DNS server (8.8.8.8) to determine the primary IP
             s.connect(("8.8.8.8", 80))
             local_ip = s.getsockname()[0]
         logging.info("Local machine IP detected: %s", local_ip)
@@ -126,61 +165,50 @@ def get_local_ip():
 
 def scan_subnet(count=100):
     logging.info("Scanning local subnet for suspicious activity...")
-    
-    # Check if the system has enough resources to proceed
     if not check_system_resources():
         logging.warning("System resources are insufficient, aborting scan.")
         return
-
     subnet = get_network_details()
     if subnet is None:
         logging.error("Could not retrieve subnet details.")
         return
-
-    local_ip = get_local_ip()  # Get the local machine's IP for exclusion
-    packets = scapy.sniff(count=count, filter="ip or tcp or udp or icmp", timeout=15)
-    logging.info("Packets captured: %d", len(packets))
-    anomalies = detect_anomalies(packets)
-    logging.info("Anomalies detected: %d", len(anomalies))
-
-    for pkt in anomalies:
-        ip = pkt[scapy.IP].src
-
-        # Exclude local IP from being flagged or blocked
-        if ip == local_ip:
-            logging.info("Skipping local machine IP: %s", ip)
-            continue
-
-    if not check_if_ip_blocked(ip):
-        threat_type, user_crime, description = classify_threat(pkt)
-        if threat_type:
-            logging.info("Threat detected: %s from IP %s", threat_type, ip)
-            device_name = get_device_name(ip)
-            insert_threat_and_block(ip, threat_type, user_crime, description, device_name)
-         else:
-            logging.info("No significant threat found for IP: %s", ip)
-
-    else:
-        logging.info("Skipping IP %s as it is already blocked.", ip)
+    local_ip = get_local_ip()
+    try:
+        packets = scapy.sniff(count=count, filter="ip or tcp or udp or icmp", timeout=15)
+        logging.info("Packets captured: %d", len(packets))
+        anomalies = detect_anomalies(packets)
+        logging.info("Anomalies detected: %d", len(anomalies))
+        for pkt in anomalies:
+            ip = pkt[scapy.IP].src
+            if ip == local_ip:
+                logging.info("Skipping local machine IP: %s", ip)
+                continue
+            if not check_if_ip_blocked(ip):
+                threat_type, user_crime, description = classify_threat(pkt)
+                if threat_type:
+                    logging.info("Threat detected: %s from IP %s", threat_type, ip)
+                    device_name = get_device_name(ip)
+                    insert_threat_and_block(ip, threat_type, user_crime, description, device_name)
+                else:
+                    logging.info("No significant threat found for IP: %s", ip)
+            else:
+                logging.info("Skipping IP %s as it is already blocked.", ip)
+    except Exception as e:
+        logging.error(f"Error in scan_subnet: {e}")
 
 def check_system_resources():
-    """Check if the system has sufficient resources to run the scan."""
     cpu_usage = psutil.cpu_percent(interval=1)
     memory = psutil.virtual_memory()
     logging.info("CPU Usage: %d%%, Memory Usage: %d%%", cpu_usage, memory.percent)
-
-    # Adjust scan behavior based on resource usage
     if cpu_usage > 80 or memory.percent > 80:
         logging.warning("High resource usage detected, reducing scan frequency.")
         return False
     return True
 
+RATE_LIMIT_WINDOW = 60
+RATE_LIMIT_THRESHOLD = 100
+ip_request_counts = defaultdict(list)
 
-# Rate limiting settings
-RATE_LIMIT_WINDOW = 60  # Time window in seconds
-RATE_LIMIT_THRESHOLD = 100  # Max packets per IP per window
-
-# Whitelist (trusted IPs)
 def load_whitelisted_ips(filename="whitelist.json"):
     try:
         with open(filename, 'r') as f:
@@ -192,10 +220,6 @@ def load_whitelisted_ips(filename="whitelist.json"):
 
 whitelisted_ips = load_whitelisted_ips()
 
-
-# IP request counts
-ip_request_counts = defaultdict(list)
-
 def log_rate_limited_ip(ip):
     logging.warning(f"Rate limit exceeded for IP {ip}. Blocking temporarily.")
 
@@ -204,11 +228,8 @@ def is_ip_whitelisted(ip):
 
 def is_rate_limited(ip):
     current_time = time.time()
-    # Remove old entries outside the rate limit window
     ip_request_counts[ip] = [timestamp for timestamp in ip_request_counts[ip] if current_time - timestamp < RATE_LIMIT_WINDOW]
-    # Add current request time
     ip_request_counts[ip].append(current_time)
-    
     if len(ip_request_counts[ip]) > RATE_LIMIT_THRESHOLD:
         log_rate_limited_ip(ip)
         return True
@@ -220,14 +241,11 @@ def cleanup_old_ips():
         ip_request_counts[ip] = [t for t in ip_request_counts[ip] if now - t < RATE_LIMIT_WINDOW]
         if not ip_request_counts[ip]:
             del ip_request_counts[ip]
-    
-
 
 def detect_anomalies(packets):
     logging.info("Detecting anomalies in captured packets...")
     data = []
     valid_packets = []
-
     for pkt in packets:
         if hasattr(pkt, 'time') and pkt.haslayer(scapy.IP):
             features = [
@@ -243,85 +261,65 @@ def detect_anomalies(packets):
                 features += [pkt[scapy.UDP].sport, pkt[scapy.UDP].dport]
             else:
                 features += [0, 0]
-
             data.append(features)
-            valid_packets.append(pkt)  # Keep a parallel list of valid packets
-
+            valid_packets.append(pkt)
     if len(data) < 2:
         logging.info("Not enough data to detect anomalies.")
         return []
-
     model = IsolationForest(contamination=0.01, n_estimators=100)
     predictions = model.fit_predict(np.array(data))
     anomalies = [pkt for i, pkt in enumerate(valid_packets) if predictions[i] == -1]
     return anomalies
 
-
-
-
 def analyze_frequency(ip):
     now = time.time()
     ip_request_counts[ip] = [t for t in ip_request_counts[ip] if now - t < 10]
     ip_request_counts[ip].append(now)
-
-    if len(ip_request_counts[ip]) > 15:  # More than 15 packets in 10 seconds
+    if len(ip_request_counts[ip]) > 15:
         return True
     return False
 
-
-
 def start_packet_router():
-    """
-    Acts as a gateway that drops packets based on is_blocked IPs from the DB.
-    """
     def packet_handler(pkt):
+        if not running:
+            return
         if pkt.haslayer(scapy.IP):
             ip_src = pkt[scapy.IP].src
             if check_if_ip_blocked(ip_src):
-                logging.warning(f"⛔ Blocked packet from {ip_src} (is_blocked = 1 in DB)")
-                return  # Drop this packet
+                logging.warning(f"Blocked packet from {ip_src} (is_blocked = 1 in DB)")
+                return
             else:
-                logging.debug(f"✅ Allowed packet from {ip_src}")
-    
+                logging.debug(f"Allowed packet from {ip_src}")
     logging.info("🚦 Starting live routing handler based on DB flags.")
-    scapy.sniff(prn=packet_handler, filter="ip", store=False)
-
+    while running:
+        try:
+            scapy.sniff(prn=packet_handler, filter="ip", store=False, timeout=1, stop_filter=lambda p: not running)
+        except Exception as e:
+            logging.error(f"Scapy sniff error in start_packet_router: {e}")
+            if not running:
+                break
 
 def analyze_packet_frequency(ip, protocol):
-    return True  # Placeholder logic — implement real checks
+    return True
 
-KNOWN_ARP_DEVICES = {
-    "192.168.1.1": "aa:bb:cc:dd:ee:ff",
-    # Add real values
-}
 def is_known_arp_device(ip, mac):
+    KNOWN_ARP_DEVICES = {"192.168.1.1": "aa:bb:cc:dd:ee:ff"}
     return KNOWN_ARP_DEVICES.get(ip) == mac
 
-
 def analyze_port_scans(ip):
-    return True  # Placeholder
-
-
+    return True
 
 def estimate_confidence(threat_type):
-    if threat_type == "SYN Flood Attack":
-        return 0.9
-    elif threat_type == "ARP Spoofing":
-        return 0.85
-    elif threat_type == "ICMP Ping Sweep":
-        return 0.8
-    elif threat_type == "Port Scan":
-        return 0.75
-    elif threat_type == "UDP Flood":
-        return 0.9
-    elif threat_type == "DNS Tunneling":
-        return 0.7
-    elif threat_type == "DNS Amplification":
-        return 0.95
-    else:
-        return 0.5  # Unknown or less confident threats
-
-
+    threats = {
+        "SYN Flood Attack": 0.9,
+        "ARP Spoofing": 0.85,
+        "ICMP Ping Sweep": 0.8,
+        "Port Scan": 0.75,
+        "UDP Flood": 0.9,
+        "DNS Tunneling": 0.7,
+        "DNS Amplification": 0.95
+    }
+    return threats.get(threat_type, 0.5)
 
 def get_device_name(ip):
     try:
@@ -329,114 +327,46 @@ def get_device_name(ip):
     except:
         return "Unknown"
 
-
-
 def classify_threat(pkt):
-    """
-    Classify threats based on packet analysis with additional robustness to avoid misclassification.
-    """
     logging.info("Classifying the threat based on packet analysis...")
-    
     ip_src = pkt[scapy.IP].src
-
     if analyze_frequency(ip_src):
         return "Abnormal Traffic", "Packet Flooding Detected", "Excessive traffic rate from IP"
-
-
-
-    
-    # Check if the source IP is whitelisted
     if is_ip_whitelisted(ip_src):
         logging.info(f"IP {ip_src} is whitelisted. Skipping classification.")
         return None, None, "Packet from trusted source, no threat analysis performed."
-
-    # Check for rate limiting
     if is_rate_limited(ip_src):
         logging.info(f"Rate limiting triggered for IP {ip_src}. Further analysis deferred.")
         return None, None, "Rate limited, packet analysis deferred."
-
-
-    # Check for the TCP flags in the packet
     flags = pkt.sprintf("%TCP.flags%") if pkt.haslayer(scapy.TCP) else None
-    threat_type = None
-    user_crime = None
-    description = None
-
-    # Adding multiple checks for more precise classification
     try:
-        # SYN Flood Attack: Multiple SYN packets without acknowledgment within a short time
         if flags and "S" in flags and "A" not in flags and pkt.haslayer(scapy.TCP):
-            #IP address is Only classify as SYN Flood if the packet count exceeds a threshold
             if analyze_packet_frequency(pkt[scapy.IP].src, "SYN"):
-                threat_type = "SYN Flood Attack"
-                user_crime = "Possible Denial-of-Service"
-                description = "SYN packets sent repeatedly without acknowledgment, common in DoS attacks."
-
-        # ICMP Ping Sweep: Only classify if there are repeated pings from the same source
+                return "SYN Flood Attack", "Possible Denial-of-Service", "SYN packets sent repeatedly without acknowledgment, common in DoS attacks."
         elif pkt.haslayer(scapy.ICMP) and pkt[scapy.ICMP].type == 8:
             if analyze_packet_frequency(pkt[scapy.IP].src, "ICMP"):
-                threat_type = "ICMP Ping Sweep"
-                user_crime = "Reconnaissance"
-                description = "Multiple ICMP echo requests, often a scan to identify active hosts."
-
-        # DNS Amplification: Focus on excessive query counts and repeated patterns
+                return "ICMP Ping Sweep", "Reconnaissance", "Multiple ICMP echo requests, often a scan to identify active hosts."
         elif pkt.haslayer(scapy.DNS) and pkt[scapy.DNS].qdcount > 2:
             if analyze_packet_frequency(pkt[scapy.IP].src, "DNS"):
-                threat_type = "DNS Amplification"
-                user_crime = "Potential DDoS via DNS"
-                description = "Excessive DNS queries indicating potential DDoS attack."
-
-        # ARP Spoofing: Validate against legitimate devices on the network
+                return "DNS Amplification", "Potential DDoS via DNS", "Excessive DNS queries indicating potential DDoS attack."
         elif pkt.haslayer(scapy.ARP) and pkt[scapy.ARP].op == 2:
             if not is_known_arp_device(pkt[scapy.ARP].psrc, pkt[scapy.ARP].hwsrc):
-                threat_type = "ARP Spoofing"
-                user_crime = "Man-in-the-Middle"
-                description = "Spoofed ARP responses attempting to intercept network traffic."
-
-        # DNS Tunneling: Check for abnormally large DNS query names
+                return "ARP Spoofing", "Man-in-the-Middle", "Spoofed ARP responses attempting to intercept network traffic."
         elif pkt.haslayer(scapy.DNS) and len(pkt[scapy.DNS].qd.qname) > 60:
-            threat_type = "DNS Tunneling"
-            user_crime = "Data Exfiltration"
-            description = "Large DNS query names indicating possible tunneling."
-
-        # Port Scan: Correlate multiple probes to classify as a scan
+            return "DNS Tunneling", "Data Exfiltration", "Large DNS query names indicating possible tunneling."
         elif pkt.haslayer(scapy.TCP) and flags in ["F", "S", "R", "P", "U"]:
             if analyze_port_scans(pkt[scapy.IP].src):
-                threat_type = "Port Scan"
-                user_crime = "Reconnaissance"
-                description = "Various TCP flags indicating potential probing of network ports."
-
-        # UDP Flood: Check for excessive empty UDP packets
+                return "Port Scan", "Reconnaissance", "Various TCP flags indicating potential probing of network ports."
         elif pkt.haslayer(scapy.UDP) and pkt[scapy.UDP].len == 0:
             if analyze_packet_frequency(pkt[scapy.IP].src, "UDP"):
-                threat_type = "UDP Flood"
-                user_crime = "Possible Denial-of-Service"
-                description = "Numerous empty UDP packets, typical of DoS attacks."
-
-        # FIN Scan: Only classify if repeated behavior is detected
+                return "UDP Flood", "Possible Denial-of-Service", "Numerous empty UDP packets, typical of DoS attacks."
         elif pkt.haslayer(scapy.TCP) and flags == "F":
             if analyze_packet_frequency(pkt[scapy.IP].src, "FIN"):
-                threat_type = "FIN Scan"
-                user_crime = "Potential Stealth Scan"
-                description = "Packets with only the FIN flag set, used to bypass detection."
-
-        # Fallback: Mark as unusual activity with minimal certainty
-        # else:
-            # threat_type = "Unusual Activity"
-            # user_crime = "Anomalous Packet Behavior"
-            # description = "Unusual packet characteristics detected in the network."
-
-        # Log the threat details if classified
-        if threat_type:
-            logging.info("Threat classified: %s (%s) - %s", threat_type, user_crime, description)
-            return threat_type, user_crime, description
-        else:
-            return None, None, "Packet deemed non-threatening after analysis."
-
+                return "FIN Scan", "Potential Stealth Scan", "Packets with only the FIN flag set, used to bypass detection."
+        return None, None, "Packet deemed non-threatening after analysis."
     except Exception as e:
-        logging.error("Error during threat classification: %s", str(e))
+        logging.error(f"Error during threat classification: {e}")
         return "Error", "Error in Classification", str(e)
-
 
 def insert_threat_and_block(ip, threat_type, crime, description, device_name="Unknown"):
     logging.info("Inserting threat data for IP %s into database...", ip)
@@ -444,21 +374,15 @@ def insert_threat_and_block(ip, threat_type, crime, description, device_name="Un
     if conn:
         try:
             cursor = conn.cursor()
-
             confidence = estimate_confidence(threat_type)
             if confidence < 0.6:
                 logging.info("Low-confidence threat skipped.")
                 return
-
-
             cursor.execute("SELECT detected_at FROM network_logs WHERE ip_address = %s", (ip,))
             row = cursor.fetchone()
-            if row:
-                last_detected = row[0]
-                if (datetime.datetime.now() - last_detected).total_seconds() < 300:
-                    logging.info("Skipping duplicate threat insert for IP %s", ip)
-                    return
-
+            if row and (datetime.datetime.now() - row[0]).total_seconds() < 300:
+                logging.info("Skipping duplicate threat insert for IP %s", ip)
+                return
             cursor.execute(
                 """INSERT INTO network_logs 
                 (ip_address, threat_type, user_crime, is_blocked, detected_at, confidence_score, device_name) 
@@ -470,55 +394,133 @@ def insert_threat_and_block(ip, threat_type, crime, description, device_name="Un
                     device_name=%s""",
                 (ip, threat_type, crime, 1, datetime.datetime.now(), confidence, device_name, confidence, device_name)
             )
-
-
             conn.commit()
             logging.info("Threat data inserted successfully.")
             mark_ip_as_blocked(ip)
         except mysql.connector.Error as err:
-            logging.error("Failed to insert threat for IP %s: %s", ip, err)
+            logging.error(f"Failed to insert threat for IP %s: {err}")
         finally:
             cursor.close()
             conn.close()
 
 def mark_ip_as_blocked(ip):
-    logging.info(f"IP {ip} marked as blocked in DB. No firewall command executed — routing will reject it dynamically.")
+    try:
+        check_cmd = ["iptables", "-C", "SECURITYAPP_BLOCK", "-s", ip, "-j", "DROP"]
+        add_cmd = ["iptables", "-A", "SECURITYAPP_BLOCK", "-s", ip, "-j", "DROP"]
+        if subprocess.run(check_cmd, stderr=subprocess.DEVNULL).returncode != 0:
+            subprocess.run(add_cmd, check=True)
+            logging.info(f"Added block rule for {ip}")
+        threading.Thread(
+            target=lambda: scapy.sniff(
+                prn=lambda p: None if (scapy.IP in p and p[scapy.IP].src == ip) else p,
+                store=False,
+                quiet=True,
+                stop_filter=lambda p: not running,
+                timeout=1
+            ),
+            daemon=True
+        ).start()
+    except Exception as e:
+        logging.error(f"Block failed for {ip}: {str(e)}")
+        scapy_blocker(ip)
 
-def save_iptables_rules():
-    pass  # No iptables used anymore
+def load_kernel_modules():
+    modules = ["ip_tables", "iptable_filter", "x_tables"]
+    for mod in modules:
+        try:
+            subprocess.run(["modprobe", mod], check=True)
+        except subprocess.CalledProcessError:
+            logging.warning(f"Couldn't load {mod}, some features may fail")
 
+def start_network_limiter():
+    """Start the network limiter in a separate thread"""
+    limiter = NetworkLimiter()
+    limiter_thread = threading.Thread(target=limiter.run, daemon=False)
+    limiter_thread.start()
+    return limiter_thread
 
-
-# Handling the signal to cleanly terminate processes when receiving SIGTERM
-def signal_handler(signum, frame):
-    logging.info("Signal received. Cleaning up and terminating.")
-
-    signal_all_user()
-
-
-# Execute the scan periodically or based on external events
 if __name__ == "__main__":
-    check_pid_file()
+    print("Starting Network Security Monitor...")
+    print("Press Ctrl+C to stop")
+
+    threads = []
+    def print_status():
+        while running:
+            print("Running - Monitoring network traffic", end='\r')
+            time.sleep(1)
+        print(" " * 50, end='\r')
+
+    def shutdown():
+        global running
+        if not running:
+            return
+        running = False
+        print("\nShutting down gracefully...")
+        signal_all_user()
+        cleanup_commands = [
+            ["iptables", "-D", "INPUT", "-j", "SECURITYAPP_BLOCK"],
+            ["iptables", "-D", "FORWARD", "-j", "SECURITYAPP_BLOCK"],
+            ["iptables", "-F", "SECURITYAPP_BLOCK"],
+            ["iptables", "-X", "SECURITYAPP_BLOCK"]
+        ]
+        for cmd in cleanup_commands:
+            subprocess.run(cmd, stderr=subprocess.DEVNULL)
+        if os.path.exists(PID_FILE):
+            os.remove(PID_FILE)
+            logging.info("Removed PID file")
+        for t in threads:
+            t.join(timeout=2)
+        shutdown_logging()
+        logging.info("Clean shutdown completed")
+
+    def signal_handler(signum, frame):
+        logger.info(f"Received signal {signum}, initiating shutdown")
+        shutdown()
+        threading.Timer(5.0, lambda: os._exit(1)).start()  # Force exit after 5 seconds
+
+    atexit.register(shutdown)
+    signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
 
-    # Start DB-based routing firewall logic
-    gateway_thread = threading.Thread(target=start_packet_router, daemon=True)
-    gateway_thread.start()
+    load_kernel_modules()
 
-    def run():
-        real_time_network_tracker()
-        scan_subnet()
+    firewall_init_commands = [
+        ["iptables", "-N", "SECURITYAPP_BLOCK"],
+        ["iptables", "-F", "SECURITYAPP_BLOCK"],
+        ["iptables", "-I", "INPUT", "-j", "SECURITYAPP_BLOCK"],
+        ["iptables", "-I", "FORWARD", "-j", "SECURITYAPP_BLOCK"]
+    ]
+    for cmd in firewall_init_commands:
+        try:
+            result = subprocess.run(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE, timeout=5, text=True)
+            if result.returncode != 0:
+                logger.error(f"Firewall command failed: {' '.join(cmd)} - {result.stderr}")
+            else:
+                logger.info(f"Firewall command succeeded: {' '.join(cmd)}")
+        except Exception as e:
+            logger.error(f"Firewall command failed: {' '.join(cmd)} - {str(e)}")
+
+    check_pid_file()
+
+    gateway_thread = threading.Thread(target=start_packet_router, daemon=False)
+    gateway_thread.start()
+    threads.append(gateway_thread)
+    limiter_thread = start_network_limiter()
+    threads.append(limiter_thread)
+    status_thread = threading.Thread(target=print_status, daemon=False)
+    status_thread.start()
+    threads.append(status_thread)
 
     try:
-        while True:
-            run()
+        while running:
+            real_time_network_tracker()
+            scan_subnet()
             cleanup_old_ips()
             time.sleep(2)
     except KeyboardInterrupt:
-        print("\nStopping application cleanly...")
-        signal_all_user()
-        print("Application stopped.")
-
-
-
-
+        print("\nKeyboard interrupt received.")
+        shutdown()
+    except Exception as e:
+        logger.error(f"Fatal error in main loop: {e}")
+        shutdown()
+        os._exit(1)
